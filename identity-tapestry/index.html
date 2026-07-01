@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identity Tapestry 2026 - Mount Lawley SHS</title>
+  <meta name="description" content="A visual archive of 584 unique drawings from the 2026 Mount Lawley Senior High School creative residency. Explore and download each hand-drawn design.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <h1>IDENTITY TAPESTRY</h1>
+        <span class="header-subtitle">Mount Lawley SHS • 2026 Residency</span>
+      </div>
+      <nav class="app-nav">
+        <button class="nav-btn active" data-tab="manifesto">Project Manifesto</button>
+        <button class="nav-btn" data-tab="library">Visual Library</button>
+        <button class="nav-btn" data-tab="generator">Mural Generator</button>
+        <button class="nav-btn" data-tab="gallery">Sightseeing</button>
+      </nav>
+      <div class="mobile-nav-wrapper">
+        <select class="mobile-nav-select" id="mobile-nav-dropdown">
+          <option value="manifesto" selected>Project Manifesto</option>
+          <option value="library">Visual Library</option>
+          <option value="generator">Mural Generator</option>
+          <option value="gallery">Sightseeing</option>
+        </select>
+      </div>
+      <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
+        <a href="../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
+      </div>
+    </header>
+
+    <!-- Main Content Panels -->
+    <main class="app-main">
+      
+      <!-- Panel 0: Project Manifesto -->
+      <section class="tab-panel active" id="panel-manifesto">
+        <div class="manifesto-layout">
+          <div class="manifesto-hero" style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; display: flex; flex-direction: column; gap: 16px;">
+            <span class="manifesto-tagline" style="font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.15em; color: var(--accent-indigo); text-transform: uppercase;">Pedagogical Inquiry &amp; Public Art</span>
+            <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 3rem; color: #fff; margin: 0; line-height: 1.1;">Identity Tapestry</h2>
+            <div class="manifesto-lead" style="display: flex; flex-direction: column; gap: 16px; font-size: 1.15rem; line-height: 1.6; color: var(--text-secondary); font-weight: 300; text-align: center; margin-top: 12px;">
+              <p>The Identity Tapestry is a collaborative public artwork created with the students and staff of Mount Lawley Senior High School in Perth, Western Australia.</p>
+              <p>Participants were invited to contribute a single hand drawn symbol representing something meaningful to them at this moment in their lives. Rather than attempting to define an entire person, each symbol captures one chosen fragment of identity: an interest, a value, a memory, a belief, a joke, or simply something worth leaving behind.</p>
+              <p>Collected together, these individual marks form a visual portrait of a school community. The resulting mural and digital archive preserve thousands of independent decisions, creating a lasting record of Mount Lawley Senior High School in 2026.</p>
+            </div>
+          </div>
+
+          <div class="manifesto-stats-grid">
+            <div class="m-stat-card">
+              <span class="m-stat-val" id="m-stat-total">-</span>
+              <span class="m-stat-lbl">Collected Drawings</span>
+            </div>
+            <div class="m-stat-card">
+              <span class="m-stat-val" id="m-stat-participants">Yrs 7-12 + Staff</span>
+              <span class="m-stat-lbl">Mount Lawley SHS</span>
+            </div>
+            <div class="m-stat-card">
+              <span class="m-stat-val">2026</span>
+              <span class="m-stat-lbl">Residency Year</span>
+            </div>
+          </div>
+
+          <div class="manifesto-thesis">
+            <div class="thesis-col">
+              <h3>Identity Tapestry</h3>
+              <p>Every day we leave traces of ourselves.</p>
+              <p>Some are temporary: a conversation, a footprint, a message, a memory. Others remain long after we have moved on.</p>
+              <p>The Identity Tapestry began with a simple invitation. Students and staff members at Mount Lawley Senior High School were invited to contribute a single drawing representing something meaningful to them at this moment in their lives.</p>
+              <p>No symbol is intended to define an entire person. Instead, each represents one chosen fragment of identity: an interest, a value, a belief, a memory, a hope, a joke, or simply something that felt important enough to draw.</p>
+              <p>Individually these marks are modest. Together they become something far greater.</p>
+              <p>The resulting mural is not a collection of drawings, but a portrait of a community. It captures thousands of independent decisions made by individuals who share the same place while living entirely different lives.</p>
+              <p>Many of these symbols will lose their meaning over time. Favourite games will be forgotten. Internet memes will disappear. Personal interests will change. Yet together they form an authentic record of what mattered to this community in 2026.</p>
+              <p>The Identity Tapestry is therefore both artwork and archive. It preserves a moment that can never be repeated.</p>
+            </div>
+            <div class="thesis-col">
+              <h3>Reading the Collection</h3>
+              <p>Although every submission is unique, patterns naturally emerge.</p>
+              <p>Recurring themes reveal shared interests, cultural influences, personal values and visual habits. Hearts, flowers, sporting equipment, celestial objects, animals, religious symbols, internet culture, typography and abstract geometry appear repeatedly throughout the collection.</p>
+              <p>These repetitions do not diminish individuality. Instead they reveal something equally important: identity is both deeply personal and profoundly shared.</p>
+              <p>The project invites viewers to move between these two scales. From a distance, the symbols merge into a single surface. Up close, each becomes the mark of one individual who chose to leave a trace.</p>
+              <div class="manifesto-actions" style="margin-top: 24px;">
+                <button class="btn btn-primary" onclick="switchTab('library')">Explore the Library</button>
+              </div>
+            </div>
+          </div>
+          
+            <!-- Mural Grid Showcase -->
+            <div class="manifesto-mural-showcase" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-light); width: 100%; text-align: center;">
+              <div style="background-color: rgba(255,255,255,0.02); border: 1px solid var(--border-light); padding: 16px; border-radius: 12px; max-width: 1000px; margin: 0 auto; overflow: hidden; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 100%; aspect-ratio: 14174/11339; background-color: rgba(255,255,255,0.01); border-radius: 6px; overflow: hidden; position: relative;">
+                  <img src="TAPESTRY_00.png" alt="Identity Tapestry Example Arrangement" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.6s ease;" onload="this.style.opacity=1;">
+                </div>
+                <span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">An example arrangement showing a selection of the collected drawings compiled together.</span>
+              </div>
+            </div>
+        </div>
+      </section>
+      
+      <!-- Panel 1: Visual Library -->
+      <section class="tab-panel" id="panel-library">
+
+
+        <!-- Symbol Grid -->
+        <div class="grid-layout">
+          <div class="grid-header">
+            <span class="result-count" id="result-count-label">Showing 0 of 0 designs</span>
+            <div class="scroll-status-wrapper" id="scroll-status-wrapper">
+              <span id="loaded-count-label">Loaded 0 / 0</span>
+            </div>
+          </div>
+          <div class="symbols-grid" id="symbols-grid">
+            <!-- Dynamic cards go here -->
+          </div>
+          <div class="infinite-scroll-trigger" id="infinite-scroll-trigger" style="text-align: center; padding: 20px 0;">
+            <div class="loading-spinner" id="infinite-scroll-spinner" style="display: none;">
+              <span class="spinner-dot"></span>
+              <span class="spinner-dot"></span>
+              <span class="spinner-dot"></span>
+            </div>
+            <span class="end-message" id="infinite-scroll-end" style="display: none; color: var(--text-muted); font-size: 0.85rem;">All designs loaded</span>
+          </div>
+        </div>
+        <button id="scroll-to-top-btn" class="scroll-top-btn" title="Scroll to top">&#9650;</button>
+      </section>
+
+      <!-- Panel: Mural Generator -->
+      <section class="tab-panel" id="panel-generator">
+        <div class="generator-layout" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; padding: 20px 0;">
+          <div class="generator-intro" style="text-align: center; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px;">
+            <h2>Mural Generator</h2>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+              Experiment with randomized layout arrangements. Adjust controls to set drawing counts, spacing (padding), global scaling, and rotation. Export the generated collage layout directly to a high-resolution vector SVG.
+            </p>
+          </div>
+
+          <div class="generator-workspace" style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+            <!-- Main Canvas Box -->
+            <div class="canvas-container" style="background: #0c0e18; border: 1px solid var(--border-light); border-radius: 12px; height: 550px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);">
+              <div id="composition-canvas" class="canvas-panel" style="width: 100%; height: 100%; position: relative;">
+                <!-- Placed symbols render here -->
+              </div>
+            </div>
+
+            <!-- Controls Panel -->
+            <div class="controls-panel" style="background: rgba(12, 14, 24, 0.4); border: 1px solid var(--border-light); border-radius: 12px; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center;">
+              <!-- Sliders -->
+              <div class="controls-sliders" style="flex: 2; min-width: 280px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Drawing Count</span>
+                    <span id="player-symbol-count-val">30</span>
+                  </div>
+                  <input type="range" id="player-symbol-count" min="5" max="150" value="30" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Spacing (Padding)</span>
+                    <span id="tank-padding-val">20px</span>
+                  </div>
+                  <input type="range" id="tank-padding" min="5" max="80" value="20" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Global Scale</span>
+                    <span id="tank-global-scale-val">1.0x</span>
+                  </div>
+                  <input type="range" id="tank-global-scale" min="0.4" max="2.0" step="0.1" value="1.0" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Global Rotation</span>
+                    <span id="tank-global-rotate-val">0&deg;</span>
+                  </div>
+                  <input type="range" id="tank-global-rotate" min="0" max="360" value="0" style="width: 100%; accent-color: var(--accent);">
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="controls-actions" style="flex: 1; min-width: 250px; display: flex; gap: 12px; justify-content: flex-end;">
+                <button class="btn btn-primary" id="generate-composition-btn" style="flex: 1; padding: 12px 16px;">Generate Arrangement</button>
+                <button class="btn btn-secondary" id="composition-export-btn" style="flex: 1; padding: 12px 16px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.02); color: #fff;">Export SVG &darr;</button>
+              </div>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- Panel 2: Sightseeing -->
+      <section class="tab-panel" id="panel-gallery">
+        <div class="gallery-layout" style="max-width: 1200px; margin: 0 auto; padding: 20px 0; display: flex; flex-direction: column; gap: 40px;">
+          <div class="gallery-intro" style="text-align: center; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+            <h2>Sightseeing</h2>
+            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+              Explore the installation residency progress and location of the Identity Tapestry project.
+            </p>
+          </div>
+
+          <!-- Section 1: Progress Photos (No links/descriptions) -->
+          <div class="gallery-section">
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; color: #fff; border-left: 3px solid var(--accent); padding-left: 12px;">Residency Progress Photos</h3>
+            <div class="gallery-photo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3262.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3263.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3264.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Project Location Map -->
+          <div class="location-section" style="margin-top: 10px;">
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; color: #fff; border-left: 3px solid var(--accent); padding-left: 12px;">Project Location</h3>
+            <div class="location-card" style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 24px;">
+              <div class="location-info" style="display: flex; flex-direction: column; justify-content: center; gap: 12px;">
+                <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: #fff; margin: 0;">Mount Lawley Senior High School</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                  65 Woodsome St, Mount Lawley WA 6050, Australia.
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                  The mural is located on the school campus grounds, serving as a permanent collaborative visual record of the Mount Lawley community in 2026.
+                </p>
+              </div>
+              <div class="location-map" style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); background: #080a10; min-height: 250px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.3683074092794!2d115.8697528!3d-31.9238914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32ba53a921d743%3A0xe2cd5ea19c35fb7a!2sMount%20Lawley%20Senior%20High%20School!5e0!3m2!1sen!2sau!4v1719700000000!5m2!1sen!2sau" width="100%" height="250" style="border:0; display: block; filter: grayscale(100%) invert(90%) contrast(90%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Corner Deli Footer -->
+      <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; margin-top: auto;">
+        <!-- Colour Stripe -->
+        <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+            <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+          </a>
+          <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- Detailed Symbol Overlay Modal (read-only: no delete button) -->
+    <div class="modal-overlay" id="detail-modal">
+      <div class="modal-card">
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+        <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; padding: 32px; width: 100%;">
+          <div class="visual-header" style="text-align: center;">
+            <h2>Design #<span id="modal-id">0000</span></h2>
+          </div>
+          
+          <div class="visual-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; max-width: 700px; margin: 0 auto;">
+            <div class="visual-box" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+              <h3 style="font-family: var(--font-display); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary);">Original Drawing</h3>
+              <div class="img-wrapper original-img-box" style="aspect-ratio: 1; background-color: #fff; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border-light); width: 100%; max-width: 320px;">
+                <img id="modal-img-original" src="" alt="Original Drawing" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply;">
+              </div>
+            </div>
+            <div class="visual-box" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+              <h3 style="font-family: var(--font-display); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary);">Extracted Vector</h3>
+              <div class="img-wrapper svg-img-box" id="modal-svg-container" style="aspect-ratio: 1; background-color: #fff; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border-light); width: 100%; max-width: 320px; color: #000;">
+                <!-- Inline SVG will be loaded here -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Public Notes Area (displays notes entered in admin portal) -->
+          <div id="modal-notes-section" style="display: none; max-width: 600px; margin-top: 10px; border-top: 1px dashed var(--border-light); padding-top: 16px; width: 100%;">
+            <h4 style="font-family: var(--font-display); font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.05em;">Curatorial Notes</h4>
+            <p id="modal-notes-text" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); font-style: italic;"></p>
+          </div>
+          
+          <div class="modal-actions" style="margin-top: 12px; display: flex; justify-content: center; width: 100%;">
+            <button class="btn btn-primary" id="download-svg-btn">Download Vector</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fullscreen Composition Viewer Modal -->
+    <div class="modal-overlay" id="composition-modal" style="background-color: rgba(7, 9, 19, 0.98);">
+      <button class="modal-close" id="compo-modal-close-btn" style="position: fixed; top: 20px; right: 20px; z-index: 10001; font-size: 2.5rem; background: none; border: none; color: #fff; cursor: pointer;">&times;</button>
+      <div class="canvas-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 40px;">
+        <div class="composition-canvas" id="public-view-canvas" style="background-color: #0c0e18; box-shadow: 0 20px 60px rgba(0,0,0,0.9); transform-origin: center center; position: relative;">
+          <!-- SVG symbols will be rendered dynamically here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+
+</body>
+</html>
