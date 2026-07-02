@@ -308,12 +308,11 @@
 <body>
   <header class="site-header">
     <div class="header-container">
-      <a href="../index.html" class="logo-box">
-        <img src="../../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" class="logo-img">
+      <div class="logo-box">
         <span class="logo-text">EREBOR</span>
-      </a>
+      </div>
       <nav class="site-nav">
-        <a href="../../../index.html" class="nav-link" style="color: var(--deli-red) !important; font-weight: 700;">Back to Corner Deli</a>
+        <a href="../../../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
       </nav>
     </div>
   </header>
@@ -440,20 +439,14 @@
     }
     testConnection();
   </script>
-  <footer class="site-footer">
-    <div class="footer-stripe"></div>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="../../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" class="logo-img">
-        <span class="footer-brand-name">CORNER DELI</span>
-      </div>
-      <div class="footer-links">
-        <a href="../../index.html#projects" class="footer-link">Projects</a>
-        <a href="../../index.html#about" class="footer-link">About</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Corner Deli. All rights reserved.</p>
+  <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; margin-top: auto; z-index: 10; position: relative; width: 100%;">
+    <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="../../../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+        <img src="../../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+        <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+      </a>
+      <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
     </div>
   </footer>
 </body>
