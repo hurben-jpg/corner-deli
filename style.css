@@ -3,13 +3,13 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-  /* Paper & Ink — warm off-white base, dark charcoal ink */
-  --paper: #FAF6F0;
-  --paper-warm: #F3EDE4;
-  --ink: #1A1A1A;
-  --ink-soft: #3D3D3D;
-  --ink-muted: #7A7A7A;
-  --ink-faint: #ABABAB;
+  /* Paper & Ink — premium dark mode slate-black base */
+  --paper: #0C0E14;
+  --paper-warm: #141823;
+  --ink: #FAF6F0;
+  --ink-soft: #FAF6F0;
+  --ink-muted: #8E9AA8;
+  --ink-faint: #535E6C;
 
   /* Primary Colours — from the Corner Deli pennant logo */
   --deli-red: #E53935;
@@ -20,11 +20,11 @@
   --deli-teal: #1B9E8C;
 
   /* Utility */
-  --border-paper: rgba(26, 26, 26, 0.1);
-  --border-medium: rgba(26, 26, 26, 0.18);
-  --shadow-paper: 0 2px 8px rgba(26, 26, 26, 0.06);
-  --shadow-card: 0 4px 20px rgba(26, 26, 26, 0.08);
-  --shadow-hover: 0 8px 30px rgba(26, 26, 26, 0.12);
+  --border-paper: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --shadow-paper: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.8);
 
   /* Type */
   --font-display: 'Outfit', sans-serif;
@@ -57,20 +57,20 @@ body {
   background-image:
     repeating-linear-gradient(
       0deg,
-      rgba(26, 26, 26, 0.015) 0px,
-      rgba(26, 26, 26, 0.015) 1px,
+      rgba(255, 255, 255, 0.005) 0px,
+      rgba(255, 255, 255, 0.005) 1px,
       transparent 1px,
       transparent 4px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(26, 26, 26, 0.015) 0px,
-      rgba(26, 26, 26, 0.015) 1px,
+      rgba(255, 255, 255, 0.005) 0px,
+      rgba(255, 255, 255, 0.005) 1px,
       transparent 1px,
       transparent 4px
     );
-  mix-blend-mode: multiply;
-  opacity: 0.6;
+  mix-blend-mode: screen;
+  opacity: 0.8;
 }
 
 /* ═══ HEADER ═══ */
@@ -248,7 +248,7 @@ body {
 
 /* ═══ PROJECT CARDS ═══ */
 .project-card {
-  background-color: #fff;
+  background-color: var(--paper-warm);
   border: 2px solid var(--border-medium);
   border-radius: 12px;
   overflow: hidden;

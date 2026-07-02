@@ -321,12 +321,16 @@
   <div class="bg-pink-circle"></div>
 
   <div class="app-container">
-    <header class="header">
-      <a href="../index.html" class="back-btn">&larr; Back to Registry</a>
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <div class="header-title">Erebor.PICA</div>
+    <header class="header" style="justify-content: space-between;">
+      <div class="header-logo" style="display: flex; flex-direction: column; gap: 2px;">
+        <h1 style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.1em; color: #fff; margin: 0; text-transform: uppercase;">EREBOR.PICA</h1>
+        <span style="font-size: 0.65rem; color: #8E9AA8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;">Sentient Building Profile</span>
       </div>
-      <div id="status-orb" class="thinking-orb dormant" title="Status: Dormant"></div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div id="status-orb" class="thinking-orb dormant" title="Status: Dormant"></div>
+        <a href="../index.html" class="back-btn" style="text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: 'Outfit', sans-serif; color: #8E9AA8; transition: color 0.2s;" onmouseover="this.style.color='#FAF6F0'" onmouseout="this.style.color='#8E9AA8'">Registry</a>
+        <a href="../../../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: 'Outfit', sans-serif; padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
+      </div>
     </header>
 
     <div class="chat-window" id="chat-window"></div>
