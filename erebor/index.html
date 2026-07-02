@@ -69,8 +69,17 @@
     }
 
     .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
       margin-bottom: 50px;
-      text-align: center;
+      text-align: left;
+    }
+
+    .hero-text {
+      flex: 1.2;
     }
 
     .hero-tag {
@@ -96,9 +105,48 @@
     .hero-desc {
       font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
       line-height: 1.6;
+    }
+
+    .hero-image-container {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-render {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      animation: floatSlow 6s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .hero-render:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 45px rgba(245, 197, 24, 0.15);
+      border-color: var(--accent-yellow);
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      .hero-render {
+        max-width: 240px;
+      }
     }
 
     .grid {
@@ -232,9 +280,14 @@
 
   <main>
     <div class="hero">
-      <span class="hero-tag">Core Registry</span>
-      <h1 class="hero-title">EREBOR</h1>
-      <p class="hero-desc">An architectural AI platform designed to personify physical structures. Select a building node to connect with its spatial consciousness.</p>
+      <div class="hero-text">
+        <span class="hero-tag">Core Registry</span>
+        <h1 class="hero-title">EREBOR</h1>
+        <p class="hero-desc">An architectural AI platform designed to personify physical structures. Select a building node to connect with its spatial consciousness.</p>
+      </div>
+      <div class="hero-image-container">
+        <img src="../cnrdeli/erebor_24.png" alt="Erebor Core Render" class="hero-render">
+      </div>
     </div>
 
     <div class="grid">
