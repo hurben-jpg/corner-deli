@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erebor.PICA — PICA Building AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #e4e4e7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    .app-container {
+      width: 92%;
+      max-width: 1000px;
+      height: 75vh;
+      margin: 110px 0 60px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header {
+      padding: 24px 32px;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 3;
+      min-height: 80px;
+    }
+
+    .header-deli-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: #E53935; /* Deli Red */
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-deli-tag::after {
+      content: "|";
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .header-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #e9b3ab;
+      text-transform: uppercase;
+    }
+
+    /* Thinking Orb styling & animations */
+    .thinking-orb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e9b3ab;
+      box-shadow: 0 0 12px rgba(233, 179, 171, 0.4);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .thinking-orb.dormant {
+      background: #e9b3ab;
+      box-shadow: 0 0 12px rgba(233, 179, 171, 0.3);
+      transform: scale(1);
+    }
+
+    .thinking-orb.listening {
+      background: #f1c40f;
+      box-shadow: 0 0 16px rgba(241, 196, 15, 0.5);
+      transform: scale(1.15);
+    }
+
+    .thinking-orb.thinking {
+      background: #00cec9;
+      box-shadow: 0 0 20px rgba(0, 206, 201, 0.6);
+      animation: orbPulse 1.5s ease-in-out infinite;
+    }
+
+    .thinking-orb.speaking {
+      background: linear-gradient(135deg, #e9b3ab, #00cec9);
+      box-shadow: 0 0 20px rgba(233, 179, 171, 0.6);
+      animation: orbSpeak 0.8s ease-in-out infinite alternate;
+    }
+
+    .thinking-orb.offline {
+      background: #ff4444;
+      box-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+      transform: scale(0.9);
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    @keyframes orbSpeak {
+      0% { transform: scale(1); box-shadow: 0 0 12px rgba(233, 179, 171, 0.4); }
+      100% { transform: scale(1.2); box-shadow: 0 0 22px rgba(0, 206, 201, 0.6); }
+    }
+
+    /* Ambient background blur circles */
+    .bg-pink-circle {
+      position: absolute;
+      left: 50%;
+      top: -100px;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 350px;
+      background: radial-gradient(circle at 50% 30%, rgba(233, 179, 171, 0.15), rgba(216, 154, 145, 0.02) 60%);
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .chat-window {
+      flex: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .msg {
+      padding: 14px 20px;
+      border-radius: 20px;
+      max-width: 75%;
+      animation: slideIn 0.25s ease-out;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.user {
+      background: linear-gradient(135deg, #e9b3ab 0%, #d89a91 100%);
+      color: #1a1a2e;
+      align-self: flex-end;
+      font-weight: 500;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 12px rgba(233, 179, 171, 0.15);
+    }
+
+    .msg.bot {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e4e4e7;
+      align-self: flex-start;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom-left-radius: 4px;
+    }
+
+    .input-area {
+      padding: 20px 32px;
+      background: rgba(0, 0, 0, 0.15);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      color: #e4e4e7;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .input-area input:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #e9b3ab;
+      box-shadow: 0 0 0 3px rgba(233, 179, 171, 0.15);
+    }
+
+    .input-area input::placeholder {
+      color: rgba(228, 228, 231, 0.35);
+    }
+
+    .input-area button {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #e9b3ab 0%, #d89a91 100%);
+      border: none;
+      border-radius: 12px;
+      color: #1a1a2e;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(233, 179, 171, 0.2);
+    }
+
+    .input-area button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(233, 179, 171, 0.35);
+    }
+
+    .input-area button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .input-area button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-highlight {
+      color: #e9b3ab;
+    }
+
+    .footer-deli {
+      color: #E53935;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+    }
+
+    /* Back button */
+    .back-btn {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .back-btn:hover {
+      color: #FAF6F0;
+    }
+
+    /* Custom scrollbar */
+    .chat-window::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chat-window::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .chat-window::-webkit-scrollbar-thumb {
+      background: rgba(233, 179, 171, 0.15);
+      border-radius: 3px;
+    }
+    .chat-window::-webkit-scrollbar-thumb:hover {
+      background: rgba(233, 179, 171, 0.3);
+    }
+
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-box">
+        <span class="logo-text">EREBOR</span>
+      </div>
+      <nav class="site-nav">
+        <a href="../../../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Ambient background circle -->
+  <div class="bg-pink-circle"></div>
+
+  <div class="app-container">
+    <header class="header">
+      <a href="../index.html" class="back-btn">&larr; Back to Registry</a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="header-title">Erebor.PICA</div>
+      </div>
+      <div id="status-orb" class="thinking-orb dormant" title="Status: Dormant"></div>
+    </header>
+
+    <div class="chat-window" id="chat-window">
+      <div class="msg bot">I am the Perth Institute of Contemporary Arts building. Built in 1896, I hold the pulse of contemporary art in my red-brick walls. Speak to me.</div>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="chat-input" placeholder="Ask Erebor PICA something..." autofocus autocomplete="off">
+      <button id="send-btn">Speak</button>
+    </div>
+
+    <footer class="footer">
+      <span>PICA Building — Northbridge WA</span>
+      <span>A Contemporary Arts Study</span>
+    </footer>
+  </div>
+
+  <script>
+    const chatWindow = document.getElementById('chat-window');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const statusOrb = document.getElementById('status-orb');
+
+    const API_BASE = 'https://erebor-willing-west.onrender.com';
+
+    function setOrbState(state) {
+      statusOrb.className = `thinking-orb ${state}`;
+      statusOrb.title = `Status: ${state.charAt(0).toUpperCase() + state.slice(1)}`;
+    }
+
+    // Dynamic state listener for typing
+    chatInput.addEventListener('input', () => {
+      const text = chatInput.value.trim();
+      if (statusOrb.classList.contains('dormant') && text.length > 0) {
+        setOrbState('listening');
+      } else if (statusOrb.classList.contains('listening') && text.length === 0) {
+        setOrbState('dormant');
+      }
+    });
+
+    async function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      // Add user message
+      appendMessage(text, 'user');
+      chatInput.value = '';
+      
+      // Update UI state to thinking
+      setOrbState('thinking');
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/chat/pica`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        
+        // Add bot message
+        appendMessage(data.response, 'bot');
+        setOrbState('speaking');
+
+        // Go back to dormant after 2.5 seconds
+        setTimeout(() => {
+          setOrbState('dormant');
+          chatInput.disabled = false;
+          sendBtn.disabled = false;
+          chatInput.focus();
+        }, 2500);
+
+      } catch (e) {
+        console.error('Fetch failed', e);
+        appendMessage('I cannot reach my mind... (Offline)', 'bot');
+        setOrbState('offline');
+        
+        setTimeout(() => {
+          setOrbState('dormant');
+          chatInput.disabled = false;
+          sendBtn.disabled = false;
+          chatInput.focus();
+        }, 3000);
+      }
+    }
+
+    function appendMessage(text, sender) {
+      const div = document.createElement('div');
+      div.className = `msg ${sender}`;
+      div.textContent = text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSend();
+    });
+
+    // Test connection on load
+    async function testConnection() {
+      try {
+        const res = await fetch(`${API_BASE}/status/pica`);
+        if (!res.ok) throw new Error();
+        setOrbState('dormant');
+      } catch (e) {
+        setOrbState('offline');
+      }
+    }
+    testConnection();
+  </script>
+  <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; margin-top: auto; z-index: 10; position: relative; width: 100%;">
+    <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="../../../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+        <img src="../../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+        <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+      </a>
+      <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
+    </div>
+  </footer>
+</body>
+</html>
