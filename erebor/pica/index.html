@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../style.css?v=1.1">
   <style>
     * {
       margin: 0;
@@ -309,8 +309,12 @@
 <body>
   <header class="site-header">
     <div class="header-container">
-      <div class="logo-box">
-        <span class="logo-text">EREBOR</span>
+      <div class="logo-box" style="display: flex; align-items: center; gap: 12px;">
+        <img src="../../../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" style="height: 36px; width: auto; filter: brightness(10);" class="logo-img">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <h1 style="font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; letter-spacing: 0.15em; color: #fff; margin: 0; text-transform: uppercase; line-height: 1.1;">EREBOR</h1>
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-body); font-weight: 500; line-height: 1.1;">Sentient Building Registry</span>
+        </div>
       </div>
       <nav class="site-nav">
         <a href="../../../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>

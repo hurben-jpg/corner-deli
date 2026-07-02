@@ -9,15 +9,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
   <div class="app-container">
     <!-- Header -->
     <header class="app-header">
-      <div class="header-logo">
-        <h1>IDENTITY TAPESTRY</h1>
-        <span class="header-subtitle">Mount Lawley SHS • 2026 Residency</span>
+      <div class="header-logo" style="display: flex; align-items: center; gap: 12px;">
+        <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" style="height: 36px; width: auto; filter: brightness(10);" class="logo-img">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <h1 style="margin: 0; line-height: 1.1; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: 0.15em; color: #fff; text-transform: uppercase;">IDENTITY TAPESTRY</h1>
+          <span class="header-subtitle" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); line-height: 1.1;">Mount Lawley SHS • 2026 Residency</span>
+        </div>
       </div>
       <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
         <a href="../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
@@ -25,7 +28,7 @@
     </header>
 
     <!-- Sub-navigation bar (Page Content Top Menu) -->
-    <div class="sub-nav-bar" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-light); padding: 12px 28px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 90; min-height: 56px;">
+    <div class="sub-nav-bar" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-light); border-left: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 12px 28px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 90; min-height: 56px; max-width: 1200px; margin: 0 auto; width: 100%;">
       <nav class="app-nav">
         <button class="nav-btn active" data-tab="manifesto">Project Manifesto</button>
         <button class="nav-btn" data-tab="library">Visual Library</button>
