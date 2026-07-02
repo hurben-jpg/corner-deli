@@ -427,14 +427,32 @@
       if (e.key === 'Enter') handleSend();
     });
 
-    // Test connection on load
+    // Test connection and load dynamic greeting on load
     async function testConnection() {
       try {
         const res = await fetch(`${API_BASE}/status/pica`);
         if (!res.ok) throw new Error();
         setOrbState('dormant');
+        loadGreeting();
       } catch (e) {
         setOrbState('offline');
+      }
+    }
+
+    async function loadGreeting() {
+      try {
+        const res = await fetch(`${API_BASE}/greeting/pica`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.greeting) {
+            const welcomeMsg = document.querySelector('.msg.bot');
+            if (welcomeMsg) {
+              welcomeMsg.textContent = data.greeting;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load dynamic greeting", e);
       }
     }
     testConnection();
