@@ -75,8 +75,10 @@ body {
 
 /* ═══ HEADER ═══ */
 .site-header {
-  border-bottom: 2px solid var(--ink);
-  background-color: var(--paper);
+  border-bottom: 1px solid var(--border-paper);
+  background-color: rgba(7, 9, 19, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   position: fixed;
   top: 0;
   left: 0;
@@ -87,7 +89,7 @@ body {
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 16px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -106,10 +108,20 @@ body {
 
 .logo-text {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.15em;
+  color: #fff;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.header-subtitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--ink);
+  color: var(--ink-muted);
+  font-family: var(--font-body);
 }
 
 .site-nav {
