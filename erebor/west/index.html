@@ -329,9 +329,7 @@
       <div id="status-orb" class="thinking-orb dormant" title="Status: Dormant"></div>
     </header>
 
-    <div class="chat-window" id="chat-window">
-      <div class="msg bot">I am West Residences. Still under construction in Mt Lawley. I notice things.</div>
-    </div>
+    <div class="chat-window" id="chat-window"></div>
 
     <div class="input-area">
       <input type="text" id="chat-input" placeholder="Ask Erebor West something..." autofocus autocomplete="off">
@@ -433,26 +431,15 @@
         const res = await fetch(`${API_BASE}/status`);
         if (!res.ok) throw new Error();
         setOrbState('dormant');
-        loadGreeting();
-      } catch (e) {
-        setOrbState('offline');
-      }
-    }
-
-    async function loadGreeting() {
-      try {
-        const res = await fetch(`${API_BASE}/greeting/west`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data.greeting) {
-            const welcomeMsg = document.querySelector('.msg.bot');
-            if (welcomeMsg) {
-              welcomeMsg.textContent = data.greeting;
-            }
-          }
+        const data = await res.json();
+        if (data.greeting) {
+          appendMessage(data.greeting, 'bot');
+        } else {
+          appendMessage("I am West Residences. Still under construction in Mt Lawley. I notice things.", 'bot');
         }
       } catch (e) {
-        console.warn("Failed to load dynamic greeting", e);
+        setOrbState('offline');
+        appendMessage("I am West Residences. Still under construction in Mt Lawley. I notice things. (Offline)", 'bot');
       }
     }
     testConnection();

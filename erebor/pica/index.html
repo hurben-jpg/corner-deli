@@ -329,9 +329,7 @@
       <div id="status-orb" class="thinking-orb dormant" title="Status: Dormant"></div>
     </header>
 
-    <div class="chat-window" id="chat-window">
-      <div class="msg bot">I am the Perth Institute of Contemporary Arts building. Built in 1896, I hold the pulse of contemporary art in my red-brick walls. Speak to me.</div>
-    </div>
+    <div class="chat-window" id="chat-window"></div>
 
     <div class="input-area">
       <input type="text" id="chat-input" placeholder="Ask Erebor PICA something..." autofocus autocomplete="off">
@@ -433,26 +431,15 @@
         const res = await fetch(`${API_BASE}/status/pica`);
         if (!res.ok) throw new Error();
         setOrbState('dormant');
-        loadGreeting();
-      } catch (e) {
-        setOrbState('offline');
-      }
-    }
-
-    async function loadGreeting() {
-      try {
-        const res = await fetch(`${API_BASE}/greeting/pica`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data.greeting) {
-            const welcomeMsg = document.querySelector('.msg.bot');
-            if (welcomeMsg) {
-              welcomeMsg.textContent = data.greeting;
-            }
-          }
+        const data = await res.json();
+        if (data.greeting) {
+          appendMessage(data.greeting, 'bot');
+        } else {
+          appendMessage("I am the Perth Institute of Contemporary Arts building. Built in 1896, I hold the pulse of contemporary art in my red-brick walls. Speak to me.", 'bot');
         }
       } catch (e) {
-        console.warn("Failed to load dynamic greeting", e);
+        setOrbState('offline');
+        appendMessage("I am the Perth Institute of Contemporary Arts building. Built in 1896, I hold the pulse of contemporary art in my red-brick walls. Speak to me. (Offline)", 'bot');
       }
     }
     testConnection();
