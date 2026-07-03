@@ -359,18 +359,25 @@ body {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
   .about-container {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 60px;
+    text-align: left;
   }
 }
 
 .about-content {
   flex: 1.2;
+  max-width: 550px;
+  width: 100%;
 }
 
 .about-text {
@@ -385,6 +392,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 320px;
+  width: 100%;
 }
 
 .about-img {
