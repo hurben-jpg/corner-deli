@@ -303,7 +303,16 @@
       background: rgba(233, 179, 171, 0.3);
     }
 
-
+    .logo-box, .logo-box:visited, .logo-box:hover, .logo-box:active {
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+    .logo-box h1 {
+      color: #fff !important;
+    }
+    .logo-box span {
+      color: var(--text-muted) !important;
+    }
   </style>
 </head>
 <body>
@@ -316,6 +325,9 @@
           <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-body); font-weight: 500; line-height: 1.1;">Sentient Building Registry</span>
         </div>
       </a>
+      <nav class="site-nav">
+        <a href="../../../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
+      </nav>
     </div>
   </header>
 

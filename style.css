@@ -355,12 +355,49 @@ body {
   background-color: var(--paper-warm);
 }
 
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .about-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.about-content {
+  flex: 1.2;
+}
+
 .about-text {
-  max-width: 800px;
   color: var(--ink-soft);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.7;
+}
+
+.about-image-box {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-img {
+  max-width: 100%;
+  max-height: 280px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease;
+}
+
+.about-img:hover {
+  transform: scale(1.03);
 }
 
 /* ═══ FOOTER ═══ */
