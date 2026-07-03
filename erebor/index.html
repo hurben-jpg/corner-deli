@@ -148,26 +148,29 @@
         max-width: 240px;
       }
     }
-
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
       margin-top: 20px;
     }
 
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 30px;
+      border-radius: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      min-height: 320px;
       position: relative;
       overflow: hidden;
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        flex-direction: row;
+      }
     }
 
     .card::before {
@@ -179,6 +182,7 @@
       height: 100%;
       background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.02), transparent 50%);
       pointer-events: none;
+      z-index: 2;
     }
 
     .card.active:hover {
@@ -187,10 +191,46 @@
       box-shadow: 0 10px 30px rgba(245, 197, 24, 0.08);
     }
 
-    .card.locked {
-      opacity: 0.5;
-      cursor: not-allowed;
-      border-style: dashed;
+    .card-image-box {
+      flex: 1;
+      min-height: 250px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      .card-image-box {
+        max-width: 350px;
+        border-right: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .card-image-box {
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.03);
+    }
+
+    .card-info {
+      flex: 1.2;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 3;
     }
 
     .card-badge {
@@ -202,7 +242,7 @@
       padding: 4px 10px;
       border-radius: 6px;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .card.active .card-badge {
@@ -211,26 +251,55 @@
       border: 1px solid rgba(245, 197, 24, 0.2);
     }
 
-    .card.locked .card-badge {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
     .card-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 600;
       margin-bottom: 12px;
       color: #fff;
+    }
+
+    .profile-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 16px 0 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+
+    @media (max-width: 480px) {
+      .profile-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-value {
+      font-size: 0.85rem;
+      color: var(--deli-warm);
+      font-weight: 500;
     }
 
     .card-desc {
       font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 30px;
-      flex-grow: 1;
+      margin-bottom: 24px;
     }
 
     .card-btn {
@@ -243,7 +312,14 @@
       font-weight: 700;
       font-size: 0.95rem;
       transition: all 0.2s ease;
-      width: 100%;
+      align-self: flex-start;
+      min-width: 200px;
+    }
+
+    @media (max-width: 480px) {
+      .card-btn {
+        width: 100%;
+      }
     }
 
     .card.active .card-btn {
@@ -255,13 +331,6 @@
     .card.active .card-btn:hover {
       box-shadow: 0 6px 16px rgba(245, 197, 24, 0.35);
       transform: translateY(-1px);
-    }
-
-    .card.locked .card-btn {
-      background-color: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.2);
-      border: 1px solid var(--border);
-      cursor: not-allowed;
     }
 
   </style>
@@ -297,22 +366,68 @@
     <div class="grid">
       <!-- West Card -->
       <div class="card active">
-        <div>
-          <span class="card-badge">Erebor.West</span>
-          <h2 class="card-title">West Residences</h2>
-          <p class="card-desc">An 8-storey landmark under construction at 141 West Parade, Mt Lawley. Grounded, community-minded, observing its emerging concrete framework.</p>
+        <div class="card-image-box">
+          <img src="../cnrdeli/West-Parade_V01-Hero-1.jpg" alt="West Residences" class="card-img">
         </div>
-        <a href="./west/index.html" class="card-btn">Establish Link &rarr;</a>
+        <div class="card-info">
+          <div>
+            <span class="card-badge">Erebor.West</span>
+            <h2 class="card-title">West Residences</h2>
+            <div class="profile-meta">
+              <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">141 West Parade, Mt Lawley</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Architect</span>
+                <span class="meta-value">Klopper & Davis</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Status</span>
+                <span class="meta-value">Nearing Completion (July 2026)</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Features</span>
+                <span class="meta-value">Willing Coffee & Bar Vino on ground</span>
+              </div>
+            </div>
+            <p class="card-desc">An 8-storey Flatiron-inspired landmark. Grounded, community-minded, and observing its emerging concrete framework and European cafe culture precinct.</p>
+          </div>
+          <a href="./west/index.html" class="card-btn">Establish Link &rarr;</a>
+        </div>
       </div>
 
       <!-- PICA Card -->
       <div class="card active">
-        <div>
-          <span class="card-badge">Erebor.PICA</span>
-          <h2 class="card-title">PICA Building</h2>
-          <p class="card-desc">A landmark heritage art space built in 1896 as the Perth Boys' and Girls' School. Deeply historic, creative, observing experimental art and the Cultural Centre's pulse.</p>
+        <div class="card-image-box">
+          <img src="../cnrdeli/4-perth-institute-of.jpg" alt="PICA Building" class="card-img">
         </div>
-        <a href="./pica/index.html" class="card-btn">Establish Link &rarr;</a>
+        <div class="card-info">
+          <div>
+            <span class="card-badge">Erebor.PICA</span>
+            <h2 class="card-title">PICA Building</h2>
+            <div class="profile-meta">
+              <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">Perth Cultural Centre, Northbridge</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Architect</span>
+                <span class="meta-value">George Temple Poole (1896)</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Style</span>
+                <span class="meta-value">Federation Free Classical</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Features</span>
+                <span class="meta-value">Historic clock tower, PICA Bar & Cafe</span>
+              </div>
+            </div>
+            <p class="card-desc">A landmark heritage art space originally built in 1896 as the Perth Boys' and Girls' School. Deeply historic, creative, observing experimental art and the Cultural Centre's pulse.</p>
+          </div>
+          <a href="./pica/index.html" class="card-btn">Establish Link &rarr;</a>
+        </div>
       </div>
     </div>
   </main>
