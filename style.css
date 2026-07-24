@@ -163,9 +163,9 @@ body {
   background-size: cover;
   background-position: center;
   z-index: 1;
-  filter: brightness(0.35) contrast(1.2) grayscale(0.8) sepia(0.05);
+  filter: none;
   transform: scale(1.05);
-  opacity: 0.65;
+  opacity: 1;
 }
 
 .hero-container {
