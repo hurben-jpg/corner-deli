@@ -164,7 +164,6 @@ body {
   background-position: center;
   z-index: 1;
   filter: none;
-  transform: scale(1.05);
   opacity: 1;
 }
 
