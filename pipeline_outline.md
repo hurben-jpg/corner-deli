@@ -4,12 +4,13 @@ This document outlines the end-to-end platforms, cloud services, software framew
 
 ---
 
-## 1. Web Hosting & Version Control
+## 1. Domains & Web Hosting
 
-| Platform/Service | Purpose | Details |
+| Platform/Service | Role | Details |
 | :--- | :--- | :--- |
-| **GitHub** | Version Control & Deployment Source | Hosts the project codebase. The static site builds out of the `deploy/` directory and is pushed to `https://github.com/hurben-jpg/corner-deli.git`. |
-| **Static Web Hosting** | Public Website Delivery | Serves the static assets (HTML5, Vanilla CSS3, Javascript) for the Corner Deli homepage, Identity Tapestry digital archive, and Erebor interface. |
+| **Porkbun** | Domain Registrar | Registrar for the custom domain **[cnrdeli.com](https://cnrdeli.com)**. Nameservers are pointed to Netlify DNS to delegate DNS zone management. |
+| **Netlify** | Static Hosting & DNS Manager | Hosts the front-end static website. Builds and deployments are triggered automatically when changes are pushed to the GitHub repository. Netlify DNS manages the active DNS zone. |
+| **GitHub** | Version Control & CI/CD Source | Hosts the project codebase. The static site builds out of the `deploy/` directory and is pushed to `https://github.com/hurben-jpg/corner-deli.git` to trigger Netlify builds. |
 | **Google Fonts** | Typography Sourcing | Delivers modern typefaces (*Outfit* and *Inter*) used across all web layouts to match custom branding specifications. |
 
 ---
@@ -18,7 +19,7 @@ This document outlines the end-to-end platforms, cloud services, software framew
 
 | Platform/Service | Role | Details |
 | :--- | :--- | :--- |
-| **Render** | Cloud Hosting Service | Hosts the containerized FastAPI backend at `https://erebor-willing-west.onrender.com`. Render automatically pulls updates from the GitHub repository to trigger deployments. |
+| **Render** | Cloud Hosting Service | Hosts the containerized FastAPI backend at `https://erebor-willing-west.onrender.com`. Render automatically pulls updates from the GitHub repository to trigger backend deployments. |
 | **FastAPI & Uvicorn** | Web API & Server Framework | Lightweight Python ASGI framework handling incoming client request routers (`POST /chat`, `GET /status`). |
 | **python-dotenv** | Configuration Security | Manages environment-specific variables and credentials (such as API keys) locally and securely in `.env` files. |
 | **Pytest** | Automated Testing | Runs backend unit testing pipelines (`tests/test_core.py`, `tests/test_erebor.py`) to verify API handlers and brain modules. |
