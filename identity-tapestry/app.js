@@ -649,10 +649,13 @@ function generateRandomComposition() {
   const rotateSlider = document.getElementById("tank-global-rotate");
   const baseRotate = rotateSlider ? parseInt(rotateSlider.value) : 0;
 
+  const randomRotateCb = document.getElementById("tank-random-rotate");
+  const isRandomRotate = randomRotateCb ? randomRotateCb.checked : true;
+
   const edgePadding = 20;
   selectedSymbols.forEach((sym, idx) => {
     let scale = baseScale * (0.6 + Math.random() * 0.8);
-    let rotation = (baseRotate + Math.floor(Math.random() * 360)) % 360;
+    let rotation = isRandomRotate ? Math.floor(Math.random() * 360) : 0;
     const radius = 50 * scale + edgePadding;
 
     let x = radius + Math.random() * (w - 2 * radius);
