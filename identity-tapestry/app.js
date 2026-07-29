@@ -175,6 +175,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Symbol Color Swatches listener
+  const symbolSwatches = document.querySelectorAll(".symbol-swatches .symbol-swatch");
+  const updateSymbolColorSelection = (color) => {
+    tankForegroundColor = color;
+    symbolSwatches.forEach(s => {
+      if (s.getAttribute("data-color") === color) {
+        s.classList.add("active");
+        s.style.border = "2px solid #fff";
+      } else {
+        s.classList.remove("active");
+        s.style.border = "1px solid rgba(255,255,255,0.2)";
+      }
+    });
+    const canvas = document.getElementById("composition-canvas");
+    if (canvas) {
+      canvas.style.color = tankForegroundColor;
+    }
+  };
+
+  symbolSwatches.forEach(sw => {
+    sw.addEventListener("click", () => {
+      updateSymbolColorSelection(sw.getAttribute("data-color"));
+    });
+  });
+
   // Background Color Swatches listener
   const swatches = document.querySelectorAll(".color-swatches .swatch");
   swatches.forEach(sw => {
@@ -189,16 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedColor = sw.getAttribute("data-color");
       tankBackgroundColor = selectedColor;
       
+      // Auto-contrast default suggestion
+      let suggestedFore = "#ffffff";
       if (selectedColor === "#ffffff" || selectedColor === "#c0b087") {
-        tankForegroundColor = "#0c0e18";
-      } else {
-        tankForegroundColor = "#ffffff";
+        suggestedFore = "#0c0e18";
       }
+      updateSymbolColorSelection(suggestedFore);
       
       const canvas = document.getElementById("composition-canvas");
       if (canvas) {
         canvas.style.backgroundColor = tankBackgroundColor;
-        canvas.style.color = tankForegroundColor;
         if (canvas.parentElement) {
           canvas.parentElement.style.backgroundColor = tankBackgroundColor;
         }
