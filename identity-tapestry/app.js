@@ -624,10 +624,11 @@ function generateRandomComposition() {
   const rotateSlider = document.getElementById("tank-global-rotate");
   const baseRotate = rotateSlider ? parseInt(rotateSlider.value) : 0;
 
+  const edgePadding = 20;
   selectedSymbols.forEach((sym, idx) => {
     let scale = baseScale * (0.6 + Math.random() * 0.8);
     let rotation = (baseRotate + Math.floor(Math.random() * 360)) % 360;
-    const radius = 50 * scale;
+    const radius = 50 * scale + edgePadding;
 
     let x = radius + Math.random() * (w - 2 * radius);
     let y = radius + Math.random() * (h - 2 * radius);
@@ -693,8 +694,9 @@ function stepPhysicsOnce(customIterations) {
     }
 
     // 2. Boundary lock
+    const edgePadding = 20;
     compositionElements.forEach(el => {
-      const radius = baseRadius * el.scale * tankGlobalScale;
+      const radius = baseRadius * el.scale * tankGlobalScale + edgePadding;
       if (el.x < radius) el.x = radius;
       else if (el.x > canvasWidth - radius) el.x = canvasWidth - radius;
       if (el.y < radius) el.y = radius;
