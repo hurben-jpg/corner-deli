@@ -649,13 +649,11 @@ function generateRandomComposition() {
   const rotateSlider = document.getElementById("tank-global-rotate");
   const baseRotate = rotateSlider ? parseInt(rotateSlider.value) : 0;
 
-  const randomRotateCb = document.getElementById("tank-random-rotate");
-  const isRandomRotate = randomRotateCb ? randomRotateCb.checked : true;
-
   const edgePadding = 20;
   selectedSymbols.forEach((sym, idx) => {
     let scale = baseScale * (0.6 + Math.random() * 0.8);
-    let rotation = isRandomRotate ? Math.floor(Math.random() * 360) : 0;
+    // Assign an independent rotation weight between -1.0 and 1.0
+    let rotWeight = Math.random() * 2.0 - 1.0;
     const radius = 50 * scale + edgePadding;
 
     let x = radius + Math.random() * (w - 2 * radius);
@@ -666,7 +664,7 @@ function generateRandomComposition() {
       x: Math.round(x),
       y: Math.round(y),
       scale: parseFloat(scale.toFixed(2)),
-      rotation: rotation,
+      rotWeight: parseFloat(rotWeight.toFixed(3)),
       zIndex: idx + 1
     });
   });
@@ -742,7 +740,9 @@ function renderCanvas() {
 
   const applyStyle = (div, el) => {
     const visScale = el.scale * tankGlobalScale;
-    const visRotation = el.rotation + tankGlobalRotate;
+    const visRotation = (el.rotWeight !== undefined) ? 
+      (el.rotWeight * tankGlobalRotate) : 
+      (el.rotation + tankGlobalRotate);
     const currentSize = 100 * visScale;
 
     div.style.position = 'absolute';
@@ -795,7 +795,9 @@ function exportCompositionSVG() {
     const sym = symbolDatabase[el.id + ".png"];
     if (sym) {
       const finalScale = el.scale * tankGlobalScale;
-      const finalRotation = el.rotation + tankGlobalRotate;
+      const finalRotation = (el.rotWeight !== undefined) ? 
+        Math.round(el.rotWeight * tankGlobalRotate) : 
+        (el.rotation + tankGlobalRotate);
       const S = 100 * finalScale;
       const scaleFactor = S / 1000;
       const tx = el.x + S / 2;
