@@ -104,6 +104,22 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
       closeCompositionViewer();
     }
+    
+    // Handle next/prev symbol navigation with arrow keys when modal is open
+    const detailModal = document.getElementById('detail-modal');
+    if (detailModal && detailModal.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') {
+        const prevBtn = document.getElementById('modal-prev-btn');
+        if (prevBtn && prevBtn.style.display !== 'none') {
+          prevBtn.click();
+        }
+      } else if (e.key === 'ArrowRight') {
+        const nextBtn = document.getElementById('modal-next-btn');
+        if (nextBtn && nextBtn.style.display !== 'none') {
+          nextBtn.click();
+        }
+      }
+    }
   });
 
   // Infinite scroll
@@ -347,6 +363,35 @@ function openSymbolModal(sym) {
 
   // Download SVG button
   document.getElementById('download-svg-btn').onclick = () => downloadSVG(sym);
+
+  // Next and Previous navigation logic
+  const currentSymbolIndex = filteredSymbols.findIndex(s => s.id === sym.id);
+  
+  const prevBtn = document.getElementById('modal-prev-btn');
+  if (prevBtn) {
+    if (currentSymbolIndex > 0) {
+      prevBtn.style.display = 'inline-flex';
+      prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        openSymbolModal(filteredSymbols[currentSymbolIndex - 1]);
+      };
+    } else {
+      prevBtn.style.display = 'none';
+    }
+  }
+
+  const nextBtn = document.getElementById('modal-next-btn');
+  if (nextBtn) {
+    if (currentSymbolIndex < filteredSymbols.length - 1) {
+      nextBtn.style.display = 'inline-flex';
+      nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        openSymbolModal(filteredSymbols[currentSymbolIndex + 1]);
+      };
+    } else {
+      nextBtn.style.display = 'none';
+    }
+  }
 
   // Show modal
   document.getElementById('detail-modal').classList.add('active');
