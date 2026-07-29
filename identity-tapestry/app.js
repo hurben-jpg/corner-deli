@@ -20,6 +20,8 @@ let tankGlobalRotate = 0;
 let tankPadding = 20;
 let canvasWidth = 1200;
 let canvasHeight = 800;
+let tankBackgroundColor = "#0c0e18";
+let tankForegroundColor = "#ffffff";
 
 // ──────────────────────────────────────────────
 // TAB NAVIGATION
@@ -172,6 +174,37 @@ document.addEventListener('DOMContentLoaded', () => {
       renderCanvas();
     });
   }
+
+  // Background Color Swatches listener
+  const swatches = document.querySelectorAll(".color-swatches .swatch");
+  swatches.forEach(sw => {
+    sw.addEventListener("click", () => {
+      swatches.forEach(s => {
+        s.classList.remove("active");
+        s.style.border = "1px solid rgba(255,255,255,0.2)";
+      });
+      sw.classList.add("active");
+      sw.style.border = "2px solid #fff";
+      
+      const selectedColor = sw.getAttribute("data-color");
+      tankBackgroundColor = selectedColor;
+      
+      if (selectedColor === "#ffffff" || selectedColor === "#c0b087") {
+        tankForegroundColor = "#0c0e18";
+      } else {
+        tankForegroundColor = "#ffffff";
+      }
+      
+      const canvas = document.getElementById("composition-canvas");
+      if (canvas) {
+        canvas.style.backgroundColor = tankBackgroundColor;
+        canvas.style.color = tankForegroundColor;
+        if (canvas.parentElement) {
+          canvas.parentElement.style.backgroundColor = tankBackgroundColor;
+        }
+      }
+    });
+  });
 
   const genBtn = document.getElementById("generate-composition-btn");
   if (genBtn) {
@@ -730,8 +763,8 @@ function exportCompositionSVG() {
   const w = canvasWidth;
   const h = canvasHeight;
 
-  let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="background-color: #0c0e18;">\n`;
-  svgContent += `  <!-- Background -->\n  <rect width="100%" height="100%" fill="#0c0e18" />\n\n`;
+  let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="background-color: ${tankBackgroundColor};">\n`;
+  svgContent += `  <!-- Background -->\n  <rect width="100%" height="100%" fill="${tankBackgroundColor}" />\n\n`;
 
   const sortedElements = [...compositionElements].sort((a, b) => a.zIndex - b.zIndex);
 
@@ -742,7 +775,7 @@ function exportCompositionSVG() {
       const finalRotation = el.rotation + tankGlobalRotate;
       const scaleFactor = finalScale * (100 / 3024);
       svgContent += `  <!-- Symbol #${el.id} -->\n`;
-      svgContent += `  <path d="${sym.svg_path_data}" transform="translate(${el.x}, ${el.y}) scale(${scaleFactor}) rotate(${finalRotation}, 1512, 1512)" fill="#ffffff" stroke="none" />\n`;
+      svgContent += `  <path d="${sym.svg_path_data}" transform="translate(${el.x}, ${el.y}) scale(${scaleFactor}) rotate(${finalRotation}, 1512, 1512)" fill="${tankForegroundColor}" stroke="none" />\n`;
     }
   });
 
