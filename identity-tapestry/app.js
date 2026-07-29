@@ -378,7 +378,7 @@ function openSymbolModal(sym) {
 
   // Inline SVG vector
   document.getElementById('modal-svg-container').innerHTML = `
-    <svg viewBox="0 0 3024 3024" width="100%" height="100%">
+    <svg viewBox="-500 -500 1000 1000" width="100%" height="100%">
       <path d="${sym.svg_path_data}" fill="currentColor" stroke="none" />
     </svg>
   `;
@@ -435,8 +435,8 @@ function closeModal() {
 }
 
 function downloadSVG(sym) {
-  const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3024 3024" width="3024" height="3024">
-  <rect width="3024" height="3024" fill="#0c0e18"/>
+  const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-500 -500 1000 1000" width="1000" height="1000">
+  <rect x="-500" y="-500" width="1000" height="1000" fill="#0c0e18"/>
   <path d="${sym.svg_path_data}" fill="#ffffff" stroke="none"/>
 </svg>`;
   const blob = new Blob([svgContent], { type: 'image/svg+xml' });
@@ -481,8 +481,11 @@ function buildMuralGallery() {
         elements.forEach(el => {
           const sym = symbolDatabase[el.id + '.png'];
           if (sym) {
-            const scaleFactor = el.scale * (100 / 3024);
-            svgThumb += `<path d="${sym.svg_path_data}" transform="translate(${el.x}, ${el.y}) scale(${scaleFactor}) rotate(${el.rotation}, 1512, 1512)" fill="#ffffff" opacity="0.85" />`;
+            const S = 100 * el.scale;
+            const scaleFactor = S / 1000;
+            const tx = el.x + S / 2;
+            const ty = el.y + S / 2;
+            svgThumb += `<path d="${sym.svg_path_data}" transform="translate(${tx}, ${ty}) scale(${scaleFactor}) rotate(${el.rotation})" fill="#ffffff" opacity="0.85" />`;
           }
         });
         svgThumb += `</svg>`;
@@ -538,7 +541,7 @@ function openCompositionViewer(name, elements) {
     div.style.transformOrigin = 'center center';
 
     div.innerHTML = `
-      <svg viewBox="0 0 3024 3024" width="100%" height="100%">
+      <svg viewBox="-500 -500 1000 1000" width="100%" height="100%">
         <path d="${sym.svg_path_data}" fill="currentColor" stroke="none" />
       </svg>
     `;
@@ -745,7 +748,7 @@ function renderCanvas() {
       applyStyle(div, el);
 
       div.innerHTML = `
-        <svg viewBox="0 0 3024 3024" width="100%" height="100%">
+        <svg viewBox="-500 -500 1000 1000" width="100%" height="100%">
           <path d="${sym.svg_path_data}" fill="currentColor" stroke="none" />
         </svg>
       `;
@@ -773,9 +776,12 @@ function exportCompositionSVG() {
     if (sym) {
       const finalScale = el.scale * tankGlobalScale;
       const finalRotation = el.rotation + tankGlobalRotate;
-      const scaleFactor = finalScale * (100 / 3024);
+      const S = 100 * finalScale;
+      const scaleFactor = S / 1000;
+      const tx = el.x + S / 2;
+      const ty = el.y + S / 2;
       svgContent += `  <!-- Symbol #${el.id} -->\n`;
-      svgContent += `  <path d="${sym.svg_path_data}" transform="translate(${el.x}, ${el.y}) scale(${scaleFactor}) rotate(${finalRotation}, 1512, 1512)" fill="${tankForegroundColor}" stroke="none" />\n`;
+      svgContent += `  <path d="${sym.svg_path_data}" transform="translate(${tx}, ${ty}) scale(${scaleFactor}) rotate(${finalRotation})" fill="${tankForegroundColor}" stroke="none" />\n`;
     }
   });
 
