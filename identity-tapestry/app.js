@@ -625,16 +625,12 @@ function generateRandomComposition() {
   const baseRotate = rotateSlider ? parseInt(rotateSlider.value) : 0;
 
   selectedSymbols.forEach((sym, idx) => {
-    let x = 80 + Math.random() * (w - 200);
-    let y = 80 + Math.random() * (h - 200);
     let scale = baseScale * (0.6 + Math.random() * 0.8);
     let rotation = (baseRotate + Math.floor(Math.random() * 360)) % 360;
+    const radius = 50 * scale;
 
-    const size = 100 * scale;
-    if (x < 40) x = 40;
-    else if (x + size > w - 40) x = w - 40 - size;
-    if (y < 40) y = 40;
-    else if (y + size > h - 40) y = h - 40 - size;
+    let x = radius + Math.random() * (w - 2 * radius);
+    let y = radius + Math.random() * (h - 2 * radius);
 
     elements.push({
       id: sym.id,
@@ -658,28 +654,18 @@ function stepPhysicsOnce(customIterations) {
   const iterations = typeof customIterations === "number" ? customIterations : 20;
   
   for (let iter = 0; iter < iterations; iter++) {
-    // Boundary lock
-    compositionElements.forEach(el => {
-      const visScale = el.scale * tankGlobalScale;
-      const size = 100 * visScale;
-      if (el.x < 0) el.x = 0;
-      else if (el.x + size > canvasWidth) el.x = canvasWidth - size;
-      if (el.y < 0) el.y = 0;
-      else if (el.y + size > canvasHeight) el.y = canvasHeight - size;
-    });
-
-    // Pairwise separation
+    // 1. Pairwise separation
     for (let i = 0; i < numElements; i++) {
       const elA = compositionElements[i];
       const radiusA = baseRadius * elA.scale * tankGlobalScale;
-      const cxA = elA.x + radiusA;
-      const cyA = elA.y + radiusA;
+      const cxA = elA.x;
+      const cyA = elA.y;
 
       for (let j = i + 1; j < numElements; j++) {
         const elB = compositionElements[j];
         const radiusB = baseRadius * elB.scale * tankGlobalScale;
-        const cxB = elB.x + radiusB;
-        const cyB = elB.y + radiusB;
+        const cxB = elB.x;
+        const cyB = elB.y;
 
         const dx = cxB - cxA;
         const dy = cyB - cyA;
@@ -705,6 +691,15 @@ function stepPhysicsOnce(customIterations) {
         }
       }
     }
+
+    // 2. Boundary lock
+    compositionElements.forEach(el => {
+      const radius = baseRadius * el.scale * tankGlobalScale;
+      if (el.x < radius) el.x = radius;
+      else if (el.x > canvasWidth - radius) el.x = canvasWidth - radius;
+      if (el.y < radius) el.y = radius;
+      else if (el.y > canvasHeight - radius) el.y = canvasHeight - radius;
+    });
   }
   renderCanvas();
 }
@@ -718,18 +713,13 @@ function renderCanvas() {
   const applyStyle = (div, el) => {
     const visScale = el.scale * tankGlobalScale;
     const visRotation = el.rotation + tankGlobalRotate;
-    const baseSize = 100;
-    const currentSize = baseSize * visScale;
-    const halfSize = currentSize / 2;
-
-    const cx = el.x + (baseSize * el.scale) / 2;
-    const cy = el.y + (baseSize * el.scale) / 2;
+    const currentSize = 100 * visScale;
 
     div.style.position = 'absolute';
     div.style.width = `${currentSize}px`;
     div.style.height = `${currentSize}px`;
-    div.style.left = `${cx - halfSize}px`;
-    div.style.top = `${cy - halfSize}px`;
+    div.style.left = `${el.x - currentSize / 2}px`;
+    div.style.top = `${el.y - currentSize / 2}px`;
     div.style.transform = `rotate(${visRotation}deg)`;
     div.style.zIndex = el.zIndex;
     div.style.transformOrigin = 'center center';
