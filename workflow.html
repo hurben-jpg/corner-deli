@@ -546,15 +546,15 @@
   <main>
     <section class="hero-section">
       <span class="hero-tag">System Blueprints</span>
-      <h1 class="hero-title">Integration Pipeline</h1>
-      <p class="hero-desc">An overview of the cloud platforms, hosting pipelines, AI components, and IoT hardware driving the cnrdeli.com ecosystem.</p>
+      <h1 class="hero-title">Integration Pipelines</h1>
+      <p class="hero-desc">An overview of the cloud platforms, hosting pipelines, AI components, IoT hardware, and drawing reprocessors driving the cnrdeli.com ecosystem.</p>
     </section>
 
-    <!-- Interactive Diagram Card -->
-    <div class="diagram-card">
+    <!-- Interactive Diagram Card 1: Building -->
+    <div class="diagram-card" data-pipeline="building">
       <div class="diagram-title">
         <span class="diagram-title-dot"></span>
-        Interactive Architecture Map
+        I. Conscious Building Pipeline
       </div>
 
       <!-- SVG Pipeline Diagram -->
@@ -647,11 +647,94 @@
       </svg>
 
       <!-- Live Display Info Panel -->
-      <div class="panel-display" id="panel-info">
-        <h3 class="panel-title" id="info-title">
+      <div class="panel-display" id="panel-info-building">
+        <h3 class="panel-title">
           <span style="color: var(--deli-yellow);">💡</span> Hover over a Node
         </h3>
-        <p class="panel-desc" id="info-desc">Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.</p>
+        <p class="panel-desc">Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.</p>
+      </div>
+    </div>
+
+    <!-- Interactive Diagram Card 2: Tapestry -->
+    <div class="diagram-card" data-pipeline="tapestry" style="margin-top: 40px;">
+      <div class="diagram-title">
+        <span class="diagram-title-dot" style="background-color: var(--deli-teal); box-shadow: 0 0 8px var(--deli-teal);"></span>
+        II. Identity Tapestry Pipeline
+      </div>
+
+      <!-- SVG Pipeline Diagram -->
+      <svg viewBox="0 0 800 240" class="pipeline-svg">
+        <!-- SVG Definitions -->
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="rgba(255,255,255,0.15)"/>
+          </marker>
+        </defs>
+
+        <!-- Connecting Flows -->
+        <!-- Scans -> OpenCV -->
+        <path d="M 150 70 L 190 70" class="flow-line line-tapestry-scans line-tapestry-opencv color-red" marker-end="url(#arrow2)"/>
+        <!-- OpenCV -> DB -->
+        <path d="M 320 70 L 370 70" class="flow-line line-tapestry-opencv line-tapestry-db color-yellow" marker-end="url(#arrow2)"/>
+        <!-- DB -> Browser -->
+        <path d="M 480 70 L 540 70" class="flow-line line-tapestry-db line-tapestry-browser color-blue" marker-end="url(#arrow2)"/>
+        <!-- Browser -> Physics -->
+        <path d="M 595 95 L 595 120 L 505 120 L 505 140" class="flow-line line-tapestry-browser line-tapestry-physics color-red" marker-end="url(#arrow2)"/>
+        <!-- Physics -> Exporter -->
+        <path d="M 560 165 L 630 165" class="flow-line line-tapestry-physics line-tapestry-exporter color-teal" marker-end="url(#arrow2)"/>
+        <!-- DB -> Physics -->
+        <path d="M 425 95 L 425 165 L 450 165" class="flow-line line-tapestry-db line-tapestry-physics color-blue" marker-end="url(#arrow2)"/>
+
+        <!-- Nodes -->
+        <!-- Node A: Scans -->
+        <g class="svg-node color-red" id="node-tapestry-scans">
+          <rect x="30" y="40" width="120" height="60" rx="10"/>
+          <text x="90" y="70">Batch Scans</text>
+          <text x="90" y="88" class="node-type">Raw Drawing Scans</text>
+        </g>
+
+        <!-- Node B: OpenCV -->
+        <g class="svg-node color-yellow" id="node-tapestry-opencv">
+          <rect x="190" y="40" width="130" height="60" rx="10"/>
+          <text x="255" y="70">OpenCV Python</text>
+          <text x="255" y="88" class="node-type">Vectorizer & Normalizer</text>
+        </g>
+
+        <!-- Node C: DB -->
+        <g class="svg-node color-blue" id="node-tapestry-db">
+          <rect x="370" y="40" width="110" height="60" rx="10"/>
+          <text x="425" y="70">Database (JSON)</text>
+          <text x="425" y="88" class="node-type">Drawing Metadata</text>
+        </g>
+
+        <!-- Node D: Browser -->
+        <g class="svg-node color-red" id="node-tapestry-browser">
+          <rect x="540" y="40" width="110" height="60" rx="10"/>
+          <text x="595" y="70">Browser UI</text>
+          <text x="595" y="88" class="node-type">Visual Library App</text>
+        </g>
+
+        <!-- Node E: Physics -->
+        <g class="svg-node color-yellow" id="node-tapestry-physics">
+          <rect x="450" y="140" width="110" height="60" rx="10"/>
+          <text x="505" y="170">Physics Solver</text>
+          <text x="505" y="188" class="node-type">Mural Layout Engine</text>
+        </g>
+
+        <!-- Node F: Exporter -->
+        <g class="svg-node color-teal" id="node-tapestry-exporter">
+          <rect x="630" y="140" width="110" height="60" rx="10"/>
+          <text x="685" y="170">SVG Exporter</text>
+          <text x="685" y="188" class="node-type">Vector Downloader</text>
+        </g>
+      </svg>
+
+      <!-- Live Display Info Panel -->
+      <div class="panel-display" id="panel-info-tapestry">
+        <h3 class="panel-title">
+          <span style="color: var(--deli-teal);">💡</span> Hover over a Node
+        </h3>
+        <p class="panel-desc">Hover over any node in the tapestry diagram above to view details of the drawing vectorization and layout engine pipeline.</p>
       </div>
     </div>
 
@@ -710,14 +793,46 @@
         <div class="card-header-box">
           <span class="card-label">IoT Hardware & Embedded</span>
           <h2 class="card-title">Spatial Consciousness</h2>
-          <p class="card-desc">An interactive physical terminal running on high-performance microcontrollers, feeding temperature, light levels, and occupancy to the server brain.</p>
         </div>
+        <p class="card-desc">An interactive physical terminal running on high-performance microcontrollers, feeding temperature, light levels, and occupancy to the server brain.</p>
         <div class="tech-list">
           <span class="tech-tag">ESP32-P4 MCU</span>
           <span class="tech-tag">ESP-IDF SDK</span>
           <span class="tech-tag">WiFi-6 C6 Module</span>
           <span class="tech-tag">Serial Sensors</span>
           <span class="tech-tag">PowerShell Builds</span>
+        </div>
+      </div>
+
+      <!-- Card 5: Tapestry Processing -->
+      <div class="info-card accent-yellow">
+        <div class="card-header-box">
+          <span class="card-label">Image Reprocessing</span>
+          <h2 class="card-title">Tapestry Processing</h2>
+        </div>
+        <p class="card-desc">A custom Python script utilising OpenCV that scans raw student sketches, crops extraneous margins, centers drawing coordinates, and normalizes vector paths for database compilation.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Python 3</span>
+          <span class="tech-tag">OpenCV (CV2)</span>
+          <span class="tech-tag">Contour Analysis</span>
+          <span class="tech-tag">SVG Path Parsing</span>
+          <span class="tech-tag">Static JSON DB</span>
+        </div>
+      </div>
+
+      <!-- Card 6: Mural Layout Engine -->
+      <div class="info-card accent-teal">
+        <div class="card-header-box">
+          <span class="card-label">Dynamic Collage & Layout</span>
+          <h2 class="card-title">Mural Physics Engine</h2>
+        </div>
+        <p class="card-desc">An interactive center-based collision-prevention solver written in Javascript. Resolves symbol separation and restricts items inside canvas padding boundaries in real-time.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Javascript ES6</span>
+          <span class="tech-tag">Physics separation</span>
+          <span class="tech-tag">Collision Solver</span>
+          <span class="tech-tag">SVG Exporter</span>
+          <span class="tech-tag">Real-time Rendering</span>
         </div>
       </div>
     </div>
@@ -736,6 +851,7 @@
 
   <script>
     const nodeDetails = {
+      // Building Pipeline Nodes
       github: {
         title: "GitHub Repository",
         color: "red",
@@ -777,12 +893,47 @@
         color: "blue",
         emoji: "💾",
         desc: "A local vector database memory layer. It embeds and stores historical chat interactions and logs, retrieving semantically relevant context blocks to power Retrieval-Augmented Generation (RAG)."
+      },
+      
+      // Tapestry Pipeline Nodes
+      'tapestry-scans': {
+        title: "Raw Drawing Scans",
+        color: "red",
+        emoji: "🎨",
+        desc: "Hand-drawn paper submissions scanned in batches. Obsolete files and duplicates are automatically identified and cleaned up by database sync routines."
+      },
+      'tapestry-opencv': {
+        title: "Python OpenCV Reprocessor",
+        color: "yellow",
+        emoji: "⚙️",
+        desc: "A custom processing pipeline that loads drawings, crops whitespace padding, binarizes sketches to clean vectors, and centers and normalizes SVG path contours to fit [-500, -500, 500, 500] coordinates."
+      },
+      'tapestry-db': {
+        title: "Static Database (JSON)",
+        color: "blue",
+        emoji: "📂",
+        desc: "Stores the normalized SVG path coordinates, scale metadata, themes, and display statuses of all active drawings. Serves as a light, high-performance static API database."
+      },
+      'tapestry-browser': {
+        title: "Tapestry Web App",
+        color: "red",
+        emoji: "🌐",
+        desc: "The browser front-end containing the Visual Library and the Mural Generator. Fetches drawings on demand and renders them inside a dynamic SVG viewBox."
+      },
+      'tapestry-physics': {
+        title: "Collage Physics Solver",
+        color: "yellow",
+        emoji: "⚡",
+        desc: "A custom center-based physics mixer that performs pairwise separation and boundary locking in real-time. Distributes randomly spawned symbols into non-overlapping compositions."
+      },
+      'tapestry-exporter': {
+        title: "SVG Exporter",
+        color: "teal",
+        emoji: "💾",
+        desc: "Compiles active collage scales, positions, rotations, and custom foreground colors to download clean, publication-ready vector SVGs."
       }
     };
 
-    const infoPanel = document.getElementById('panel-info');
-    const infoTitle = document.getElementById('info-title');
-    const infoDesc = document.getElementById('info-desc');
     const nodes = document.querySelectorAll('.svg-node');
     const lines = document.querySelectorAll('.flow-line');
 
@@ -792,15 +943,21 @@
         const details = nodeDetails[nodeId];
         
         if (details) {
+          const card = node.closest('.diagram-card');
+          const titleEl = card.querySelector('.panel-title');
+          const descEl = card.querySelector('.panel-desc');
+          const panelEl = card.querySelector('.panel-display');
+
           // Update display panel content
-          infoTitle.innerHTML = `<span style="color: var(--deli-${details.color});">${details.emoji}</span> ${details.title}`;
-          infoDesc.textContent = details.desc;
+          titleEl.innerHTML = `<span style="color: var(--deli-${details.color});">${details.emoji}</span> ${details.title}`;
+          descEl.textContent = details.desc;
           
           // Update visual active classes
-          infoPanel.className = `panel-display active-${details.color}`;
+          panelEl.className = `panel-display active-${details.color}`;
           
-          // Highlight related connective paths
-          lines.forEach(line => {
+          // Highlight related connective paths inside this specific diagram-card
+          const cardLines = card.querySelectorAll('.flow-line');
+          cardLines.forEach(line => {
             if (line.classList.contains(`line-${nodeId}`)) {
               line.classList.add('active');
             } else {
@@ -811,18 +968,31 @@
       });
 
       node.addEventListener('mouseleave', () => {
-        // Reset connective paths
-        lines.forEach(line => {
+        const card = node.closest('.diagram-card');
+        const cardLines = card.querySelectorAll('.flow-line');
+        cardLines.forEach(line => {
           line.classList.remove('active');
         });
       });
     });
 
-    // Reset panel to default when mouse leaves the diagram area
-    document.querySelector('.diagram-card').addEventListener('mouseleave', () => {
-      infoTitle.innerHTML = `<span style="color: var(--deli-yellow);">💡</span> Hover over a Node`;
-      infoDesc.textContent = "Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.";
-      infoPanel.className = "panel-display";
+    // Reset panel to default when mouse leaves each diagram card area
+    document.querySelectorAll('.diagram-card').forEach(card => {
+      const isBuilding = card.getAttribute('data-pipeline') === 'building';
+      card.addEventListener('mouseleave', () => {
+        const titleEl = card.querySelector('.panel-title');
+        const descEl = card.querySelector('.panel-desc');
+        const panelEl = card.querySelector('.panel-display');
+
+        if (isBuilding) {
+          titleEl.innerHTML = `<span style="color: var(--deli-yellow);">💡</span> Hover over a Node`;
+          descEl.textContent = "Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.";
+        } else {
+          titleEl.innerHTML = `<span style="color: var(--deli-teal);">💡</span> Hover over a Node`;
+          descEl.textContent = "Hover over any node in the tapestry diagram above to view details of the drawing vectorization and layout engine pipeline.";
+        }
+        panelEl.className = "panel-display";
+      });
     });
   </script>
 </body>
