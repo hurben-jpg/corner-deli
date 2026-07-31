@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBJECT | Corner Deli</title>
+    <meta name="description" content="OBJECT is a proposed autonomous storefront presenting one handmade Western Australian object at a time through a descending-price reverse auction.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="OBJECT by Corner Deli">
+    <meta property="og:description" content="One object. One falling price. One person decides when it is worth owning.">
+    <meta property="og:image" content="../cnrdeli/object_hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OBJECT by Corner Deli">
+    <meta name="twitter:description" content="One object. One falling price. One person decides when it is worth owning.">
+    <meta name="twitter:image" content="../cnrdeli/object_hero.png">
+
+    <!-- Fonts & Base Style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css?v=1.2">
+
+    <style>
+        :root {
+            --paper: #0C0E14;
+            --paper-warm: #141823;
+            --ink: #FAF6F0;
+            --ink-muted: #8E9AA8;
+            --ink-faint: #535E6C;
+            --brass: #C5A059;
+            --brass-muted: rgba(197, 160, 89, 0.3);
+            --border-paper: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.12);
+        }
+
+        body {
+            background-color: var(--paper);
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ── Header overrides for quiet architectural feel ── */
+        .object-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(12, 14, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-paper);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--ink-muted);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--ink);
+        }
+
+        .header-brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            color: var(--ink);
+            text-transform: uppercase;
+        }
+
+        /* ── Hero Section ── */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 120px 32px 80px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .hero-img-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.85;
+            z-index: 1;
+        }
+
+        .hero-overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(12, 14, 20, 0.4) 0%,
+                rgba(12, 14, 20, 0.2) 50%,
+                rgba(12, 14, 20, 0.9) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-kicker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: var(--brass);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: 0.08em;
+            color: var(--ink);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-meta {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+        }
+
+        /* ── Typography & Spacing ── */
+        .content-container {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 120px 32px;
+        }
+
+        .section-block {
+            margin-bottom: 140px;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--ink);
+            margin-bottom: 32px;
+        }
+
+        .lead-text {
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--ink);
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .lead-highlight {
+            color: var(--brass);
+            display: block;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .body-text {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            line-height: 1.85;
+            margin-bottom: 24px;
+            max-width: 680px;
+        }
+
+        /* ── Image Gallery ── */
+        .gallery-block {
+            margin: 60px 0 80px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .gallery-item {
+            background-color: var(--paper-warm);
+            border: 1px solid var(--border-paper);
+            overflow: hidden;
+        }
+
+        .gallery-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            filter: contrast(1.02);
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-caption {
+            padding: 24px 28px;
+            border-top: 1px solid var(--border-paper);
+        }
+
+        .caption-title {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .caption-sub {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            font-weight: 300;
+        }
+
+        /* ── Didactic Box ── */
+        .didactic-box {
+            background-color: var(--paper-warm);
+            border: 1px solid var(--border-light);
+            padding: 48px;
+            margin: 48px 0;
+            max-width: 420px;
+            font-family: var(--font-display);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .didactic-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .didactic-item {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            color: var(--ink-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .didactic-price {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--brass);
+            margin-top: 16px;
+        }
+
+        /* ── Closing Banner ── */
+        .closing-banner {
+            border-top: 1px solid var(--border-paper);
+            border-bottom: 1px solid var(--border-paper);
+            padding: 100px 32px;
+            margin: 120px 0 80px;
+            text-align: center;
+        }
+
+        .closing-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--ink);
+            letter-spacing: 0.02em;
+        }
+
+        .closing-text span {
+            display: block;
+        }
+
+        .closing-text span.accent {
+            color: var(--brass);
+        }
+
+        /* ── Footer Status Banner ── */
+        .footer-status-banner {
+            padding: 40px 32px;
+            text-align: center;
+            border-top: 1px solid var(--border-paper);
+            background-color: rgba(20, 24, 35, 0.5);
+        }
+
+        .status-text {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 80px 20px;
+            }
+
+            .section-block {
+                margin-bottom: 90px;
+            }
+
+            .didactic-box {
+                padding: 32px 24px;
+            }
+
+            .closing-banner {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pixel-mesh"></div>
+
+    <!-- Header -->
+    <header class="object-header">
+        <div class="header-container">
+            <a href="../index.html" class="back-link">&larr; Corner Deli</a>
+            <div class="header-brand">OBJECT</div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-section">
+        <img src="../cnrdeli/object_hero.png" alt="OBJECT Storefront Render at Night" class="hero-img-bg">
+        <div class="hero-overlay-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-kicker">Corner Deli Presents</div>
+            <h1 class="hero-title">OBJECT.</h1>
+            <div class="hero-meta">
+                Concept development<br>
+                Perth, Western Australia<br>
+                2026
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content-container">
+
+        <!-- Introduction -->
+        <section class="section-block">
+            <div class="lead-text">
+                <span class="lead-highlight">One object.<br>One falling price.<br>One person decides when it is worth owning.</span>
+            </div>
+            
+            <p class="body-text">
+                OBJECT is a proposed autonomous storefront presenting a single handmade Western Australian object at a time.
+            </p>
+            <p class="body-text">
+                Each object begins at a deliberately ambitious price. The price gradually descends until someone chooses to acquire it. The window then closes, the object departs, and another takes its place.
+            </p>
+            <p class="body-text">
+                The project combines sculpture, design, retail and public theatre within one highly restrained format.
+            </p>
+        </section>
+
+        <!-- Concept -->
+        <section class="section-block">
+            <h2 class="section-heading">A reverse auction in the city</h2>
+            <p class="body-text">
+                OBJECT removes almost everything associated with conventional retail.
+            </p>
+            <p class="body-text">
+                There are no shelves, sales staff or competing products. Behind the glass is one object, one price and one decision.
+            </p>
+            <p class="body-text">
+                The same object may remain in the city for days, weeks or months. People pass it repeatedly, watch its value change and gradually develop a relationship with it. Eventually one person decides the moment has arrived.
+            </p>
+            <p class="body-text">
+                When the object is acquired, it leaves the window and begins a private life elsewhere.
+            </p>
+            <p class="body-text" style="color: var(--ink); font-weight: 400; margin-top: 32px;">
+                OBJECT then begins again.
+            </p>
+        </section>
+
+        <!-- Objects -->
+        <section class="section-block">
+            <h2 class="section-heading">Western Australian objects</h2>
+            <p class="body-text">
+                The first objects are being developed through a material language of jarrah, terrazzo and brass.
+            </p>
+            <p class="body-text">
+                Their forms draw from the structural logic of Western Australian seed pods, gum nuts, banksia follicles, bottlebrush capsules, beehives and weathered stone. They are not literal reproductions of plants or souvenirs.
+            </p>
+            <p class="body-text">
+                They are handmade objects intended to feel monumental, self-contained and difficult to place within a particular era.
+            </p>
+
+            <!-- Image Gallery -->
+            <div class="gallery-block">
+                <div class="gallery-grid">
+                    <div class="gallery-item full-width">
+                        <img src="../cnrdeli/object_hero.png" alt="Jarrah, terrazzo and brass object study" class="gallery-img">
+                        <div class="gallery-caption">
+                            <div class="caption-title">Material study</div>
+                            <div class="caption-sub">Jarrah, terrazzo and brass</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../cnrdeli/object_thumb.png" alt="Botanical geometry form study" class="gallery-img">
+                        <div class="gallery-caption">
+                            <div class="caption-title">Form study</div>
+                            <div class="caption-sub">Botanical geometry without literal representation</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../cnrdeli/object_thumb.png" alt="Brass insertion study" class="gallery-img" style="filter: brightness(0.9) contrast(1.1);">
+                        <div class="gallery-caption">
+                            <div class="caption-title">Brass insertion study</div>
+                            <div class="caption-sub">Cast, embedded and mechanically retained components</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Window -->
+        <section class="section-block">
+            <h2 class="section-heading">One room. One object.</h2>
+            <p class="body-text">
+                The physical space is conceived as a dark, unattended display chamber visible from the street at all hours.
+            </p>
+            <p class="body-text">
+                The object sits alone on a permanent plinth. A minimal display on the glass identifies the object and its current price.
+            </p>
+
+            <!-- Didactic Example -->
+            <div class="didactic-box">
+                <div class="didactic-title">OBJECT.</div>
+                <div class="didactic-item">OBJECT 001</div>
+                <div class="didactic-price">$14,820</div>
+            </div>
+
+            <p class="body-text">
+                The information should appear quiet and architectural. No bright retail signage, promotional graphics, product descriptions or visible checkout interface should compete with the object.
+            </p>
+        </section>
+
+        <!-- Acquisition -->
+        <section class="section-block">
+            <h2 class="section-heading">The moment of acquisition</h2>
+            <p class="body-text">
+                The purchase takes place online.
+            </p>
+            <p class="body-text">
+                When an object is acquired, the storefront responds immediately. The glass becomes opaque, the display disappears and the room closes while the object is removed.
+            </p>
+            <p class="body-text">
+                After a short interval, a new object is installed and the process restarts.
+            </p>
+        </section>
+
+        <!-- Closing Statement -->
+        <div class="closing-banner">
+            <div class="closing-text">
+                <span>Made in Western Australia.</span>
+                <span>Seen by the city.</span>
+                <span class="accent">Acquired by one person.</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Status -->
+    <div class="footer-status-banner">
+        <div class="status-text">
+            OBJECT is currently in concept development through Corner Deli.
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; position: relative; width: 100%;">
+        <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+                <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+            </a>
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                <a href="../workflow.html" style="color: #FAF6F0; font-size: 0.75rem; letter-spacing: 0.03em; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.3); padding-bottom: 2px;">Pipeline Workflow ↗</a>
+                <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
