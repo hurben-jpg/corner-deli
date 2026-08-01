@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OBJECT | Corner Deli</title>
-    <meta name="description" content="OBJECT is a proposed autonomous storefront presenting one handmade Western Australian object at a time through a descending-price reverse auction.">
+    <meta name="description" content="OBJECT is a proposed cultural institution presenting one extraordinary object at a time.">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="OBJECT by Corner Deli">
-    <meta property="og:description" content="One object. One falling price. One person decides when it is worth owning.">
+    <meta property="og:description" content="One object. One room. One decision.">
     <meta property="og:image" content="../cnrdeli/object_hero.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="OBJECT by Corner Deli">
-    <meta name="twitter:description" content="One object. One falling price. One person decides when it is worth owning.">
+    <meta name="twitter:description" content="One object. One room. One decision.">
     <meta name="twitter:image" content="../cnrdeli/object_hero.png">
 
     <!-- Fonts & Base Style -->
@@ -98,7 +98,7 @@
             min-height: 100vh;
             display: flex;
             align-items: flex-end;
-            padding: 120px 32px 80px;
+            padding: 140px 32px 100px;
             overflow: hidden;
             background-color: #000;
         }
@@ -125,7 +125,7 @@
                 180deg,
                 rgba(12, 14, 20, 0.4) 0%,
                 rgba(12, 14, 20, 0.2) 50%,
-                rgba(12, 14, 20, 0.9) 100%
+                rgba(12, 14, 20, 0.95) 100%
             );
             z-index: 2;
         }
@@ -146,7 +146,7 @@
             letter-spacing: 0.3em;
             color: var(--brass);
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .hero-title {
@@ -157,15 +157,35 @@
             letter-spacing: 0.08em;
             color: var(--ink);
             text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .hero-tagline-lines {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--ink);
             margin-bottom: 24px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-desc-text {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            max-width: 580px;
+            margin-bottom: 40px;
+            line-height: 1.7;
         }
 
         .hero-meta {
             font-family: var(--font-body);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 300;
-            color: var(--ink-muted);
-            letter-spacing: 0.05em;
+            color: var(--ink-faint);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             line-height: 1.6;
         }
 
@@ -177,33 +197,17 @@
         }
 
         .section-block {
-            margin-bottom: 140px;
+            margin-bottom: 120px;
             animation: fadeIn 1s ease forwards;
         }
 
         .section-heading {
             font-family: var(--font-display);
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             color: var(--ink);
-            margin-bottom: 32px;
-        }
-
-        .lead-text {
-            font-size: 1.4rem;
-            font-weight: 300;
-            line-height: 1.7;
-            color: var(--ink);
-            margin-bottom: 40px;
-            letter-spacing: -0.01em;
-        }
-
-        .lead-highlight {
-            color: var(--brass);
-            display: block;
-            margin-bottom: 16px;
-            font-weight: 400;
+            margin-bottom: 28px;
         }
 
         .body-text {
@@ -211,8 +215,8 @@
             font-weight: 300;
             color: var(--ink-muted);
             line-height: 1.85;
-            margin-bottom: 24px;
-            max-width: 680px;
+            margin-bottom: 20px;
+            max-width: 640px;
         }
 
         /* ── Image Gallery ── */
@@ -275,9 +279,7 @@
         .didactic-box {
             background-color: var(--paper-warm);
             border: 1px solid var(--border-light);
-            padding: 48px;
-            margin: 48px 0;
-            max-width: 420px;
+            padding: 40px 44px;
             font-family: var(--font-display);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
@@ -287,7 +289,7 @@
             font-weight: 700;
             letter-spacing: 0.2em;
             color: var(--ink);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .didactic-item {
@@ -299,7 +301,7 @@
         }
 
         .didactic-price {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 400;
             letter-spacing: 0.05em;
             color: var(--brass);
@@ -317,9 +319,9 @@
 
         .closing-text {
             font-family: var(--font-display);
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
             font-weight: 400;
-            line-height: 1.4;
+            line-height: 1.5;
             color: var(--ink);
             letter-spacing: 0.02em;
         }
@@ -366,7 +368,7 @@
             }
 
             .section-block {
-                margin-bottom: 90px;
+                margin-bottom: 80px;
             }
 
             .didactic-box {
@@ -398,10 +400,16 @@
         <div class="hero-content">
             <div class="hero-kicker">Corner Deli Presents</div>
             <h1 class="hero-title">OBJECT.</h1>
+            <div class="hero-tagline-lines">
+                <span>One object.</span><br>
+                <span>One room.</span><br>
+                <span>One decision.</span>
+            </div>
+            <p class="hero-desc-text">
+                OBJECT is a proposed institution presenting one extraordinary object at a time.
+            </p>
             <div class="hero-meta">
-                Concept development<br>
-                Perth, Western Australia<br>
-                2026
+                Concept development &bull; Perth, Western Australia &bull; 2026
             </div>
         </div>
     </section>
@@ -411,52 +419,89 @@
 
         <!-- Introduction -->
         <section class="section-block">
-            <div class="lead-text">
-                <span class="lead-highlight">One object.<br>One falling price.<br>One person decides when it is worth owning.</span>
-            </div>
-            
-            <p class="body-text">
-                OBJECT is a proposed autonomous storefront presenting a single handmade Western Australian object at a time.
+            <p class="body-text" style="font-size: 1.15rem; color: var(--ink);">
+                Every OBJECT exists for a limited time.
             </p>
             <p class="body-text">
-                Each object begins at a deliberately ambitious price. The price gradually descends until someone chooses to acquire it. The window then closes, the object departs, and another takes its place.
+                Sometimes an object leaves because someone decides it is worth owning.
             </p>
             <p class="body-text">
-                The project combines sculpture, design, retail and public theatre within one highly restrained format.
+                Sometimes it leaves because its time has expired.
+            </p>
+            <p class="body-text">
+                Either way, the room becomes empty.
+            </p>
+            <p class="body-text" style="color: var(--ink); font-weight: 400; margin-top: 24px;">
+                Then another OBJECT arrives.
             </p>
         </section>
 
-        <!-- Concept -->
+        <!-- About Object -->
         <section class="section-block">
-            <h2 class="section-heading">A reverse auction in the city</h2>
+            <h2 class="section-heading">About OBJECT</h2>
             <p class="body-text">
-                OBJECT removes almost everything associated with conventional retail.
+                OBJECT is a proposed cultural institution exploring the presentation of extraordinary objects.
             </p>
             <p class="body-text">
-                There are no shelves, sales staff or competing products. Behind the glass is one object, one price and one decision.
+                Its subjects may include sculpture, design, geology, archaeology, natural history, craft or things that resist classification altogether.
             </p>
             <p class="body-text">
-                The same object may remain in the city for days, weeks or months. People pass it repeatedly, watch its value change and gradually develop a relationship with it. Eventually one person decides the moment has arrived.
+                Each OBJECT occupies the room alone.
             </p>
-            <p class="body-text">
-                When the object is acquired, it leaves the window and begins a private life elsewhere.
-            </p>
-            <p class="body-text" style="color: var(--ink); font-weight: 400; margin-top: 32px;">
-                OBJECT then begins again.
+            <p class="body-text" style="color: var(--brass); font-size: 1.1rem; margin-top: 28px; line-height: 1.6;">
+                The room asks only one thing:<br>
+                <span style="font-size: 1.4rem; font-weight: 400; letter-spacing: 0.05em; display: inline-block; margin-top: 8px; color: var(--ink);">Look.</span>
             </p>
         </section>
 
-        <!-- Objects -->
+        <!-- Departure -->
+        <section class="section-block">
+            <h2 class="section-heading">Departure</h2>
+            <p class="body-text">
+                Most OBJECTs begin at an intentionally ambitious value.
+            </p>
+            <p class="body-text">
+                Their price gradually descends over time.
+            </p>
+            <p class="body-text">
+                Eventually someone decides that moment has arrived.
+            </p>
+            <p class="body-text">
+                The OBJECT departs.
+            </p>
+            <p class="body-text" style="color: var(--ink); font-weight: 400; margin-top: 24px;">
+                Another OBJECT takes its place.
+            </p>
+        </section>
+
+        <!-- On Loan -->
+        <section class="section-block">
+            <h2 class="section-heading">On Loan</h2>
+            <p class="body-text">
+                Not every OBJECT is available for acquisition.
+            </p>
+            <p class="body-text">
+                Some are presented for a limited period before returning to their owner.
+            </p>
+            <p class="body-text">
+                When an OBJECT is on loan, the display replaces the price with a countdown until its departure.
+            </p>
+            <p class="body-text">
+                This allows rare, borrowed or irreplaceable objects to become part of the programme while preserving the same ritual.
+            </p>
+        </section>
+
+        <!-- Western Australian Objects -->
         <section class="section-block">
             <h2 class="section-heading">Western Australian objects</h2>
             <p class="body-text">
-                The first objects are being developed through a material language of jarrah, terrazzo and brass.
+                The first OBJECTs are being developed using jarrah, terrazzo and brass.
             </p>
             <p class="body-text">
-                Their forms draw from the structural logic of Western Australian seed pods, gum nuts, banksia follicles, bottlebrush capsules, beehives and weathered stone. They are not literal reproductions of plants or souvenirs.
+                Future OBJECTs may emerge from many disciplines and materials.
             </p>
             <p class="body-text">
-                They are handmade objects intended to feel monumental, self-contained and difficult to place within a particular era.
+                Selection is determined not by category, but by significance.
             </p>
 
             <!-- Image Gallery -->
@@ -489,46 +534,50 @@
 
         <!-- The Window -->
         <section class="section-block">
-            <h2 class="section-heading">One room. One object.</h2>
+            <h2 class="section-heading">The Window</h2>
             <p class="body-text">
-                The physical space is conceived as a dark, unattended display chamber visible from the street at all hours.
+                The room remains visible day and night.
             </p>
             <p class="body-text">
-                The object sits alone on a permanent plinth. A minimal display on the glass identifies the object and its current price.
+                One OBJECT.
             </p>
-
-            <!-- Didactic Example -->
-            <div class="didactic-box">
-                <div class="didactic-title">OBJECT.</div>
-                <div class="didactic-item">OBJECT 001</div>
-                <div class="didactic-price">$14,820</div>
-            </div>
-
             <p class="body-text">
-                The information should appear quiet and architectural. No bright retail signage, promotional graphics, product descriptions or visible checkout interface should compete with the object.
+                One display.
+            </p>
+            <p class="body-text" style="color: var(--ink); font-weight: 400; margin-top: 24px;">
+                Nothing else competes for attention.
             </p>
         </section>
 
-        <!-- Acquisition -->
+        <!-- Display Examples -->
         <section class="section-block">
-            <h2 class="section-heading">The moment of acquisition</h2>
-            <p class="body-text">
-                The purchase takes place online.
-            </p>
-            <p class="body-text">
-                When an object is acquired, the storefront responds immediately. The glass becomes opaque, the display disappears and the room closes while the object is removed.
-            </p>
-            <p class="body-text">
-                After a short interval, a new object is installed and the process restarts.
-            </p>
+            <h2 class="section-heading">Display Examples</h2>
+            <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 32px;">
+                <!-- AVAILABLE -->
+                <div class="didactic-box" style="flex: 1; min-width: 260px; margin: 0;">
+                    <div class="didactic-title" style="font-size: 0.8rem; color: var(--brass); margin-bottom: 16px;">AVAILABLE</div>
+                    <div class="didactic-title">OBJECT.</div>
+                    <div class="didactic-item">OBJECT 001</div>
+                    <div class="didactic-price">$125,000</div>
+                </div>
+
+                <!-- ON LOAN -->
+                <div class="didactic-box" style="flex: 1; min-width: 260px; margin: 0;">
+                    <div class="didactic-title" style="font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 16px;">ON LOAN</div>
+                    <div class="didactic-title">OBJECT.</div>
+                    <div class="didactic-item">OBJECT 017</div>
+                    <div class="didactic-item" style="color: var(--brass); margin-top: 16px;">ON LOAN</div>
+                    <div class="didactic-price" style="font-size: 1.5rem; color: var(--ink);">12 DAYS</div>
+                </div>
+            </div>
         </section>
 
         <!-- Closing Statement -->
         <div class="closing-banner">
             <div class="closing-text">
-                <span>Made in Western Australia.</span>
-                <span>Seen by the city.</span>
-                <span class="accent">Acquired by one person.</span>
+                <span>OBJECT exists to slow people down.</span>
+                <span style="margin-top: 8px;">To place one remarkable thing before the city.</span>
+                <span class="accent" style="margin-top: 16px;">To ask only that it be looked at.</span>
             </div>
         </div>
 
