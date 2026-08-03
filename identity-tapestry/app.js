@@ -312,7 +312,7 @@ function renderLibraryGrid(append = false) {
 
     card.innerHTML = `
       <div class="card-img-container" style="background:#fff;">
-        <img src="scans/${sym.id}.jpg" alt="Student symbol #${sym.id}" loading="lazy" style="filter: contrast(${threshold}%) grayscale(100%);">
+        <img src="scans/${sym.id}.jpg?v=2" alt="Student symbol #${sym.id}" loading="lazy" style="filter: contrast(${threshold}%) grayscale(100%);">
       </div>
       <div class="card-info" style="justify-content:center;">
         <span class="card-id">#${sym.id}</span>
