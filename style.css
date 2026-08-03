@@ -215,6 +215,22 @@ body {
   line-height: 1.65;
 }
 
+.deli-stripe-separator {
+  width: 90px;
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--deli-red) 0px,
+    var(--deli-red) 15px,
+    var(--deli-yellow) 15px,
+    var(--deli-yellow) 30px,
+    var(--deli-blue) 30px,
+    var(--deli-blue) 45px
+  );
+  margin-bottom: 24px;
+}
+
 /* ═══ SECTIONS ═══ */
 .projects-section {
   padding: 80px 24px;
