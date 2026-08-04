@@ -1,0 +1,1011 @@
+/* ============================================================
+   RALA-EPIRB — Design System & Stylesheet
+   Refined for serious engineering & patent licensing context
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Quiet Navy Palette */
+  --navy-950: #040810;
+  --navy-900: #070F1B;
+  --navy-800: #0B1626;
+  --navy-700: #101F33;
+  --navy-600: #172B45;
+  --navy-500: #223E63;
+
+  /* Functional Orange Accent (WCAG AA Compliant contrast ratio > 4.5:1 for white text) */
+  --orange-700: #A63B00;
+  --orange-600: #C84A00;
+  --orange-500: #D95405;
+  --orange-400: #E66619;
+
+  /* Neutrals */
+  --gray-50:  #F8F9FA;
+  --gray-100: #F0F2F5;
+  --gray-200: #E2E5EA;
+  --gray-300: #CDD1D8;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Semantic Variables */
+  --bg-dark:        var(--navy-900);
+  --bg-darker:      var(--navy-950);
+  --bg-section-alt: var(--navy-800);
+  --bg-light:       var(--gray-50);
+  --text-on-dark:   var(--gray-100);
+  --text-muted:     var(--gray-400);
+  --text-on-light:  var(--gray-800);
+  --border-dark:    rgba(255, 255, 255, 0.1);
+  --border-light:   var(--gray-200);
+  
+  --accent-orange:  var(--orange-600);
+  --accent-hover:   var(--orange-700);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  /* Spacing */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 5rem;
+
+  /* Layout */
+  --max-width: 1140px;
+  --nav-height: 72px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.25s;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-on-dark);
+  background-color: var(--bg-dark);
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Accessible Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--orange-400);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+h3 { font-size: clamp(1.1rem, 1.75vw, 1.35rem); }
+h4 { font-size: 1.05rem; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange-400);
+}
+
+.label--muted {
+  color: var(--gray-400);
+}
+
+/* --- Layout Containers & Section Anchors --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+  border-bottom: 1px solid var(--border-dark);
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.section--dark {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+.section--darker {
+  background: var(--bg-darker);
+  color: var(--text-on-dark);
+}
+
+.section--alt {
+  background: var(--bg-section-alt);
+  color: var(--text-on-dark);
+}
+
+.section--light {
+  background: var(--bg-light);
+  color: var(--text-on-light);
+  border-bottom-color: var(--border-light);
+}
+
+.section__header {
+  max-width: 760px;
+  margin-bottom: var(--space-3xl);
+}
+
+.section__header h2 {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.section__header p {
+  font-size: 1.0625rem;
+  color: var(--gray-400);
+  line-height: 1.7;
+}
+
+.section--light .section__header p {
+  color: var(--gray-600);
+}
+
+/* --- Navigation --- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: rgba(7, 15, 27, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dark);
+  transition: background var(--duration) var(--ease-out);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nav__logo-img {
+  height: 46px;
+  width: auto;
+  filter: none;
+  transition: opacity 0.15s ease;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.nav__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-300);
+  transition: color 0.15s ease;
+}
+
+.nav__link:hover,
+.nav__link.active {
+  color: var(--white);
+}
+
+.nav__cta {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  background: var(--accent-orange);
+  color: var(--white);
+  border: 1px solid var(--orange-700);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav__cta:hover {
+  background: var(--accent-hover);
+}
+
+.nav__menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+  color: var(--white);
+  padding: 0.4rem 0.6rem;
+}
+
+.nav__menu-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* --- Text Hero Section --- */
+:root {
+  --hero-symbol-opacity: 0.18;
+}
+
+.hero {
+  position: relative;
+  background-color: var(--navy-950);
+  border-bottom: 1px solid var(--border-dark);
+  padding-top: calc(var(--nav-height) + var(--space-3xl));
+  padding-bottom: var(--space-4xl);
+  min-height: clamp(560px, 68vh, 660px);
+  display: flex;
+  align-items: center;
+  scroll-margin-top: 0;
+  overflow: hidden; /* Prevents decorative cropped symbol from causing horizontal scroll */
+}
+
+.hero__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  width: 100%;
+}
+
+/* Decorative Hero Insignia Symbol (Authentic Colors, Scaled Down) */
+.hero__decorative-symbol {
+  display: none; /* Controlled by .hero--with-symbol toggle class */
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 350px;
+  width: auto;
+  opacity: var(--hero-symbol-opacity);
+  z-index: 1;
+  filter: none;
+}
+
+.hero--with-symbol .hero__decorative-symbol {
+  display: block;
+}
+
+.hero__badge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border-dark);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-400);
+  margin-bottom: var(--space-xl);
+}
+
+.hero h1 {
+  color: var(--white);
+  margin-bottom: var(--space-lg);
+  font-size: clamp(2rem, 3.6vw, 3.15rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .accent {
+  color: var(--orange-400);
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.hero__sub {
+  font-size: 1.0625rem;
+  color: var(--gray-300);
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+  max-width: 720px;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hero__full-name {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-dark);
+  max-width: 720px;
+}
+
+.hero__full-name p {
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  color: var(--gray-400);
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+}
+
+/* --- Buttons & Links --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--accent-orange);
+  color: var(--white);
+  border-color: var(--orange-700);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn--disabled,
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--navy-600);
+  border-color: var(--navy-500);
+  color: var(--gray-400);
+}
+
+.text-link {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--orange-400);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Problem & Concept Section --- */
+.concept__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.concept__box {
+  padding: var(--space-xl);
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  border-radius: 4px;
+}
+
+.concept__box h3 {
+  color: var(--gray-900);
+  margin-bottom: var(--space-md);
+  font-size: 1.15rem;
+}
+
+.concept__box p {
+  color: var(--gray-700);
+  font-size: 0.975rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.concept__box p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Responsive System Diagram --- */
+.system-visual {
+  margin-top: var(--space-2xl);
+  display: block;
+  width: 100%;
+}
+
+.diagram-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Capabilities Matrix (4 Concise Groups) --- */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.capability-block {
+  padding: var(--space-xl);
+  background: var(--navy-800);
+  border: 1px solid var(--border-dark);
+  border-left: 3px solid var(--orange-600);
+  border-radius: 2px;
+}
+
+.capability-block h3 {
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+}
+
+.capability-block p {
+  font-size: 0.9375rem;
+  color: var(--gray-300);
+  line-height: 1.65;
+}
+
+/* --- Potential Applications (Restrained Matrix) --- */
+.applications-wrapper {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--border-dark);
+}
+
+.applications-wrapper h3 {
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: var(--space-lg);
+}
+
+.applications-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.app-item {
+  padding: var(--space-lg);
+  background: var(--navy-900);
+  border: 1px solid var(--border-dark);
+  border-radius: 2px;
+}
+
+.app-item__type {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--orange-400);
+  margin-bottom: var(--space-xs);
+}
+
+.app-item__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* --- Patent Portfolio Section --- */
+.patents-table-container {
+  border: 1px solid var(--border-dark);
+  background: var(--navy-900);
+  border-radius: 4px;
+}
+
+.patents-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+}
+
+.patents-table caption {
+  padding: var(--space-md);
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  text-align: left;
+  background: var(--navy-950);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.patents-table th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--navy-950);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.patents-table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-dark);
+  color: var(--gray-300);
+  vertical-align: middle;
+}
+
+.patents-table tr:last-child td {
+  border-bottom: none;
+}
+
+.patent-link {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: underline;
+  text-decoration-color: var(--navy-500);
+  text-underline-offset: 3px;
+}
+
+.patent-link:hover {
+  color: var(--orange-400);
+  text-decoration-color: var(--orange-400);
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-tag--verified {
+  background: rgba(42, 80, 128, 0.4);
+  color: #93C5FD;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+}
+
+.status-tag--pending {
+  background: rgba(107, 114, 128, 0.3);
+  color: var(--gray-300);
+  border: 1px solid rgba(205, 209, 216, 0.2);
+}
+
+/* Corrected syntax error: 1px solid var(--border-dark) */
+.inventor-note {
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--border-dark);
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--gray-500);
+  font-size: 0.875rem;
+  color: var(--gray-400);
+  line-height: 1.6;
+}
+
+/* --- Licensing Section --- */
+.licensing-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.licensing-intro h3 {
+  font-size: 1.35rem;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+}
+
+.licensing-intro p {
+  color: var(--gray-300);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.licensing-notice {
+  margin-top: var(--space-xl);
+  padding: var(--space-md);
+  border: 1px solid var(--border-dark);
+  background: var(--navy-950);
+  border-radius: 4px;
+}
+
+.licensing-notice p {
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  margin-bottom: 0;
+}
+
+/* Form Styles */
+.form-card {
+  padding: var(--space-2xl);
+  background: var(--navy-800);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-200);
+  margin-bottom: 0.35rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem 0.9rem;
+  background: var(--navy-950);
+  border: 1px solid var(--navy-600);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+}
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--gray-500);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-privacy {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  margin-top: var(--space-md);
+  line-height: 1.5;
+}
+
+.form-status {
+  margin-top: var(--space-md);
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.form-status--info {
+  display: block;
+  background: rgba(42, 80, 128, 0.3);
+  color: #93C5FD;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+}
+
+.form-status--success {
+  display: block;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ADE80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.form-status--error {
+  display: block;
+  background: rgba(239, 68, 68, 0.15);
+  color: #FCA5A5;
+  border: 1px solid rgba(252, 165, 165, 0.3);
+}
+
+/* --- Footer --- */
+.footer {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  background: var(--navy-950);
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.footer__brand p {
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  max-width: 440px;
+  margin-top: var(--space-md);
+}
+
+.footer__contact {
+  text-align: right;
+}
+
+.footer__contact p {
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  margin-bottom: 0.25rem;
+}
+
+.footer__contact a {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--orange-400);
+}
+
+.footer__bottom {
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-dark);
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* --- Progressive Enhancement JS Scroll Reveal --- */
+/* Default (No-JS): Content is 100% visible */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Enabled only when JS adds html.js */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+html.js .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Reduced Motion Overrides --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* --- Responsive Mobile Patent Table Formatting --- */
+@media (max-width: 768px) {
+  .patents-table,
+  .patents-table tbody,
+  .patents-table tr,
+  .patents-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .patents-table thead {
+    display: none;
+  }
+
+  .patents-table tr {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--border-dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem var(--space-md);
+    align-items: center;
+  }
+
+  .patents-table td {
+    padding: 0;
+    border: none;
+  }
+
+  .patents-table td.patent-desc {
+    display: none; /* Omit repeated common title on narrow mobile records */
+  }
+
+  .patents-table td.patent-num {
+    grid-column: 1 / -1;
+    font-size: 1rem;
+  }
+
+  .patents-table td.patent-jurisdiction {
+    grid-column: 1 / 2;
+    font-size: 0.85rem;
+    color: var(--gray-400);
+  }
+
+  .patents-table td.patent-status-col {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+
+  .patents-table td.patent-link-col {
+    grid-column: 1 / -1;
+    margin-top: var(--space-xs);
+    padding-top: var(--space-xs);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* --- Responsive Breakpoints (1024px Mobile Nav) --- */
+@media (max-width: 1024px) {
+  .nav__links {
+    display: none;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--navy-950);
+    flex-direction: column;
+    padding: var(--space-2xl);
+    gap: var(--space-xl);
+    border-top: 1px solid var(--border-dark);
+    z-index: 99;
+  }
+
+  .nav__links.open {
+    display: flex;
+  }
+
+  .nav__link {
+    font-size: 1.125rem;
+  }
+
+  .nav__cta {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .nav__menu-btn {
+    display: block;
+  }
+
+  .concept__grid,
+  .licensing-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .applications-matrix {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .footer__contact {
+    text-align: left;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero__decorative-symbol {
+    height: 270px;
+    right: -30px;
+    opacity: 0.14;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero--with-symbol .hero__decorative-symbol,
+  .hero__decorative-symbol {
+    display: none !important;
+  }
+
+  .nav__logo-img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .applications-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+}

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 680" width="100%" height="100%" fill="none" aria-label="RALA System Operational Sequence Diagram (Mobile View)">
+  <defs>
+    <pattern id="tech-grid-m" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Container -->
+  <rect width="380" height="680" rx="8" fill="#070F1B"/>
+  <rect width="380" height="680" rx="8" fill="url(#tech-grid-m)"/>
+  <rect width="378" height="678" x="1" y="1" rx="7" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+
+  <!-- Vertical Connecting Line -->
+  <line x1="60" y1="80" x2="60" y2="540" stroke="#2A5080" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- STEP 1: DEPLOYED IN STANDBY -->
+  <g transform="translate(30, 40)">
+    <circle cx="30" cy="30" r="22" fill="#112240" stroke="#2A5080" stroke-width="2"/>
+    <text x="30" y="35" text-anchor="middle" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="14" font-weight="700">1</text>
+    
+    <g transform="translate(70, 10)">
+      <text x="0" y="18" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="15" font-weight="600">Beacon Deployed in Standby</text>
+      <text x="0" y="38" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">Carrier departs with beacon operating</text>
+      <text x="0" y="54" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">in low-power standby mode.</text>
+    </g>
+  </g>
+
+  <!-- STEP 2: CONCERN RAISED -->
+  <g transform="translate(30, 190)">
+    <circle cx="30" cy="30" r="22" fill="#0B1A2E" stroke="#1B3A5C" stroke-width="2"/>
+    <text x="30" y="35" text-anchor="middle" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="14" font-weight="700">2</text>
+    
+    <g transform="translate(70, 10)">
+      <text x="0" y="18" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="15" font-weight="600">Concern Raised</text>
+      <text x="0" y="38" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">Overdue check-in, geofence breach,</text>
+      <text x="0" y="54" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">or external sensor trigger.</text>
+    </g>
+  </g>
+
+  <!-- STEP 3: AUTHORISED REMOTE ACTIVATION -->
+  <g transform="translate(30, 340)">
+    <circle cx="30" cy="30" r="22" fill="#0B1A2E" stroke="#C84A00" stroke-width="2"/>
+    <text x="30" y="35" text-anchor="middle" fill="#C84A00" font-family="Inter, sans-serif" font-size="14" font-weight="700">3</text>
+    
+    <g transform="translate(70, 10)">
+      <text x="0" y="18" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="15" font-weight="600">Authorised Remote Activation</text>
+      <text x="0" y="38" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">Emergency center or SAR authority</text>
+      <text x="0" y="54" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">transmits remote activation signal.</text>
+    </g>
+  </g>
+
+  <!-- STEP 4: EMERGENCY TRANSMISSION & SAR RESPONSE -->
+  <g transform="translate(30, 490)">
+    <circle cx="30" cy="30" r="22" fill="#112240" stroke="#C84A00" stroke-width="2"/>
+    <path d="M 30 18 L 30 42" stroke="#C84A00" stroke-width="2"/>
+    <path d="M 18 30 L 42 30" stroke="#C84A00" stroke-width="2"/>
+    <circle cx="30" cy="30" r="4" fill="#E2E5EA"/>
+    
+    <g transform="translate(70, 5)">
+      <text x="0" y="18" fill="#E2E5EA" font-family="Inter, sans-serif" font-size="15" font-weight="600">Emergency &amp; SAR Response</text>
+      <text x="0" y="38" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">Beacon confirms location and</text>
+      <text x="0" y="54" fill="#9CA3AF" font-family="Inter, sans-serif" font-size="13">transmits distress information.</text>
+    </g>
+  </g>
+
+  <!-- Footnote -->
+  <g transform="translate(20, 625)">
+    <rect width="340" height="40" rx="4" fill="rgba(11, 26, 46, 0.6)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+    <text x="170" y="24" text-anchor="middle" fill="#6B7280" font-family="Inter, sans-serif" font-size="11">
+      Conceptual signal sequence described in patent specifications.
+    </text>
+  </g>
+</svg>
