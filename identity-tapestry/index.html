@@ -3,12 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Identity Tapestry 2026 - Visual Analysis & Library</title>
-  <!-- Google Fonts: Outfit & Inter -->
+  <title>Identity Tapestry 2026 - Mount Lawley SHS</title>
+  <meta name="description" content="A visual archive of 1,445 unique drawings from the 2026 Mount Lawley Senior High School creative residency. Explore and download each hand-drawn design.">
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body>
   <div class="app-container">
@@ -16,68 +23,80 @@
     <header class="app-header" style="display: block; padding: 0 28px;">
       <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; min-height: 68px; padding: 16px 0;">
         <div class="header-logo" style="display: flex; align-items: center; gap: 12px;">
-          <img src="../../CNRDELI/corner_deli_logo-01.png" alt="Corner Deli Logo" style="height: 36px; width: auto; filter: brightness(10);" class="logo-img">
+          <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" style="height: 36px; width: auto; filter: brightness(10);" class="logo-img">
           <div style="display: flex; flex-direction: column; gap: 2px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <h1 style="margin: 0; line-height: 1.1; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: 0.15em; color: #fff; text-transform: uppercase;">IDENTITY TAPESTRY</h1>
-              <span style="font-size: 0.65rem; background-color: #ef4444; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-display); line-height: 1;">Admin Portal</span>
-            </div>
-            <span class="header-subtitle" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); line-height: 1.1;">Mount Lawley SHS • 2026 Residency Control</span>
+            <h1 style="margin: 0; line-height: 1.1; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: 0.15em; color: #fff; text-transform: uppercase;">IDENTITY TAPESTRY</h1>
+            <span class="header-subtitle" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); line-height: 1.1;">Mount Lawley SHS • 2026 Residency</span>
           </div>
         </div>
-        <nav class="app-nav">
-          <button class="nav-btn active" data-tab="manifesto">Project Manifesto</button>
-          <button class="nav-btn" data-tab="site_photos">Site Photo Mural Studio</button>
-          <button class="nav-btn" data-tab="library">Visual Library</button>
-          <button class="nav-btn" data-tab="tapestry">Digital Collage</button>
-          <button class="nav-btn" data-tab="pond">Composition Builder</button>
-          <button class="nav-btn" data-tab="investigations">Investigations Hub</button>
-        </nav>
-        <div class="header-actions">
-          <span class="scale-badge" id="stats-total-badge">0 Symbols</span>
+        <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
+          <a href="../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
         </div>
       </div>
     </header>
 
+    <!-- Sub-navigation bar (Page Content Top Menu) -->
+    <div class="sub-nav-bar" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-light); border-left: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 12px 28px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 90; min-height: 56px; max-width: 1200px; margin: 0 auto; width: 100%;">
+      <nav class="app-nav">
+        <button class="nav-btn active" data-tab="manifesto">Project Manifesto</button>
+        <button class="nav-btn" data-tab="site_photos">Site Photo Mural Studio</button>
+        <button class="nav-btn" data-tab="library">Visual Library</button>
+        <button class="nav-btn" data-tab="generator">Mural Generator</button>
+        <button class="nav-btn" data-tab="gallery">Sightseeing</button>
+      </nav>
+      <div class="mobile-nav-wrapper">
+        <select class="mobile-nav-select" id="mobile-nav-dropdown">
+          <option value="manifesto" selected>Project Manifesto</option>
+          <option value="site_photos">Site Photo Mural Studio</option>
+          <option value="library">Visual Library</option>
+          <option value="generator">Mural Generator</option>
+          <option value="gallery">Sightseeing</option>
+        </select>
+      </div>
+    </div>
+
     <!-- Main Content Panels -->
     <main class="app-main">
       
-      <!-- Panel 0: Project Manifesto (Homepage) -->
+      <!-- Panel: Site Photo Mural Studio -->
+      <section class="tab-panel" id="panel-site_photos">
+        <div id="photo-mural-mount"></div>
+      </section>
+
+      <!-- Panel 0: Project Manifesto -->
       <section class="tab-panel active" id="panel-manifesto">
         <div class="manifesto-layout">
-          <div class="manifesto-hero">
-            <span class="manifesto-tagline">Pedagogical Inquiry &amp; Public Art</span>
-            <h2>Identity Tapestry: A Cohort Manifested in Lines</h2>
-            <p class="manifesto-lead">
-              A 17-day creative learning residency at Mount Lawley Senior High School. 584 student minds, translating personal narratives, values, and visual signatures into simplified graphic symbols.
-            </p>
+          <div class="manifesto-hero" style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; display: flex; flex-direction: column; gap: 16px;">
+            <span class="manifesto-tagline" style="font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.15em; color: var(--accent-indigo); text-transform: uppercase;">Pedagogical Inquiry &amp; Public Art</span>
+            <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 3rem; color: #fff; margin: 0; line-height: 1.1;">Identity Tapestry</h2>
+            <div class="manifesto-lead" style="display: flex; flex-direction: column; gap: 16px; font-size: 1.15rem; line-height: 1.6; color: var(--text-secondary); font-weight: 300; text-align: center; margin-top: 12px;">
+              <p>The Identity Tapestry is a collaborative public artwork created with the students and staff of Mount Lawley Senior High School in Perth, Western Australia.</p>
+              <p>Participants were invited to contribute a single hand drawn symbol representing something meaningful to them at this moment in their lives. Rather than attempting to define an entire person, each symbol captures one chosen fragment of identity: an interest, a value, a memory, a belief, a joke, or simply something worth leaving behind.</p>
+              <p>Collected together, these individual marks form a visual portrait of a school community. The resulting mural and digital archive preserve thousands of independent decisions, creating a lasting record of Mount Lawley Senior High School in 2026.</p>
+            </div>
           </div>
 
           <div class="manifesto-stats-grid">
             <div class="m-stat-card">
               <span class="m-stat-val" id="m-stat-total">-</span>
-              <span class="m-stat-lbl">Student Symbols</span>
-            </div>
-            <div class="m-stat-card">
-              <span class="m-stat-val" id="m-stat-steadiness">-</span>
-              <span class="m-stat-lbl">Mean Line Control</span>
-            </div>
-            <div class="m-stat-card">
-              <span class="m-stat-val" id="m-stat-themes">5</span>
-              <span class="m-stat-lbl">Visual Themes</span>
+              <span class="m-stat-lbl">Collected Drawings</span>
             </div>
             <div class="m-stat-card">
               <span class="m-stat-val" id="m-stat-participants">Yrs 7-12 + Staff</span>
               <span class="m-stat-lbl">Mount Lawley SHS</span>
             </div>
+            <div class="m-stat-card">
+              <span class="m-stat-val">2026</span>
+              <span class="m-stat-lbl">Residency Year</span>
+            </div>
           </div>
 
           <div class="manifesto-thesis">
             <div class="thesis-col">
-              <h3>The Identity Tapestry</h3>
+              <h3>Identity Tapestry</h3>
               <p>Every day we leave traces of ourselves.</p>
               <p>Some are temporary: a conversation, a footprint, a message, a memory. Others remain long after we have moved on.</p>
-              <p>The Identity Tapestry began with a simple invitation. Every student and staff member at Mount Lawley Senior High School was asked to contribute a single symbol representing something meaningful to them at this moment in their lives.</p>
+              <p>The Identity Tapestry began with a simple invitation. Students and staff members at Mount Lawley Senior High School were invited to contribute a single drawing representing something meaningful to them at this moment in their lives.</p>
               <p>No symbol is intended to define an entire person. Instead, each represents one chosen fragment of identity: an interest, a value, a belief, a memory, a hope, a joke, or simply something that felt important enough to draw.</p>
               <p>Individually these marks are modest. Together they become something far greater.</p>
               <p>The resulting mural is not a collection of drawings, but a portrait of a community. It captures thousands of independent decisions made by individuals who share the same place while living entirely different lives.</p>
@@ -90,91 +109,27 @@
               <p>Recurring themes reveal shared interests, cultural influences, personal values and visual habits. Hearts, flowers, sporting equipment, celestial objects, animals, religious symbols, internet culture, typography and abstract geometry appear repeatedly throughout the collection.</p>
               <p>These repetitions do not diminish individuality. Instead they reveal something equally important: identity is both deeply personal and profoundly shared.</p>
               <p>The project invites viewers to move between these two scales. From a distance, the symbols merge into a single surface. Up close, each becomes the mark of one individual who chose to leave a trace.</p>
-              <p>Perhaps the most interesting part of this web application won't be machine analysis.</p>
-              <p>It will be the fact that someone in 2056 could search for "frog", "basketball", "moon", or even "Tung Tung Tung Sahur" and discover exactly how those ideas appeared in the minds of Mount Lawley students thirty years earlier.</p>
-              <p>We are not just making a mural. We are accidentally creating an anthropological archive.</p>
-              <p>And that is where the simple truth lies. Identity is not something we can fully describe. But when asked to choose one mark that represents us, we reveal something genuine.</p>
-              <p>This is a thesis that stands honest and true, remaining meaningful long after current memes and fashions have faded.</p>
-              <div class="manifesto-actions">
-                <button class="btn btn-primary" onclick="switchTab('library')">Explore Visual Library 🔍</button>
-                <button class="btn btn-secondary" onclick="switchTab('pond')">Enter Symbol Pond 🌊</button>
+              <div class="manifesto-actions" style="margin-top: 24px;">
+                <button class="btn btn-primary" onclick="switchTab('library')">Explore the Library</button>
               </div>
             </div>
           </div>
+          
+            <!-- Mural Grid Showcase -->
+            <div class="manifesto-mural-showcase" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-light); width: 100%; text-align: center;">
+              <div style="background-color: rgba(255,255,255,0.02); border: 1px solid var(--border-light); padding: 16px; border-radius: 12px; max-width: 1000px; margin: 0 auto; overflow: hidden; display: flex; flex-direction: column; gap: 12px;">
+                <div style="width: 100%; aspect-ratio: 14174/11339; background-color: rgba(255,255,255,0.01); border-radius: 6px; overflow: hidden; position: relative;">
+                  <img src="TAPESTRY_00.png" alt="Identity Tapestry Example Arrangement" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.6s ease;" onload="this.style.opacity=1;">
+                </div>
+                <span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">An example arrangement showing a selection of the collected drawings compiled together.</span>
+              </div>
+            </div>
         </div>
       </section>
       
-      <!-- Panel: Site Photo Mural Studio -->
-      <section class="tab-panel" id="panel-site_photos">
-        <div id="photo-mural-mount"></div>
-      </section>
-
       <!-- Panel 1: Visual Library -->
       <section class="tab-panel" id="panel-library">
-        <!-- Filter Sidebar & Search -->
-        <div class="control-bar">
-          <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Search by ID or tags (e.g. 0214, circular)...">
-            <span class="search-icon">🔍</span>
-          </div>
-          
-          <div class="filter-controls">
-            <div class="select-wrapper">
-              <label for="filter-theme">Theme</label>
-              <select id="filter-theme">
-                <option value="all">All Themes</option>
-                <option value="Abstract Geometry">Abstract Geometry</option>
-                <option value="Text & Monograms">Text & Monograms</option>
-                <option value="Detailed & Complex">Detailed & Complex</option>
-                <option value="Minimalist">Minimalist</option>
-                <option value="Personal Symbols">Personal Symbols</option>
-              </select>
-            </div>
 
-            <div class="select-wrapper">
-              <label for="filter-density">Line Density</label>
-              <select id="filter-density">
-                <option value="all">Any Density</option>
-                <option value="bold">Bold & Dense (>8%)</option>
-                <option value="medium">Medium (3% - 8%)</option>
-                <option value="delicate">Delicate (<3%)</option>
-              </select>
-            </div>
-
-            <div class="select-wrapper">
-              <label for="filter-steadiness">Steadiness</label>
-              <select id="filter-steadiness">
-                <option value="all">Any Steadiness</option>
-                <option value="steady">Steady & Clean (>95%)</option>
-                <option value="organic">Organic / Jittery (<91%)</option>
-              </select>
-            </div>
-
-            <div class="select-wrapper">
-              <label for="sort-by">Sort By</label>
-              <select id="sort-by">
-                <option value="id-asc">ID (Ascending)</option>
-                <option value="id-desc">ID (Descending)</option>
-                <option value="density-desc">Highest Density</option>
-                <option value="density-asc">Lowest Density</option>
-                <option value="thickness-desc">Thickest Stroke</option>
-                <option value="thickness-asc">Thinnest Stroke</option>
-                <option value="steadiness-desc">Most Steady</option>
-                <option value="steadiness-asc">Least Steady (Jittery)</option>
-              </select>
-            </div>
-
-            <div class="checkbox-wrapper">
-              <input type="checkbox" id="hide-duplicates" checked>
-              <label for="hide-duplicates">Deduplicate Grid</label>
-            </div>
-            
-            <div class="checkbox-wrapper">
-              <input type="checkbox" id="show-deleted">
-              <label for="show-deleted">Show Deleted</label>
-            </div>
-          </div>
-        </div>
 
         <!-- Symbol Grid -->
         <div class="grid-layout">
@@ -196,206 +151,161 @@
             <span class="end-message" id="infinite-scroll-end" style="display: none; color: var(--text-muted); font-size: 0.85rem;">All designs loaded</span>
           </div>
         </div>
+        <button id="scroll-to-top-btn" class="scroll-top-btn" title="Scroll to top">&#9650;</button>
       </section>
 
-      <!-- Panel 2: Digital Collage (Tapestry Wall) -->
-      <section class="tab-panel" id="panel-tapestry">
-        <div class="tapestry-intro">
-          <h2>The Collective Identity Mural</h2>
-          <p>This interactive canvas compiles all student vectors. Toggle color schemes or hover/click to inspect individuals.</p>
-          <div class="collage-controls">
-            <button class="collage-color-btn active" data-color="white-black">B&W</button>
-            <button class="collage-color-btn" data-color="indigo-glow">Indigo Glow</button>
-            <button class="collage-color-btn" data-color="neon-green">Matrix Green</button>
-            <button class="collage-color-btn" data-color="tapestry-coral">Sunset Coral</button>
-            <span class="collage-info">Hover to zoom • Click to inspect</span>
+      <!-- Panel: Mural Generator -->
+      <section class="tab-panel" id="panel-generator">
+        <div class="generator-layout" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; padding: 20px 0;">
+          <div class="generator-intro" style="text-align: center; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px;">
+            <h2>Mural Generator</h2>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+              Experiment with randomized layout arrangements. Adjust controls to set drawing counts, spacing (padding), global scaling, and rotation. Export the generated collage layout directly to a high-resolution vector SVG.
+            </p>
           </div>
-        </div>
-        <div class="tapestry-wall-container" id="tapestry-wall">
-          <!-- Dynamic collage elements -->
-        </div>
-      </section>
 
-      <!-- Panel 2.5: Interactive Composition Builder -->
-      <section class="tab-panel" id="panel-pond">
-        <div class="builder-layout" style="width: 100%; height: calc(100vh - var(--header-height)); position: relative; overflow: hidden; display: flex; flex-direction: column;">
-          <!-- Floating Retractable Controls Ribbon -->
-          <div class="mural-ribbon" id="mural-ribbon" style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; background: rgba(13, 17, 28, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); transition: transform 0.3s ease, opacity 0.3s ease; padding: 6px 12px; min-width: 720px; box-sizing: border-box;">
-            
-            <div class="ribbon-main-row" style="display: flex; align-items: center; gap: 12px; height: 38px;">
-              <button class="ribbon-toggle-btn" id="ribbon-collapse-btn" style="background: transparent; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Collapse/Expand Ribbon">
-                <span class="toggle-icon">🔽</span>
-              </button>
-              
-              <button class="btn btn-primary" id="generate-composition-btn" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; background: linear-gradient(135deg, var(--accent-indigo), var(--accent-pink)); border: none; border-radius: 6px; color: #fff; cursor: pointer;">
-                Generate Artwork ✨
-              </button>
-              
-              <div class="ribbon-divider" style="width: 1px; height: 20px; background-color: var(--border-light);"></div>
-              
-              <div class="ribbon-nav" style="display: flex; align-items: center; gap: 4px;">
-                <button class="btn btn-sm btn-secondary" id="player-prev-btn" style="padding: 4px 10px; font-weight: 600; font-size: 0.78rem;" title="Previous composition">◀</button>
-                <button class="btn btn-sm btn-secondary" id="gravity-btn" style="padding: 4px 14px; font-weight: 700; font-size: 0.78rem; background: linear-gradient(135deg, #1e3a5f, #0f4c81); border-color: #1a6ea8;" title="Drop symbols with gravity">Drop ↓</button>
-                <button class="btn btn-sm btn-secondary" id="player-next-btn" style="padding: 4px 10px; font-weight: 600; font-size: 0.78rem;" title="Next composition">▶</button>
-              </div>
-              
-              <div class="ribbon-divider" style="width: 1px; height: 20px; background-color: var(--border-light);"></div>
-              
-              <div class="ribbon-preset" style="display: flex; align-items: center; gap: 4px;">
-                <select id="canvas-preset-select" class="compo-select-compact" style="background-color: rgba(0,0,0,0.3); border: 1px solid var(--border-light); color: #fff; padding: 4px 8px; font-size: 0.75rem; border-radius: 6px; outline: none; cursor: pointer; font-family: inherit;">
-                  <option value="fullscreen" selected>Full Screen 📺</option>
-                  <option value="standard">Standard (1200 x 800)</option>
-                  <option value="wide">Wide Mural (2400 x 1200)</option>
-                  <option value="square">Square Wall (1800 x 1800)</option>
-                  <option value="custom">Custom...</option>
-                </select>
-                
-                <div id="custom-canvas-dims" style="display: none; align-items: center; gap: 4px;">
-                  <input type="number" id="custom-canvas-w" value="1200" style="width: 55px; padding: 2px 4px; background: #000; border: 1px solid var(--border-light); color: #fff; border-radius: 4px; font-size: 0.75rem;">
-                  <span style="color: var(--text-muted); font-size: 0.75rem;">x</span>
-                  <input type="number" id="custom-canvas-h" value="800" style="width: 55px; padding: 2px 4px; background: #000; border: 1px solid var(--border-light); color: #fff; border-radius: 4px; font-size: 0.75rem;">
-                  <button class="btn btn-sm btn-secondary" id="apply-custom-canvas-btn" style="padding: 2px 6px; font-size: 0.75rem;">Go</button>
-                </div>
-              </div>
-              
-              <div class="ribbon-divider" style="width: 1px; height: 20px; background-color: var(--border-light);"></div>
-              
-              <button class="ribbon-icon-btn" id="ribbon-settings-btn" style="background: transparent; border: none; color: var(--text-secondary); font-size: 0.78rem; font-weight: 600; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: all 0.2s;" title="Toggle Advanced Controls Drawer">
-                ⚙️ Controls
-              </button>
-              
-              <button class="ribbon-icon-btn" id="composition-publish-btn" style="background: transparent; border: none; color: var(--text-secondary); font-size: 0.78rem; font-weight: 600; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: all 0.2s;" title="Publish composition layout to the live public Mural Gallery">
-                🚀 Publish to Web
-              </button>
-              
-              <button class="btn btn-secondary btn-sm" id="projector-mode-btn" style="padding: 4px 10px; font-size: 0.78rem;" title="Toggle Fullscreen Projector Screen">
-                Projector Mode 📺
-              </button>
-
-              <div class="ribbon-stats" id="builder-stats" style="font-size: 0.72rem; color: var(--text-muted); padding-left: 10px; border-left: 1px solid var(--border-light); font-weight: 600;">
-                0 Unique Placed
+          <div class="generator-workspace" style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+            <!-- Main Canvas Box -->
+            <div class="canvas-container" style="background: #0c0e18; border: 1px solid var(--border-light); border-radius: 12px; height: 550px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);">
+              <div id="composition-canvas" class="canvas-panel" style="width: 100%; height: 100%; position: relative;">
+                <!-- Placed symbols render here -->
               </div>
             </div>
 
-            <!-- Sliding Options Drawer -->
-            <div class="ribbon-drawer" id="ribbon-drawer" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0;">
-              <div class="drawer-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="player-symbol-theme" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Symbol Theme</label>
-                    <select id="player-symbol-theme" class="compo-select-compact" style="background-color: rgba(0,0,0,0.3); border: 1px solid var(--border-light); color: #fff; padding: 4px 8px; font-size: 0.75rem; border-radius: 6px; outline: none; cursor: pointer; font-family: inherit;">
-                      <option value="all" selected>All Themes</option>
-                      <option value="Abstract Geometry">Abstract Geometry</option>
-                      <option value="Text & Monograms">Text & Monograms</option>
-                      <option value="Detailed & Complex">Detailed & Complex</option>
-                      <option value="Minimalist">Minimalist</option>
-                      <option value="Personal Symbols">Personal Symbols</option>
-                    </select>
+            <!-- Controls Panel -->
+            <div class="controls-panel" style="background: rgba(12, 14, 24, 0.4); border: 1px solid var(--border-light); border-radius: 12px; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center;">
+              <!-- Sliders -->
+              <div class="controls-sliders" style="flex: 2; min-width: 280px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Drawing Count</span>
+                    <span id="player-symbol-count-val">30</span>
                   </div>
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="player-layout-theme" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Layout Theme</label>
-                    <select id="player-layout-theme" class="compo-select-compact" style="background-color: rgba(0,0,0,0.3); border: 1px solid var(--border-light); color: #fff; padding: 4px 8px; font-size: 0.75rem; border-radius: 6px; outline: none; cursor: pointer; font-family: inherit;">
-                      <option value="wave" selected>Rhythmic Wave 🌊</option>
-                      <option value="mandala">Radial Mandala 💮</option>
-                      <option value="radiation">Focal Radiation ☀️</option>
-                      <option value="chaos">Organic Chaos 🌀</option>
-                    </select>
-                  </div>
+                  <input type="range" id="player-symbol-count" min="5" max="150" value="30" style="width: 100%; accent-color: var(--accent);">
                 </div>
-                
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="player-symbol-count" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Symbol Count: <span id="player-symbol-count-val" style="color: #fff; font-weight:600;">30</span></label>
-                    <input type="range" id="player-symbol-count" min="0" max="642" value="30" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Spacing (Padding)</span>
+                    <span id="tank-padding-val">20px</span>
                   </div>
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="player-slideshow-speed" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Cycle Speed: <span id="player-slideshow-speed-val" style="color: #fff; font-weight:600;">5s</span></label>
-                    <input type="range" id="player-slideshow-speed" min="2" max="15" step="1" value="5" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
+                  <input type="range" id="tank-padding" min="5" max="80" value="20" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Global Scale</span>
+                    <span id="tank-global-scale-val">1.0x</span>
+                  </div>
+                  <input type="range" id="tank-global-scale" min="0.4" max="2.0" step="0.1" value="1.0" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);">
+                    <span>Rotation Scatter</span>
+                    <span id="tank-global-rotate-val">0&deg;</span>
+                  </div>
+                  <input type="range" id="tank-global-rotate" min="-180" max="180" value="0" style="width: 100%; accent-color: var(--accent);">
+                </div>
+
+                <div class="control-group bg-color-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Background Color</span>
+                  <div class="color-swatches" style="display: flex; gap: 8px; align-items: center; height: 32px; padding: 2px 0;">
+                    <button class="swatch active" data-color="#0c0e18" style="width: 24px; height: 24px; border-radius: 50%; background: #0c0e18; border: 2px solid #fff; cursor: pointer; padding: 0;" title="Black"></button>
+                    <button class="swatch" data-color="#888888" style="width: 24px; height: 24px; border-radius: 50%; background: #888888; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="Grey"></button>
+                    <button class="swatch" data-color="#ffffff" style="width: 24px; height: 24px; border-radius: 50%; background: #ffffff; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="White"></button>
+                    <button class="swatch" data-color="#957480" style="width: 24px; height: 24px; border-radius: 50%; background: #957480; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#957480"></button>
+                    <button class="swatch" data-color="#773732" style="width: 24px; height: 24px; border-radius: 50%; background: #773732; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#773732"></button>
+                    <button class="swatch" data-color="#985f35" style="width: 24px; height: 24px; border-radius: 50%; background: #985f35; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#985f35"></button>
+                    <button class="swatch" data-color="#c0b087" style="width: 24px; height: 24px; border-radius: 50%; background: #c0b087; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#c0b087"></button>
                   </div>
                 </div>
 
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="tank-padding" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Spacing: <span id="tank-padding-val" style="color: #fff; font-weight:600;">20px</span></label>
-                    <input type="range" id="tank-padding" min="0" max="120" value="20" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
-                  </div>
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="tank-global-scale" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Global Scale: <span id="tank-global-scale-val" style="color: #fff; font-weight:600;">1.0x</span></label>
-                    <input type="range" id="tank-global-scale" min="0.2" max="2.5" step="0.05" value="1.0" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
+                <div class="control-group symbol-color-group" style="display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Symbol Color</span>
+                  <div class="symbol-swatches" style="display: flex; gap: 8px; align-items: center; height: 32px; padding: 2px 0;">
+                    <button class="symbol-swatch active" data-color="#ffffff" style="width: 24px; height: 24px; border-radius: 50%; background: #ffffff; border: 2px solid #fff; cursor: pointer; padding: 0;" title="White"></button>
+                    <button class="symbol-swatch" data-color="#0c0e18" style="width: 24px; height: 24px; border-radius: 50%; background: #0c0e18; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="Black"></button>
                   </div>
                 </div>
+              </div>
 
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label for="tank-global-rotate" style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Rotation Scatter: <span id="tank-global-rotate-val" style="color: #fff; font-weight:600;">0°</span></label>
-                    <input type="range" id="tank-global-rotate" min="-180" max="180" step="5" value="0" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
-                  </div>
-                  
-                  <div class="zoom-fit-wrapper" style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
-                    <input type="checkbox" id="canvas-zoom-fit" checked style="cursor: pointer;">
-                    <label for="canvas-zoom-fit" style="font-size: 0.72rem; color: var(--text-secondary); cursor: pointer; user-select: none;">Zoom Fit 🔍</label>
-                  </div>
-                </div>
+              <!-- Buttons -->
+              <div class="controls-actions" style="flex: 1; min-width: 250px; display: flex; gap: 12px; justify-content: flex-end;">
+                <button class="btn btn-primary" id="generate-composition-btn" style="flex: 1; padding: 12px 16px;">Generate Arrangement</button>
+                <button class="btn btn-secondary" id="composition-export-btn" style="flex: 1; padding: 12px 16px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.02); color: #fff;">Export SVG &darr;</button>
+              </div>
+              </div>
+            </div>
+        </div>
+      </section>
 
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Background Color</label>
-                    <div class="color-swatches" style="display: flex; gap: 6px; align-items: center; height: 32px; padding: 2px 0;">
-                      <button class="swatch active" data-color="#0c0e18" style="width: 18px; height: 18px; border-radius: 50%; background: #0c0e18; border: 2px solid #fff; cursor: pointer; padding: 0;" title="Black"></button>
-                      <button class="swatch" data-color="#888888" style="width: 18px; height: 18px; border-radius: 50%; background: #888888; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="Grey"></button>
-                      <button class="swatch" data-color="#ffffff" style="width: 18px; height: 18px; border-radius: 50%; background: #ffffff; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="White"></button>
-                      <button class="swatch" data-color="#957480" style="width: 18px; height: 18px; border-radius: 50%; background: #957480; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#957480"></button>
-                      <button class="swatch" data-color="#773732" style="width: 18px; height: 18px; border-radius: 50%; background: #773732; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#773732"></button>
-                      <button class="swatch" data-color="#985f35" style="width: 18px; height: 18px; border-radius: 50%; background: #985f35; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#985f35"></button>
-                      <button class="swatch" data-color="#c0b087" style="width: 18px; height: 18px; border-radius: 50%; background: #c0b087; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="#c0b087"></button>
-                    </div>
-                  </div>
-                </div>
+      <!-- Panel 2: Sightseeing -->
+      <section class="tab-panel" id="panel-gallery">
+        <div class="gallery-layout" style="max-width: 1200px; margin: 0 auto; padding: 20px 0; display: flex; flex-direction: column; gap: 40px;">
+          <div class="gallery-intro" style="text-align: center; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+            <h2>Sightseeing</h2>
+            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+              Explore the installation residency progress and location of the Identity Tapestry project.
+            </p>
+          </div>
 
-                <div class="drawer-col" style="display: flex; flex-direction: column; gap: 8px;">
-                  <div class="drawer-control-group" style="display: flex; flex-direction: column; gap: 3px;">
-                    <label style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em;">Symbol Color</label>
-                    <div class="symbol-swatches" style="display: flex; gap: 6px; align-items: center; height: 32px; padding: 2px 0;">
-                      <button class="symbol-swatch active" data-color="#ffffff" style="width: 18px; height: 18px; border-radius: 50%; background: #ffffff; border: 2px solid #fff; cursor: pointer; padding: 0;" title="White"></button>
-                      <button class="symbol-swatch" data-color="#0c0e18" style="width: 18px; height: 18px; border-radius: 50%; background: #0c0e18; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; padding: 0;" title="Black"></button>
-                    </div>
-                  </div>
-                </div>
+          <!-- Section 1: Progress Photos (No links/descriptions) -->
+          <div class="gallery-section">
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; color: #fff; border-left: 3px solid var(--accent); padding-left: 12px;">Residency Progress Photos</h3>
+            <div class="gallery-photo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3262.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3263.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; aspect-ratio: 1.5;">
+                <img src="gallery/IMG_3264.jpeg" alt="Identity Tapestry Progress Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               </div>
             </div>
           </div>
 
-          <!-- Canvas Workspace Wrapper -->
-          <div class="builder-workspace" style="flex: 1; padding: 0; background-color: #080a10; overflow: hidden; display: flex; width: 100%; height: 100%;">
-            <div class="canvas-container" style="flex: 1; width: 100%; height: 100%; padding: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-              <div class="composition-canvas" id="composition-canvas" style="background-color: #0c0e18; box-shadow: 0 15px 50px rgba(0,0,0,0.85); transform-origin: center center; position: relative;">
-                <div class="canvas-grid-overlay"></div>
+          <!-- Section 2: Project Location Map -->
+          <div class="location-section" style="margin-top: 10px;">
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; color: #fff; border-left: 3px solid var(--accent); padding-left: 12px;">Project Location</h3>
+            <div class="location-card" style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 24px;">
+              <div class="location-info" style="display: flex; flex-direction: column; justify-content: center; gap: 12px;">
+                <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: #fff; margin: 0;">Mount Lawley Senior High School</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                  65 Woodsome St, Mount Lawley WA 6050, Australia.
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                  The mural is located on the school campus grounds, serving as a permanent collaborative visual record of the Mount Lawley community in 2026.
+                </p>
+              </div>
+              <div class="location-map" style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); background: #080a10; min-height: 250px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.3683074092794!2d115.8697528!3d-31.9238914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32ba53a921d743%3A0xe2cd5ea19c35fb7a!2sMount%20Lawley%20Senior%20High%20School!5e0!3m2!1sen!2sau!4v1719700000000!5m2!1sen!2sau" width="100%" height="250" style="border:0; display: block; filter: grayscale(100%) invert(90%) contrast(90%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Panel 3: Investigations Hub -->
-      <section class="tab-panel" id="panel-investigations">
-        <div class="investigations-container">
-          <aside class="investigations-nav">
-            <button class="inv-nav-btn active" data-tab="psychology">Psychology of Lines</button>
-            <button class="inv-nav-btn" data-tab="religion">Religious & Cultural Adaptations</button>
-            <button class="inv-nav-btn" data-tab="popculture">Pop Culture & Gaming Brands</button>
-            <button class="inv-nav-btn" data-tab="branding">Monograms & Self-Branding</button>
-            <button class="inv-nav-btn" data-tab="originality">Originality & Trace Detection</button>
-          </aside>
-          
-          <div class="investigations-content" id="investigations-text-content">
-            <!-- Dynamic content injected here -->
           </div>
         </div>
       </section>
       
+      <!-- Corner Deli Footer -->
+      <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; margin-top: auto;">
+        <!-- Colour Stripe -->
+        <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+            <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+          </a>
+          <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <a href="../workflow.html" style="color: #FAF6F0; font-size: 0.75rem; letter-spacing: 0.03em; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.3); padding-bottom: 2px;" target="_blank">Pipeline Workflow â†—</a>
+            <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
+          </div>
+        </div>
+      </footer>
+
     </main>
 
-    <!-- Detailed Symbol Overlay Modal -->
+    <!-- Detailed Symbol Overlay Modal (read-only: no delete button) -->
     <div class="modal-overlay" id="detail-modal">
       <div class="modal-card">
         <button class="modal-close" id="modal-close-btn">&times;</button>
@@ -419,39 +329,32 @@
             </div>
           </div>
           
+          <!-- Public Notes Area (displays notes entered in admin portal) -->
+          <div id="modal-notes-section" style="display: none; max-width: 600px; margin-top: 10px; border-top: 1px dashed var(--border-light); padding-top: 16px; width: 100%;">
+            <h4 style="font-family: var(--font-display); font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.05em;">Curatorial Notes</h4>
+            <p id="modal-notes-text" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); font-style: italic;"></p>
+          </div>
+          
           <div class="modal-actions" style="margin-top: 12px; display: flex; justify-content: center; align-items: center; gap: 16px; width: 100%;">
             <button class="btn btn-secondary" id="modal-prev-btn">&larr; Prev</button>
             <button class="btn btn-primary" id="download-svg-btn">Download Vector</button>
-            <button class="btn btn-danger" id="modal-delete-btn">Delete Design ❌</button>
             <button class="btn btn-secondary" id="modal-next-btn">Next &rarr;</button>
           </div>
-          
-          <!-- Admin Settings Panel -->
-          <div class="admin-settings-section" style="width: 100%; max-width: 600px; margin-top: 20px; border-top: 1px solid var(--border-light); padding-top: 24px; display: flex; flex-direction: column; gap: 16px; text-align: left;">
-            <h3 style="font-family: var(--font-display); font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Admin Control Settings</h3>
-            
-            <div class="admin-control-row" style="display: flex; align-items: center; gap: 10px;">
-              <input type="checkbox" id="admin-visible-toggle" style="cursor: pointer; width: 18px; height: 18px;">
-              <label for="admin-visible-toggle" style="font-size: 0.9rem; color: var(--text-primary); cursor: pointer; user-select: none;">Visible on Public Website</label>
-            </div>
-            
-            <div class="admin-control-col" style="display: flex; flex-direction: column; gap: 6px;">
-              <label for="admin-threshold-slider" style="font-size: 0.85rem; color: var(--text-secondary);">Image Contrast / Threshold: <span id="admin-threshold-val" style="color: #fff; font-weight: 600;">100%</span></label>
-              <input type="range" id="admin-threshold-slider" min="50" max="250" value="100" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;">
-            </div>
-            
-            <div class="admin-control-col" style="display: flex; flex-direction: column; gap: 6px;">
-              <label for="admin-notes" style="font-size: 0.85rem; color: var(--text-secondary);">Administrative / Curatorial Notes</label>
-              <textarea id="admin-notes" rows="3" placeholder="Add curatorial notes, residency details, student context, etc..." style="width: 100%; background: #000; border: 1px solid var(--border-light); color: #fff; border-radius: 6px; padding: 8px; font-family: inherit; font-size: 0.85rem; resize: vertical; outline: none;"></textarea>
-            </div>
-            
-            <button class="btn btn-primary" id="admin-save-btn" style="margin-top: 10px; padding: 8px 16px;">Save Admin Settings</button>
-          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fullscreen Composition Viewer Modal -->
+    <div class="modal-overlay" id="composition-modal" style="background-color: rgba(7, 9, 19, 0.98);">
+      <button class="modal-close" id="compo-modal-close-btn" style="position: fixed; top: 20px; right: 20px; z-index: 10001; font-size: 2.5rem; background: none; border: none; color: #fff; cursor: pointer;">&times;</button>
+      <div class="canvas-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 40px;">
+        <div class="composition-canvas" id="public-view-canvas" style="background-color: #0c0e18; box-shadow: 0 20px 60px rgba(0,0,0,0.9); transform-origin: center center; position: relative;">
+          <!-- SVG symbols will be rendered dynamically here -->
         </div>
       </div>
     </div>
   </div>
   <script src="photo_mural.js"></script>
   <script src="app.js"></script>
+
 </body>
 </html>
