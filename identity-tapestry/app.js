@@ -7,6 +7,8 @@
 // STATE
 // ──────────────────────────────────────────────
 let symbolDatabase = {};
+let fullDatabaseLoaded = false;
+let fullDatabasePromise = null;
 let filteredSymbols = [];
 let compositions = {};
 let visibleCount = 40;
@@ -56,12 +58,12 @@ function switchTab(tabName) {
   }
 
   if (tabName === 'gallery') {
-    buildMuralGallery();
+    ensureFullDatabase().then(buildMuralGallery);
   } else if (tabName === 'generator') {
     setTimeout(() => {
       resizeToContainer();
       if (compositionElements.length === 0) {
-        generateRandomComposition();
+        ensureFullDatabase().then(generateRandomComposition);
       }
     }, 100);
   } else if (tabName === 'library') {
@@ -75,8 +77,29 @@ window.switchTab = switchTab;
 // ──────────────────────────────────────────────
 // BOOTSTRAP: load data.json then wire everything
 // ──────────────────────────────────────────────
+function ensureFullDatabase() {
+  if (fullDatabaseLoaded) return Promise.resolve(symbolDatabase);
+  if (!fullDatabasePromise) {
+    fullDatabasePromise = fetch('data.json')
+      .then(r => {
+        if (!r.ok) throw new Error(`Symbol database request failed: ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        symbolDatabase = data;
+        fullDatabaseLoaded = true;
+        return data;
+      })
+      .catch(error => {
+        fullDatabasePromise = null;
+        throw error;
+      });
+  }
+  return fullDatabasePromise;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('data.json')
+  fetch('symbols-index.json')
     .then(r => r.json())
     .then(data => {
       symbolDatabase = data;
@@ -233,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const genBtn = document.getElementById("generate-composition-btn");
   if (genBtn) {
-    genBtn.addEventListener("click", generateRandomComposition);
+    genBtn.addEventListener("click", () => ensureFullDatabase().then(generateRandomComposition));
   }
 
   const expBtn = document.getElementById("composition-export-btn");
@@ -387,6 +410,12 @@ function initInfiniteScroll() {
 // SYMBOL MODAL: read-only
 // ──────────────────────────────────────────────
 function openSymbolModal(sym) {
+  if (!fullDatabaseLoaded) {
+    ensureFullDatabase()
+      .then(() => openSymbolModal(symbolDatabase[`${sym.id}.png`] || sym))
+      .catch(error => console.error('Could not load symbol details:', error));
+    return;
+  }
   document.getElementById('modal-id').innerText = sym.id;
 
   // Use the optimized JPEG raw scan drawing

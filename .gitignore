@@ -1,3 +1,6 @@
 # Local OS files
 .DS_Store
 Thumbs.db
+
+# High-resolution working assets are kept locally, outside production commits.
+source-assets/
