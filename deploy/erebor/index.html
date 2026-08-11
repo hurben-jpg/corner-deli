@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erebor — Sentient Building Registry</title>
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1.2">
+  <style>
+    :root {
+      --bg: #0C0E14;
+      --card-bg: rgba(20, 24, 35, 0.4);
+      --border: rgba(255, 255, 255, 0.08);
+      --deli-red: #E53935;
+      --deli-warm: #FAF6F0;
+      --text-muted: #8E9AA8;
+      --accent-yellow: #F5C518;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--deli-warm);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle grid background */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 120px 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      margin-bottom: 50px;
+      text-align: left;
+    }
+
+    .hero-text {
+      flex: 1.2;
+    }
+
+    .hero-tag {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: var(--deli-red);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 3.5rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .hero-image-container {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-render {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      animation: floatSlow 6s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .hero-render:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 45px rgba(245, 197, 24, 0.15);
+      border-color: var(--accent-yellow);
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      .hero-render {
+        max-width: 240px;
+      }
+    }
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        flex-direction: row;
+      }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.02), transparent 50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .card.active:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-yellow);
+      box-shadow: 0 10px 30px rgba(245, 197, 24, 0.08);
+    }
+
+    .card-image-box {
+      flex: 1;
+      min-height: 250px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      .card-image-box {
+        max-width: 350px;
+        border-right: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .card-image-box {
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.03);
+    }
+
+    .card-info {
+      flex: 1.2;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 3;
+    }
+
+    .card-badge {
+      align-self: flex-start;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .card.active .card-badge {
+      background-color: rgba(245, 197, 24, 0.15);
+      color: var(--accent-yellow);
+      border: 1px solid rgba(245, 197, 24, 0.2);
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .profile-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 16px 0 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+
+    @media (max-width: 480px) {
+      .profile-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-value {
+      font-size: 0.85rem;
+      color: var(--deli-warm);
+      font-weight: 500;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      text-align: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      align-self: flex-start;
+      min-width: 200px;
+    }
+
+    @media (max-width: 480px) {
+      .card-btn {
+        width: 100%;
+      }
+    }
+
+    .card.active .card-btn {
+      background: linear-gradient(135deg, #F5C518 0%, #D4A30B 100%);
+      color: #0C0E14;
+      box-shadow: 0 4px 12px rgba(245, 197, 24, 0.2);
+    }
+
+    .card.active .card-btn:hover {
+      box-shadow: 0 6px 16px rgba(245, 197, 24, 0.35);
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-box" style="display: flex; align-items: center; gap: 12px;">
+        <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" style="height: 36px; width: auto; filter: brightness(10);" class="logo-img">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <h1 style="font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; letter-spacing: 0.15em; color: #fff; margin: 0; text-transform: uppercase; line-height: 1.1;">EREBOR</h1>
+          <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-body); font-weight: 500; line-height: 1.1;">Sentient Building Registry</span>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="../index.html" class="cnrdeli-back-btn" style="color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; font-family: var(--font-display); padding: 6px 16px; border-radius: 20px; transition: all 0.25s; background: #E53935; letter-spacing: 0.03em; border: none; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'"><span style="font-size: 0.7rem;">&#9664;</span> CNRDELI</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="hero-text">
+        <span class="hero-tag">Core Registry</span>
+        <h1 class="hero-title">EREBOR</h1>
+        <p class="hero-desc">An architectural AI platform designed to personify physical structures. Select a building node to connect with its spatial consciousness.</p>
+      </div>
+      <div class="hero-image-container">
+        <img src="../cnrdeli/erebor_24.png" alt="Erebor Core Render" class="hero-render">
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- West Card -->
+      <div class="card active">
+        <div class="card-image-box">
+          <img src="../cnrdeli/West-Parade_V01-Hero-1.jpg" alt="West Residences" class="card-img">
+        </div>
+        <div class="card-info">
+          <div>
+            <span class="card-badge">Erebor.West</span>
+            <h2 class="card-title">West Residences</h2>
+            <div class="profile-meta">
+              <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">141 West Parade, Mt Lawley</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Architect</span>
+                <span class="meta-value">Klopper & Davis</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Status</span>
+                <span class="meta-value">Nearing Completion (July 2026)</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Features</span>
+                <span class="meta-value">Willing Coffee & Bar Vino on ground</span>
+              </div>
+            </div>
+            <p class="card-desc">An 8-storey Flatiron-inspired landmark. Grounded, community-minded, and observing its emerging concrete framework and European cafe culture precinct.</p>
+          </div>
+          <a href="./west/index.html" class="card-btn">Establish Link &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PICA Card -->
+      <div class="card active">
+        <div class="card-image-box">
+          <img src="../cnrdeli/4-perth-institute-of.jpg" alt="PICA Building" class="card-img">
+        </div>
+        <div class="card-info">
+          <div>
+            <span class="card-badge">Erebor.PICA</span>
+            <h2 class="card-title">PICA Building</h2>
+            <div class="profile-meta">
+              <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">Perth Cultural Centre, Northbridge</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Architect</span>
+                <span class="meta-value">George Temple Poole (1896)</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Style</span>
+                <span class="meta-value">Federation Free Classical</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Features</span>
+                <span class="meta-value">Historic clock tower, PICA Bar & Cafe</span>
+              </div>
+            </div>
+            <p class="card-desc">A landmark heritage art space originally built in 1896 as the Perth Boys' and Girls' School. Deeply historic, creative, observing experimental art and the Cultural Centre's pulse.</p>
+          </div>
+          <a href="./pica/index.html" class="card-btn">Establish Link &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="border-top: none; padding: 0; background-color: #1A1A1A; color: #FAF6F0; margin-top: auto; z-index: 10; position: relative; width: 100%;">
+    <div style="height: 4px; background: repeating-linear-gradient(90deg, #F5C518 0px, #F5C518 33.33%, #E53935 33.33%, #E53935 66.66%, #4DA6E8 66.66%, #4DA6E8 100%);"></div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FAF6F0;">
+        <img src="../cnrdeli/corner_deli_logo-01.png" alt="Corner Deli" style="height: 24px; filter: brightness(10);">
+        <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.1em;">CORNER DELI</span>
+      </a>
+      <span style="color: #7A7A7A; font-size: 0.75rem; letter-spacing: 0.03em;">&copy; 2026 Corner Deli</span>
+    </div>
+  </footer>
+</body>
+</html>

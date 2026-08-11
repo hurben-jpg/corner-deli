@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corner Deli — Pipeline Workflow</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0C0E14;
+      --card-bg: rgba(20, 24, 35, 0.45);
+      --card-bg-hover: rgba(25, 30, 45, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      
+      --deli-red: #E53935;
+      --deli-yellow: #F5C518;
+      --deli-blue: #4DA6E8;
+      --deli-teal: #1B9E8C;
+      --text-main: #FAF6F0;
+      --text-muted: #8E9AA8;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Subtle grid mesh background */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .pixel-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.004) 0px, rgba(255, 255, 255, 0.004) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.004) 0px, rgba(255, 255, 255, 0.004) 1px, transparent 1px, transparent 4px);
+      opacity: 0.8;
+    }
+
+    /* ═══ HEADER ═══ */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background-color: rgba(7, 9, 19, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-img {
+      height: 36px;
+      width: auto;
+      filter: brightness(10);
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 0.15em;
+      color: #fff;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .header-subtitle {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+
+    .site-nav-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: var(--font-display);
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: all 0.25s;
+      background: var(--deli-red);
+      letter-spacing: 0.03em;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .site-nav-btn:hover {
+      background: #C62828;
+    }
+
+    /* ═══ MAIN LAYOUT ═══ */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 24px 80px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: var(--deli-red);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.8rem;
+      letter-spacing: -0.01em;
+      color: #fff;
+      margin-bottom: 16px;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ═══ INTERACTIVE DIAGRAM ═══ */
+    .diagram-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .diagram-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.02), transparent 70%);
+      pointer-events: none;
+    }
+
+    .diagram-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diagram-title-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--deli-yellow);
+      box-shadow: 0 0 8px var(--deli-yellow);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* SVG Styling */
+    .pipeline-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .svg-node {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .svg-node rect {
+      fill: rgba(30, 36, 52, 0.6);
+      stroke: var(--border);
+      stroke-width: 1.5;
+      transition: all 0.3s ease;
+    }
+
+    .svg-node text {
+      fill: var(--text-main);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    .svg-node .node-type {
+      fill: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    /* Animated connector lines */
+    .flow-line {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 2;
+      stroke-dasharray: 6 4;
+      transition: all 0.3s ease;
+    }
+
+    .flow-line.active {
+      stroke-dasharray: 8 4;
+      animation: dash 1.5s linear infinite;
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+
+    /* Hover States for Interactive Diagram */
+    .svg-node:hover rect {
+      fill: rgba(45, 54, 78, 0.85);
+      stroke-width: 2;
+    }
+
+    /* Node Color Accents */
+    .svg-node.color-red:hover rect { stroke: var(--deli-red); filter: drop-shadow(0 0 8px rgba(229, 57, 69, 0.4)); }
+    .svg-node.color-yellow:hover rect { stroke: var(--deli-yellow); filter: drop-shadow(0 0 8px rgba(245, 197, 24, 0.4)); }
+    .svg-node.color-blue:hover rect { stroke: var(--deli-blue); filter: drop-shadow(0 0 8px rgba(77, 166, 232, 0.4)); }
+    .svg-node.color-teal:hover rect { stroke: var(--deli-teal); filter: drop-shadow(0 0 8px rgba(27, 158, 140, 0.4)); }
+
+    .svg-node.color-red:hover text { fill: var(--deli-red); }
+    .svg-node.color-yellow:hover text { fill: var(--deli-yellow); }
+    .svg-node.color-blue:hover text { fill: var(--deli-blue); }
+    .svg-node.color-teal:hover text { fill: var(--deli-teal); }
+
+    .flow-line.color-red.active { stroke: var(--deli-red); }
+    .flow-line.color-yellow.active { stroke: var(--deli-yellow); }
+    .flow-line.color-blue.active { stroke: var(--deli-blue); }
+    .flow-line.color-teal.active { stroke: var(--deli-teal); }
+
+    /* ═══ LIVE PANEL INFO ═══ */
+    .panel-display {
+      background: linear-gradient(135deg, rgba(20, 24, 35, 0.8) 0%, rgba(13, 17, 27, 0.95) 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 24px;
+      transition: all 0.3s ease;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .panel-display::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--border);
+      border-radius: 4px 0 0 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .panel-display.active-red::before { background-color: var(--deli-red); }
+    .panel-display.active-yellow::before { background-color: var(--deli-yellow); }
+    .panel-display.active-blue::before { background-color: var(--deli-blue); }
+    .panel-display.active-teal::before { background-color: var(--deli-teal); }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ═══ DETAILS GRID ═══ */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .info-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.015), transparent 50%);
+      pointer-events: none;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      background-color: var(--card-bg-hover);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .info-card.accent-red:hover { border-color: rgba(229, 57, 69, 0.3); }
+    .info-card.accent-yellow:hover { border-color: rgba(245, 197, 24, 0.3); }
+    .info-card.accent-blue:hover { border-color: rgba(77, 166, 232, 0.3); }
+    .info-card.accent-teal:hover { border-color: rgba(27, 158, 140, 0.3); }
+
+    .card-header-box {
+      margin-bottom: 20px;
+    }
+
+    .card-label {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .info-card.accent-red .card-label { color: var(--deli-red); }
+    .info-card.accent-yellow .card-label { color: var(--deli-yellow); }
+    .info-card.accent-blue .card-label { color: var(--deli-blue); }
+    .info-card.accent-teal .card-label { color: var(--deli-teal); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+    }
+
+    /* ═══ FOOTER ═══ */
+    .site-footer {
+      border-top: none;
+      padding: 0;
+      background-color: #1A1A1A;
+      color: var(--text-main);
+      margin-top: auto;
+      z-index: 10;
+      position: relative;
+      width: 100%;
+    }
+
+    .footer-stripe {
+      height: 4px;
+      background: repeating-linear-gradient(90deg, var(--deli-yellow) 0px, var(--deli-yellow) 33.33%, var(--deli-red) 33.33%, var(--deli-red) 66.66%, var(--deli-blue) 66.66%, var(--deli-blue) 100%);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 24px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .footer-brand img {
+      height: 24px;
+      filter: brightness(10);
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-copy {
+      color: #7A7A7A;
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="pixel-mesh"></div>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-box">
+        <img src="cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo" class="logo-img">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="logo-text">CORNER DELI</span>
+          <span class="header-subtitle">Digital Pipeline Architecture</span>
+        </div>
+      </div>
+      <a href="index.html" class="site-nav-btn">Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <span class="hero-tag">System Blueprints</span>
+      <h1 class="hero-title">Integration Pipelines</h1>
+      <p class="hero-desc">An overview of the cloud platforms, hosting pipelines, AI components, IoT hardware, and drawing reprocessors driving the cnrdeli.com ecosystem.</p>
+    </section>
+
+    <!-- Interactive Diagram Card 1: Building -->
+    <div class="diagram-card" data-pipeline="building">
+      <div class="diagram-title">
+        <span class="diagram-title-dot"></span>
+        I. Conscious Building Pipeline
+      </div>
+
+      <!-- SVG Pipeline Diagram -->
+      <svg viewBox="0 0 800 360" class="pipeline-svg">
+        <!-- SVG Definitions -->
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="rgba(255,255,255,0.15)"/>
+          </marker>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#E53935"/>
+          </marker>
+          <marker id="arrow-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#F5C518"/>
+          </marker>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#4DA6E8"/>
+          </marker>
+          <marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#1B9E8C"/>
+          </marker>
+        </defs>
+
+        <!-- Connecting Flows -->
+        <!-- GitHub -> Netlify -->
+        <path d="M 170 120 L 260 120" class="flow-line line-github line-netlify color-red" marker-end="url(#arrow)"/>
+        <!-- GitHub -> Render -->
+        <path d="M 120 150 L 120 220 L 260 220" class="flow-line line-github line-render color-yellow" marker-end="url(#arrow)"/>
+        <!-- Netlify <-> User (Browser) -->
+        <path d="M 390 120 L 480 120" class="flow-line line-netlify line-browser color-red" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+        <!-- Browser -> Render -->
+        <path d="M 540 150 L 540 220 L 390 220" class="flow-line line-browser line-render color-yellow" marker-end="url(#arrow)"/>
+        
+        <!-- Render <-> Vector DB -->
+        <path d="M 325 250 L 325 300" class="flow-line line-render line-vectordb color-blue" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+        <!-- Render -> LLM (AI) -->
+        <path d="M 390 230 L 610 230" class="flow-line line-render line-ai color-blue" marker-end="url(#arrow)"/>
+        <!-- Render <-> Hardware -->
+        <path d="M 260 235 L 180 235 L 180 300" class="flow-line line-render line-hardware color-teal" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+
+        <!-- Nodes -->
+        <!-- Node 1: GitHub -->
+        <g class="svg-node color-red" id="node-github">
+          <rect x="50" y="90" width="120" height="60" rx="10"/>
+          <text x="110" y="120">GitHub</text>
+          <text x="110" y="138" class="node-type">Version Control</text>
+        </g>
+
+        <!-- Node 2: Netlify -->
+        <g class="svg-node color-red" id="node-netlify">
+          <rect x="270" y="90" width="120" height="60" rx="10"/>
+          <text x="330" y="120">Netlify</text>
+          <text x="330" y="138" class="node-type">Static Hosting & DNS</text>
+        </g>
+
+        <!-- Node 3: Browser (Client) -->
+        <g class="svg-node color-red" id="node-browser">
+          <rect x="490" y="90" width="120" height="60" rx="10"/>
+          <text x="550" y="120">Browser</text>
+          <text x="550" y="138" class="node-type">Visitor Client</text>
+        </g>
+
+        <!-- Node 4: Render -->
+        <g class="svg-node color-yellow" id="node-render">
+          <rect x="270" y="190" width="120" height="60" rx="10"/>
+          <text x="330" y="220">Render</text>
+          <text x="330" y="238" class="node-type">FastAPI Backend</text>
+        </g>
+
+        <!-- Node 5: AI Brain -->
+        <g class="svg-node color-blue" id="node-ai">
+          <rect x="620" y="190" width="120" height="60" rx="10"/>
+          <text x="680" y="220">AI Brain</text>
+          <text x="680" y="238" class="node-type">Gemini / OpenAI</text>
+        </g>
+
+        <!-- Node 6: Hardware (ESP32-P4) -->
+        <g class="svg-node color-teal" id="node-hardware">
+          <rect x="120" y="290" width="120" height="60" rx="10"/>
+          <text x="180" y="320">ESP32-P4</text>
+          <text x="180" y="338" class="node-type">IoT Controller</text>
+        </g>
+
+        <!-- Node 7: ChromaDB -->
+        <g class="svg-node color-blue" id="node-vectordb">
+          <rect x="270" y="290" width="120" height="60" rx="10"/>
+          <text x="330" y="320">ChromaDB</text>
+          <text x="330" y="338" class="node-type">Vector DB (RAG)</text>
+        </g>
+      </svg>
+
+      <!-- Live Display Info Panel -->
+      <div class="panel-display" id="panel-info-building">
+        <h3 class="panel-title">
+          <span style="color: var(--deli-yellow);">💡</span> Hover over a Node
+        </h3>
+        <p class="panel-desc">Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.</p>
+      </div>
+    </div>
+
+    <!-- Interactive Diagram Card 2: Tapestry -->
+    <div class="diagram-card" data-pipeline="tapestry" style="margin-top: 40px;">
+      <div class="diagram-title">
+        <span class="diagram-title-dot" style="background-color: var(--deli-teal); box-shadow: 0 0 8px var(--deli-teal);"></span>
+        II. Identity Tapestry Pipeline
+      </div>
+
+      <!-- SVG Pipeline Diagram -->
+      <svg viewBox="0 0 800 240" class="pipeline-svg">
+        <!-- SVG Definitions -->
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="rgba(255,255,255,0.15)"/>
+          </marker>
+        </defs>
+
+        <!-- Connecting Flows -->
+        <!-- Scans -> OpenCV -->
+        <path d="M 150 70 L 190 70" class="flow-line line-tapestry-scans line-tapestry-opencv color-red" marker-end="url(#arrow2)"/>
+        <!-- OpenCV -> DB -->
+        <path d="M 320 70 L 370 70" class="flow-line line-tapestry-opencv line-tapestry-db color-yellow" marker-end="url(#arrow2)"/>
+        <!-- DB -> Browser -->
+        <path d="M 480 70 L 540 70" class="flow-line line-tapestry-db line-tapestry-browser color-blue" marker-end="url(#arrow2)"/>
+        <!-- Browser -> Physics -->
+        <path d="M 595 95 L 595 120 L 505 120 L 505 140" class="flow-line line-tapestry-browser line-tapestry-physics color-red" marker-end="url(#arrow2)"/>
+        <!-- Physics -> Exporter -->
+        <path d="M 560 165 L 630 165" class="flow-line line-tapestry-physics line-tapestry-exporter color-teal" marker-end="url(#arrow2)"/>
+        <!-- DB -> Physics -->
+        <path d="M 425 95 L 425 165 L 450 165" class="flow-line line-tapestry-db line-tapestry-physics color-blue" marker-end="url(#arrow2)"/>
+
+        <!-- Nodes -->
+        <!-- Node A: Scans -->
+        <g class="svg-node color-red" id="node-tapestry-scans">
+          <rect x="30" y="40" width="120" height="60" rx="10"/>
+          <text x="90" y="70">Batch Scans</text>
+          <text x="90" y="88" class="node-type">Raw Drawing Scans</text>
+        </g>
+
+        <!-- Node B: OpenCV -->
+        <g class="svg-node color-yellow" id="node-tapestry-opencv">
+          <rect x="190" y="40" width="130" height="60" rx="10"/>
+          <text x="255" y="70">OpenCV Python</text>
+          <text x="255" y="88" class="node-type">Vectorizer & Normalizer</text>
+        </g>
+
+        <!-- Node C: DB -->
+        <g class="svg-node color-blue" id="node-tapestry-db">
+          <rect x="370" y="40" width="110" height="60" rx="10"/>
+          <text x="425" y="70">Database (JSON)</text>
+          <text x="425" y="88" class="node-type">Drawing Metadata</text>
+        </g>
+
+        <!-- Node D: Browser -->
+        <g class="svg-node color-red" id="node-tapestry-browser">
+          <rect x="540" y="40" width="110" height="60" rx="10"/>
+          <text x="595" y="70">Browser UI</text>
+          <text x="595" y="88" class="node-type">Visual Library App</text>
+        </g>
+
+        <!-- Node E: Physics -->
+        <g class="svg-node color-yellow" id="node-tapestry-physics">
+          <rect x="450" y="140" width="110" height="60" rx="10"/>
+          <text x="505" y="170">Physics Solver</text>
+          <text x="505" y="188" class="node-type">Mural Layout Engine</text>
+        </g>
+
+        <!-- Node F: Exporter -->
+        <g class="svg-node color-teal" id="node-tapestry-exporter">
+          <rect x="630" y="140" width="110" height="60" rx="10"/>
+          <text x="685" y="170">SVG Exporter</text>
+          <text x="685" y="188" class="node-type">Vector Downloader</text>
+        </g>
+      </svg>
+
+      <!-- Live Display Info Panel -->
+      <div class="panel-display" id="panel-info-tapestry">
+        <h3 class="panel-title">
+          <span style="color: var(--deli-teal);">💡</span> Hover over a Node
+        </h3>
+        <p class="panel-desc">Hover over any node in the tapestry diagram above to view details of the drawing vectorization and layout engine pipeline.</p>
+      </div>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="details-grid">
+      <!-- Card 1: Web Hosting -->
+      <div class="info-card accent-red">
+        <div class="card-header-box">
+          <span class="card-label">Domains & Web Hosting</span>
+          <h2 class="card-title">Front-End Pipeline</h2>
+        </div>
+        <p class="card-desc">The public static interface of cnrdeli.com. Deployed directly via version control triggers and resolved via a robust registered DNS zone manager.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Porkbun Domain</span>
+          <span class="tech-tag">Netlify Hosting</span>
+          <span class="tech-tag">Netlify DNS</span>
+          <span class="tech-tag">GitHub Triggers</span>
+          <span class="tech-tag">HTML5 / CSS3 / JS</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Backend API -->
+      <div class="info-card accent-yellow">
+        <div class="card-header-box">
+          <span class="card-label">Backend Service Pipeline</span>
+          <h2 class="card-title">Erebor Brain Server</h2>
+        </div>
+        <p class="card-desc">A FastAPI application running in Render cloud environments, managing the environmental consciousness, handling chat endpoints, and retrieving sensor logs.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Render Cloud</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">Uvicorn Server</span>
+          <span class="tech-tag">python-dotenv</span>
+          <span class="tech-tag">Pytest Tests</span>
+        </div>
+      </div>
+
+      <!-- Card 3: RAG Memory -->
+      <div class="info-card accent-blue">
+        <div class="card-header-box">
+          <span class="card-label">AI & Vector Memory</span>
+          <h2 class="card-title">Retrieval-Augmented RAG</h2>
+        </div>
+        <p class="card-desc">Orchestrates cognitive context. User messages are enriched with local static knowledge records, vector semantic memories, and real-time sensory states.</p>
+        <div class="tech-list">
+          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">ChromaDB</span>
+          <span class="tech-tag">OpenAI API</span>
+          <span class="tech-tag">Google Gemini</span>
+          <span class="tech-tag">JSON Embeds</span>
+        </div>
+      </div>
+
+      <!-- Card 4: IoT Hardware -->
+      <div class="info-card accent-teal">
+        <div class="card-header-box">
+          <span class="card-label">IoT Hardware & Embedded</span>
+          <h2 class="card-title">Spatial Consciousness</h2>
+        </div>
+        <p class="card-desc">An interactive physical terminal running on high-performance microcontrollers, feeding temperature, light levels, and occupancy to the server brain.</p>
+        <div class="tech-list">
+          <span class="tech-tag">ESP32-P4 MCU</span>
+          <span class="tech-tag">ESP-IDF SDK</span>
+          <span class="tech-tag">WiFi-6 C6 Module</span>
+          <span class="tech-tag">Serial Sensors</span>
+          <span class="tech-tag">PowerShell Builds</span>
+        </div>
+      </div>
+
+      <!-- Card 5: Tapestry Processing -->
+      <div class="info-card accent-yellow">
+        <div class="card-header-box">
+          <span class="card-label">Image Reprocessing</span>
+          <h2 class="card-title">Tapestry Processing</h2>
+        </div>
+        <p class="card-desc">A custom Python script utilising OpenCV that scans raw student sketches, crops extraneous margins, centers drawing coordinates, and normalizes vector paths for database compilation.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Python 3</span>
+          <span class="tech-tag">OpenCV (CV2)</span>
+          <span class="tech-tag">Contour Analysis</span>
+          <span class="tech-tag">SVG Path Parsing</span>
+          <span class="tech-tag">Static JSON DB</span>
+        </div>
+      </div>
+
+      <!-- Card 6: Mural Layout Engine -->
+      <div class="info-card accent-teal">
+        <div class="card-header-box">
+          <span class="card-label">Dynamic Collage & Layout</span>
+          <h2 class="card-title">Mural Physics Engine</h2>
+        </div>
+        <p class="card-desc">An interactive center-based collision-prevention solver written in Javascript. Resolves symbol separation and restricts items inside canvas padding boundaries in real-time.</p>
+        <div class="tech-list">
+          <span class="tech-tag">Javascript ES6</span>
+          <span class="tech-tag">Physics separation</span>
+          <span class="tech-tag">Collision Solver</span>
+          <span class="tech-tag">SVG Exporter</span>
+          <span class="tech-tag">Real-time Rendering</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-stripe"></div>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand">
+        <img src="cnrdeli/corner_deli_logo-01.png" alt="Corner Deli Logo">
+        <span class="footer-brand-name">CORNER DELI</span>
+      </a>
+      <span class="footer-copy">&copy; 2026 Corner Deli</span>
+    </div>
+  </footer>
+
+  <script>
+    const nodeDetails = {
+      // Building Pipeline Nodes
+      github: {
+        title: "GitHub Repository",
+        color: "red",
+        emoji: "🐙",
+        desc: "Serves as the primary source code hub. Pushing changes to the repository triggers automatic deployments to Netlify (for the frontend static layout) and Render (for the backend FastAPI app)."
+      },
+      netlify: {
+        title: "Netlify Hosting & DNS",
+        color: "red",
+        emoji: "⚡",
+        desc: "Hosts the front-end static layout of cnrdeli.com, deploying updates automatically on git commits. Netlify DNS manages the custom DNS zone, linking the domain registered at Porkbun to the hosting assets."
+      },
+      browser: {
+        title: "Web Client (Browser)",
+        color: "red",
+        emoji: "💻",
+        desc: "The interface loaded by the user. Fetches static HTML/CSS/JS from Netlify, and makes live AJAX calls to the FastAPI server on Render to chat with the building's environmental AI."
+      },
+      render: {
+        title: "Render Backend API",
+        color: "yellow",
+        emoji: "🚀",
+        desc: "Hosts the Python backend API (FastAPI) at https://erebor-willing-west.onrender.com. It aggregates sensory data, queries semantic vector memory, constructs prompts, and communicates with LLM providers."
+      },
+      ai: {
+        title: "AI Brain (LLM)",
+        color: "blue",
+        emoji: "🧠",
+        desc: "Generates the sentient response. LangChain routes the augmented prompts (comprising historical contexts, sensor values, and user inputs) to OpenAI or Google Gemini API engines to build the agent output."
+      },
+      hardware: {
+        title: "ESP32-P4 Controller",
+        color: "teal",
+        emoji: "📟",
+        desc: "An interactive touch LCD physical module built on the ESP32-P4 architecture. Uses ESP-IDF firmware compilation layers, C6 WiFi links, and serial commands to interface with real-world sensor components."
+      },
+      vectordb: {
+        title: "ChromaDB (Vector Memory)",
+        color: "blue",
+        emoji: "💾",
+        desc: "A local vector database memory layer. It embeds and stores historical chat interactions and logs, retrieving semantically relevant context blocks to power Retrieval-Augmented Generation (RAG)."
+      },
+      
+      // Tapestry Pipeline Nodes
+      'tapestry-scans': {
+        title: "Raw Drawing Scans",
+        color: "red",
+        emoji: "🎨",
+        desc: "Hand-drawn paper submissions scanned in batches. Obsolete files and duplicates are automatically identified and cleaned up by database sync routines."
+      },
+      'tapestry-opencv': {
+        title: "Python OpenCV Reprocessor",
+        color: "yellow",
+        emoji: "⚙️",
+        desc: "A custom processing pipeline that loads drawings, crops whitespace padding, binarizes sketches to clean vectors, and centers and normalizes SVG path contours to fit [-500, -500, 500, 500] coordinates."
+      },
+      'tapestry-db': {
+        title: "Static Database (JSON)",
+        color: "blue",
+        emoji: "📂",
+        desc: "Stores the normalized SVG path coordinates, scale metadata, themes, and display statuses of all active drawings. Serves as a light, high-performance static API database."
+      },
+      'tapestry-browser': {
+        title: "Tapestry Web App",
+        color: "red",
+        emoji: "🌐",
+        desc: "The browser front-end containing the Visual Library and the Mural Generator. Fetches drawings on demand and renders them inside a dynamic SVG viewBox."
+      },
+      'tapestry-physics': {
+        title: "Collage Physics Solver",
+        color: "yellow",
+        emoji: "⚡",
+        desc: "A custom center-based physics mixer that performs pairwise separation and boundary locking in real-time. Distributes randomly spawned symbols into non-overlapping compositions."
+      },
+      'tapestry-exporter': {
+        title: "SVG Exporter",
+        color: "teal",
+        emoji: "💾",
+        desc: "Compiles active collage scales, positions, rotations, and custom foreground colors to download clean, publication-ready vector SVGs."
+      }
+    };
+
+    const nodes = document.querySelectorAll('.svg-node');
+    const lines = document.querySelectorAll('.flow-line');
+
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const nodeId = node.id.replace('node-', '');
+        const details = nodeDetails[nodeId];
+        
+        if (details) {
+          const card = node.closest('.diagram-card');
+          const titleEl = card.querySelector('.panel-title');
+          const descEl = card.querySelector('.panel-desc');
+          const panelEl = card.querySelector('.panel-display');
+
+          // Update display panel content
+          titleEl.innerHTML = `<span style="color: var(--deli-${details.color});">${details.emoji}</span> ${details.title}`;
+          descEl.textContent = details.desc;
+          
+          // Update visual active classes
+          panelEl.className = `panel-display active-${details.color}`;
+          
+          // Highlight related connective paths inside this specific diagram-card
+          const cardLines = card.querySelectorAll('.flow-line');
+          cardLines.forEach(line => {
+            if (line.classList.contains(`line-${nodeId}`)) {
+              line.classList.add('active');
+            } else {
+              line.classList.remove('active');
+            }
+          });
+        }
+      });
+
+      node.addEventListener('mouseleave', () => {
+        const card = node.closest('.diagram-card');
+        const cardLines = card.querySelectorAll('.flow-line');
+        cardLines.forEach(line => {
+          line.classList.remove('active');
+        });
+      });
+    });
+
+    // Reset panel to default when mouse leaves each diagram card area
+    document.querySelectorAll('.diagram-card').forEach(card => {
+      const isBuilding = card.getAttribute('data-pipeline') === 'building';
+      card.addEventListener('mouseleave', () => {
+        const titleEl = card.querySelector('.panel-title');
+        const descEl = card.querySelector('.panel-desc');
+        const panelEl = card.querySelector('.panel-display');
+
+        if (isBuilding) {
+          titleEl.innerHTML = `<span style="color: var(--deli-yellow);">💡</span> Hover over a Node`;
+          descEl.textContent = "Hover over any node in the system diagram above to view details, its role in the pipeline, and the integrated technologies.";
+        } else {
+          titleEl.innerHTML = `<span style="color: var(--deli-teal);">💡</span> Hover over a Node`;
+          descEl.textContent = "Hover over any node in the tapestry diagram above to view details of the drawing vectorization and layout engine pipeline.";
+        }
+        panelEl.className = "panel-display";
+      });
+    });
+  </script>
+</body>
+</html>
