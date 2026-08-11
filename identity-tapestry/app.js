@@ -81,7 +81,7 @@ window.switchTab = switchTab;
 
 // Load database on start
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("data.json")
+  fetch("data.json?v=" + Date.now())
     .then(response => response.json())
     .then(data => {
       symbolDatabase = data;
