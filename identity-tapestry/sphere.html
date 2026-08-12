@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Navigate all 1,445 Identity Tapestry symbols on an interactive three-dimensional sphere.">
+  <title>Identity Tapestry — Symbol Sphere</title>
+  <link rel="stylesheet" href="sphere.css?v=2">
+</head>
+<body>
+  <main class="sphere-stage">
+    <canvas id="symbol-sphere" aria-label="Interactive sphere containing all 1,445 Identity Tapestry symbols"></canvas>
+
+    <header class="sphere-header">
+      <div>
+        <a class="back-link" href="index.html">← Identity Tapestry</a>
+        <h1>Symbol Sphere</h1>
+        <p>1,445 individual marks · one community</p>
+      </div>
+      <div class="sphere-actions" aria-label="Sphere controls">
+        <button id="motion-toggle" type="button" aria-pressed="true">Pause drift</button>
+        <button id="reset-view" type="button">Reset view</button>
+      </div>
+    </header>
+
+    <section class="loading-panel" id="loading-panel" aria-live="polite">
+      <span id="loading-label">Loading symbol archive…</span>
+      <span class="loading-track" aria-hidden="true"><span id="loading-progress"></span></span>
+    </section>
+
+    <aside class="symbol-detail" id="symbol-detail" hidden aria-live="polite">
+      <img id="selected-symbol-image" alt="">
+      <div>
+        <span class="detail-label">Selected symbol</span>
+        <strong id="selected-symbol-id">#0001</strong>
+      </div>
+      <button id="close-detail" type="button" aria-label="Clear selected symbol">×</button>
+    </aside>
+
+    <footer class="sphere-help">
+      <span>Drag and release to centre</span>
+      <span>Scroll or pinch to zoom</span>
+      <span>Choose a symbol in the centre</span>
+    </footer>
+  </main>
+  <script src="sphere.js?v=11"></script>
+</body>
+</html>

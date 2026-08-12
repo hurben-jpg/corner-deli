@@ -1,0 +1,313 @@
+:root {
+  color-scheme: dark;
+  --background: #070913;
+  --surface: rgba(15, 20, 36, 0.78);
+  --surface-strong: rgba(10, 13, 25, 0.94);
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  --faint: #6b7280;
+  --accent: #818cf8;
+  --border: rgba(255, 255, 255, 0.11);
+  --font-display: "Outfit", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.sphere-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(99, 102, 241, 0.10), transparent 44%),
+    var(--background);
+}
+
+.sphere-stage::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+#symbol-sphere {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+#symbol-sphere.is-dragging {
+  cursor: grabbing;
+}
+
+.sphere-header {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px;
+  pointer-events: none;
+}
+
+.sphere-header > * {
+  pointer-events: auto;
+}
+
+.back-link {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--text);
+}
+
+h1 {
+  margin: 8px 0 2px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sphere-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.sphere-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sphere-actions button,
+.symbol-detail button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.sphere-actions button {
+  padding: 9px 14px;
+  font-size: 0.76rem;
+}
+
+.sphere-actions button:hover,
+.sphere-actions button:focus-visible,
+.symbol-detail button:hover,
+.symbol-detail button:focus-visible {
+  border-color: rgba(129, 140, 248, 0.65);
+  background: rgba(99, 102, 241, 0.18);
+  outline: none;
+}
+
+.loading-panel {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(320px, calc(100% - 48px));
+  padding: 18px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+  backdrop-filter: blur(14px);
+  transition: opacity 240ms ease;
+}
+
+.loading-panel.is-complete {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-panel.is-error {
+  color: #fca5a5;
+}
+
+.loading-track {
+  display: block;
+  height: 2px;
+  margin-top: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#loading-progress {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+  transition: width 120ms linear;
+}
+
+.symbol-detail {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 58px;
+  display: flex;
+  align-items: center;
+  min-width: 190px;
+  padding: 10px 12px 10px 10px;
+  transform: translateX(-50%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  backdrop-filter: blur(14px);
+}
+
+.symbol-detail[hidden] {
+  display: none;
+}
+
+.symbol-detail img {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  padding: 5px;
+  border-radius: 9px;
+  background: var(--text);
+  object-fit: contain;
+}
+
+.detail-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#selected-symbol-id {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.symbol-detail button {
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.sphere-help {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 22px;
+  left: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  color: var(--faint);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+
+.sphere-header,
+.sphere-help,
+.symbol-detail {
+  transition: opacity 420ms ease;
+}
+
+.sphere-stage.is-ui-idle .sphere-header,
+.sphere-stage.is-ui-idle .sphere-help,
+.sphere-stage.is-ui-idle .symbol-detail {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sphere-stage.is-ui-idle #symbol-sphere {
+  cursor: none;
+}
+
+@media (max-width: 640px) {
+  .sphere-header {
+    padding: 18px;
+  }
+
+  .sphere-actions {
+    flex-direction: column;
+  }
+
+  .sphere-actions button {
+    padding: 8px 11px;
+  }
+
+  .sphere-help {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    gap: 10px;
+    font-size: 0.62rem;
+    text-align: center;
+  }
+
+  .symbol-detail {
+    bottom: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-panel,
+  #loading-progress,
+  .sphere-header,
+  .sphere-help,
+  .symbol-detail {
+    transition: none;
+  }
+}

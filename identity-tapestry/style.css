@@ -543,8 +543,43 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
   font-size: 0.85rem;
   color: var(--text-secondary);
+}
+
+.library-view-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+}
+
+.library-view-btn {
+  border: 0;
+  border-radius: 7px;
+  padding: 7px 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: 600 0.72rem var(--font-display);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.library-view-btn:hover,
+.library-view-btn:focus-visible {
+  color: var(--text-primary);
+  outline: none;
+}
+
+.library-view-btn.active {
+  color: #fff;
+  background: var(--accent-indigo);
 }
 
 .pagination-controls {
@@ -623,6 +658,72 @@ body::after {
   object-fit: contain;
   mix-blend-mode: multiply;
   image-rendering: -webkit-optimize-contrast;
+}
+
+.card-vector-container,
+.comparison-half {
+  position: relative;
+}
+
+.card-img-container .card-vector {
+  mix-blend-mode: normal;
+  padding: 8px;
+}
+
+.card-comparison {
+  align-items: stretch;
+}
+
+.comparison-half {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.comparison-half + .comparison-half {
+  border-left: 1px solid #d7d9e0;
+}
+
+.comparison-half img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-visual-label {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(7, 9, 19, 0.78);
+  color: #fff;
+  font: 600 0.52rem var(--font-display);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+@media (max-width: 620px) {
+  .grid-header {
+    justify-content: center;
+  }
+
+  .result-count,
+  .scroll-status-wrapper {
+    flex: 1 1 auto;
+  }
+
+  .library-view-switcher {
+    order: 3;
+    width: 100%;
+  }
+
+  .library-view-btn {
+    flex: 1;
+  }
 }
 
 .card-info {

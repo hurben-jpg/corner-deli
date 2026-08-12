@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Identity Tapestry 2026 - Mount Lawley SHS</title>
-  <meta name="description" content="A visual archive of 1,375 unique drawings from the 2026 Mount Lawley Senior High School creative residency. Explore and download each hand-drawn design.">
+  <meta name="description" content="A visual archive of 1,445 drawings from the 2026 Mount Lawley Senior High School creative residency. Explore each source scan and extracted vector.">
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1.2">
+  <link rel="stylesheet" href="style.css?v=1.3">
 </head>
 <body>
   <div class="app-container">
@@ -42,6 +42,7 @@
         <button class="nav-btn" data-tab="library">Visual Library</button>
         <button class="nav-btn" data-tab="generator">Mural Generator</button>
         <button class="nav-btn" data-tab="gallery">Sightseeing</button>
+        <a class="nav-btn" href="sphere.html" style="display: inline-flex; align-items: center; text-decoration: none;">Sphere</a>
       </nav>
       <div class="mobile-nav-wrapper">
         <select class="mobile-nav-select" id="mobile-nav-dropdown">
@@ -49,6 +50,7 @@
           <option value="library">Visual Library</option>
           <option value="generator">Mural Generator</option>
           <option value="gallery">Sightseeing</option>
+          <option value="sphere">Sphere</option>
         </select>
       </div>
     </div>
@@ -128,6 +130,11 @@
         <div class="grid-layout">
           <div class="grid-header">
             <span class="result-count" id="result-count-label">Showing 0 of 0 designs</span>
+            <div class="library-view-switcher" role="group" aria-label="Choose how drawings are displayed">
+              <button class="library-view-btn active" type="button" data-library-view="scan" aria-pressed="true">Scans</button>
+              <button class="library-view-btn" type="button" data-library-view="vector" aria-pressed="false">Extracted Vectors</button>
+              <button class="library-view-btn" type="button" data-library-view="compare" aria-pressed="false">Compare</button>
+            </div>
             <div class="scroll-status-wrapper" id="scroll-status-wrapper">
               <span id="loaded-count-label">Loaded 0 / 0</span>
             </div>
@@ -346,7 +353,7 @@
       </div>
     </div>
   </div>
-  <script src="app.js"></script>
+  <script src="app.js?v=1.2"></script>
 
 </body>
 </html>

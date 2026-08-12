@@ -14,6 +14,7 @@ let compositions = {};
 let visibleCount = 40;
 const SCROLL_BATCH = 40;
 let isInfiniteScrollLoading = false;
+let libraryViewMode = 'scan';
 
 // Mural Generator State
 let compositionElements = [];
@@ -28,7 +29,7 @@ let tankForegroundColor = "#ffffff";
 // ──────────────────────────────────────────────
 // TAB NAVIGATION
 // ──────────────────────────────────────────────
-const navButtons = document.querySelectorAll('.nav-btn');
+const navButtons = document.querySelectorAll('.nav-btn[data-tab]');
 const tabPanels  = document.querySelectorAll('.tab-panel');
 
 navButtons.forEach(btn => {
@@ -145,6 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+  });
+
+  document.querySelectorAll('.library-view-btn').forEach(button => {
+    button.addEventListener('click', () => setLibraryViewMode(button.dataset.libraryView));
   });
 
   // Infinite scroll
@@ -268,7 +273,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobNav = document.getElementById("mobile-nav-dropdown");
   if (mobNav) {
     mobNav.addEventListener("change", (e) => {
-      switchTab(e.target.value);
+      if (e.target.value === 'sphere') {
+        window.location.href = 'sphere.html';
+      } else {
+        switchTab(e.target.value);
+      }
     });
   }
 });
@@ -299,6 +308,34 @@ function buildVisualLibrary() {
   filteredSymbols = result;
   visibleCount = SCROLL_BATCH;
   renderLibraryGrid(false);
+}
+
+function setLibraryViewMode(mode) {
+  if (!['scan', 'vector', 'compare'].includes(mode) || mode === libraryViewMode) return;
+  libraryViewMode = mode;
+  document.querySelectorAll('.library-view-btn').forEach(button => {
+    const isActive = button.dataset.libraryView === mode;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+  renderLibraryGrid(false);
+}
+
+function buildLibraryVisual(sym, threshold) {
+  const scan = `<img class="card-scan" src="scans/${sym.id}.jpg?v=2" alt="Source scan for student symbol #${sym.id}" loading="lazy" style="filter: contrast(${threshold}%) grayscale(100%);">`;
+  const vector = `<img class="card-vector" src="svgs/${sym.id}.svg" alt="Extracted vector for student symbol #${sym.id}" loading="lazy">`;
+
+  if (libraryViewMode === 'vector') {
+    return `<div class="card-img-container card-vector-container">${vector}<span class="card-visual-label">Extracted vector</span></div>`;
+  }
+  if (libraryViewMode === 'compare') {
+    return `
+      <div class="card-img-container card-comparison">
+        <div class="comparison-half">${scan}<span class="card-visual-label">Scan</span></div>
+        <div class="comparison-half">${vector}<span class="card-visual-label">Vector</span></div>
+      </div>`;
+  }
+  return `<div class="card-img-container">${scan}</div>`;
 }
 
 function renderLibraryGrid(append = false) {
@@ -334,9 +371,7 @@ function renderLibraryGrid(append = false) {
     const threshold = sym.threshold !== undefined ? sym.threshold : 100;
 
     card.innerHTML = `
-      <div class="card-img-container" style="background:#fff;">
-        <img src="scans/${sym.id}.jpg?v=2" alt="Student symbol #${sym.id}" loading="lazy" style="filter: contrast(${threshold}%) grayscale(100%);">
-      </div>
+      ${buildLibraryVisual(sym, threshold)}
       <div class="card-info" style="justify-content:center;">
         <span class="card-id">#${sym.id}</span>
       </div>
