@@ -298,7 +298,7 @@ const siteMockups = [
   { src: 'site_mockups/73f40b30-8033-466e-81cb-c9eae3ff3bda.png', caption: 'Pink wall study', alt: 'Student symbols applied across a pink school wall' },
   { src: 'site_mockups/82808cf6-4e61-4767-b853-b180760fea86.png', caption: 'Ochre wall study', alt: 'Student symbols applied across an ochre school wall' },
   { src: 'site_mockups/92ddb08b-a0e9-4a54-8604-1aaa08439183.png', caption: 'Orange and turquoise wall study', alt: 'Turquoise student symbols applied across an orange school wall' },
-  { src: 'site_mockups/a5b16ced-5484-414a-869f-920b7b0a1d4d.png', caption: 'Red wall study', alt: 'Student symbols applied across a red school wall' },
+  { src: 'site_mockups/7a5c1dfd-1f1a-471a-8610-3e65359ffda4.png', caption: 'Blue courtyard study', alt: 'Student symbols applied across a blue courtyard building' },
   { src: 'site_mockups/d5f0bac0-31ef-4dd3-ad2e-8c2d139c7ffd.png', caption: 'Blue wall study', alt: 'Student symbols applied vertically across a blue school wall' }
 ];
 let siteMockupIndex = 0;
