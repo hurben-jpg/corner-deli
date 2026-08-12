@@ -248,12 +248,56 @@ body::after {
 }
 
 .manifesto-hero {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0 auto 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 28px;
+}
+
+.manifesto-hero-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3592 / 2045;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  background: var(--bg-secondary);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+.manifesto-hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 9, 19, 0.02) 35%,
+    rgba(7, 9, 19, 0.3) 62%,
+    rgba(7, 9, 19, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+.manifesto-hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.manifesto-hero-title {
+  position: absolute;
+  z-index: 1;
+  left: clamp(24px, 5vw, 56px);
+  right: clamp(24px, 5vw, 56px);
+  bottom: clamp(24px, 5vw, 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
 }
 
 .manifesto-tagline {
@@ -262,23 +306,61 @@ body::after {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent-indigo);
+  color: #c7d2fe;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
 }
 
 .manifesto-hero h2 {
   font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-weight: 800;
   color: #fff;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
 }
 
 .manifesto-lead {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--text-secondary);
   font-weight: 300;
+}
+
+@media (max-width: 620px) {
+  .manifesto-hero {
+    gap: 22px;
+  }
+
+  .manifesto-hero-image {
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+  }
+
+  .manifesto-hero-image img {
+    object-position: 52% center;
+  }
+
+  .manifesto-hero-title {
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+  }
+
+  .manifesto-hero h2 {
+    font-size: clamp(2.7rem, 14vw, 4rem);
+  }
+
+  .manifesto-lead {
+    font-size: 1rem;
+    text-align: left;
+  }
 }
 
 /* Stats grid on Manifesto */
