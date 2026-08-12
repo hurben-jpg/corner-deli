@@ -445,12 +445,6 @@ function initInfiniteScroll() {
 // SYMBOL MODAL: read-only
 // ──────────────────────────────────────────────
 function openSymbolModal(sym) {
-  if (!fullDatabaseLoaded) {
-    ensureFullDatabase()
-      .then(() => openSymbolModal(symbolDatabase[`${sym.id}.png`] || sym))
-      .catch(error => console.error('Could not load symbol details:', error));
-    return;
-  }
   document.getElementById('modal-id').innerText = sym.id;
 
   // Use the optimized JPEG raw scan drawing
@@ -463,13 +457,15 @@ function openSymbolModal(sym) {
   // Apply custom threshold (contrast) filter
   const threshold = sym.threshold !== undefined ? sym.threshold : 100;
   origImg.style.filter = `contrast(${threshold}%) grayscale(100%)`;
-  document.getElementById('modal-svg-container').style.filter = `contrast(${threshold}%)`;
 
-  // Inline SVG vector
-  document.getElementById('modal-svg-container').innerHTML = `
-    <svg viewBox="-500 -500 1000 1000" width="100%" height="100%">
-      <path d="${sym.svg_path_data}" fill="currentColor" stroke="none" />
-    </svg>
+  // Use the same standalone vector asset as the library thumbnails. This keeps
+  // each symbol's own viewBox intact and avoids loading the full database just
+  // to open the comparison modal.
+  const vectorContainer = document.getElementById('modal-svg-container');
+  vectorContainer.style.filter = 'none';
+  vectorContainer.innerHTML = `
+    <img src="svgs/${sym.id}.svg?v=3" alt="Extracted vector for symbol ${sym.id}"
+      style="display:block; width:100%; height:100%; object-fit:contain;" />
   `;
 
   // Curatorial notes
@@ -524,19 +520,12 @@ function closeModal() {
 }
 
 function downloadSVG(sym) {
-  const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-500 -500 1000 1000" width="1000" height="1000">
-  <rect x="-500" y="-500" width="1000" height="1000" fill="#0c0e18"/>
-  <path d="${sym.svg_path_data}" fill="#ffffff" stroke="none"/>
-</svg>`;
-  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
+  const a = document.createElement('a');
+  a.href = `svgs/${sym.id}.svg`;
   a.download = `identity_tapestry_${sym.id}.svg`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 }
 
 // ──────────────────────────────────────────────
