@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1.4">
+  <link rel="stylesheet" href="style.css?v=1.5">
 </head>
 <body>
   <div class="app-container">
@@ -289,6 +289,30 @@
               </div>
             </div>
           </div>
+
+          <section class="site-mockups-section" aria-labelledby="site-mockups-title">
+            <div class="site-mockups-heading">
+              <div>
+                <p class="site-mockups-kicker">Proposed architectural interventions</p>
+                <h3 id="site-mockups-title">The school becomes the canvas</h3>
+              </div>
+              <p>Visual studies showing how the collected student symbols could inhabit the colour and architecture of the campus.</p>
+            </div>
+
+            <button class="site-mockup-feature" type="button" data-mockup-index="0" aria-label="Enlarge the complete site assembly mockup">
+              <img src="site_mockups/Assembly_01.png" alt="Complete Identity Tapestry site assembly mockup" loading="lazy" decoding="async">
+              <span class="site-mockup-caption"><strong>Assembly 01</strong><span>Complete site study · click to enlarge</span></span>
+            </button>
+
+            <div class="site-mockup-grid">
+              <button class="site-mockup-tile" type="button" data-mockup-index="1" aria-label="Enlarge yellow wall site mockup"><img src="site_mockups/429f5596-bfc8-4a4d-a76b-1422448ca47f.png" alt="Student symbols applied across a yellow school wall" loading="lazy" decoding="async"></button>
+              <button class="site-mockup-tile" type="button" data-mockup-index="2" aria-label="Enlarge pink wall site mockup"><img src="site_mockups/73f40b30-8033-466e-81cb-c9eae3ff3bda.png" alt="Student symbols applied across a pink school wall" loading="lazy" decoding="async"></button>
+              <button class="site-mockup-tile" type="button" data-mockup-index="3" aria-label="Enlarge ochre wall site mockup"><img src="site_mockups/82808cf6-4e61-4767-b853-b180760fea86.png" alt="Student symbols applied across an ochre school wall" loading="lazy" decoding="async"></button>
+              <button class="site-mockup-tile" type="button" data-mockup-index="4" aria-label="Enlarge orange and turquoise wall site mockup"><img src="site_mockups/92ddb08b-a0e9-4a54-8604-1aaa08439183.png" alt="Turquoise student symbols applied across an orange school wall" loading="lazy" decoding="async"></button>
+              <button class="site-mockup-tile" type="button" data-mockup-index="5" aria-label="Enlarge red wall site mockup"><img src="site_mockups/a5b16ced-5484-414a-869f-920b7b0a1d4d.png" alt="Student symbols applied across a red school wall" loading="lazy" decoding="async"></button>
+              <button class="site-mockup-tile" type="button" data-mockup-index="6" aria-label="Enlarge blue wall site mockup"><img src="site_mockups/d5f0bac0-31ef-4dd3-ad2e-8c2d139c7ffd.png" alt="Student symbols applied vertically across a blue school wall" loading="lazy" decoding="async"></button>
+            </div>
+          </section>
         </div>
       </section>
       
@@ -357,8 +381,15 @@
         </div>
       </div>
     </div>
+
+    <div class="site-mockup-lightbox" id="site-mockup-lightbox" role="dialog" aria-modal="true" aria-label="Site mockup viewer" aria-hidden="true">
+      <button class="site-lightbox-close" id="site-lightbox-close" type="button" aria-label="Close site mockup viewer">&times;</button>
+      <button class="site-lightbox-nav site-lightbox-prev" id="site-lightbox-prev" type="button" aria-label="Previous site mockup">&larr;</button>
+      <figure class="site-lightbox-figure"><img id="site-lightbox-image" src="" alt=""><figcaption id="site-lightbox-caption"></figcaption></figure>
+      <button class="site-lightbox-nav site-lightbox-next" id="site-lightbox-next" type="button" aria-label="Next site mockup">&rarr;</button>
+    </div>
   </div>
-  <script src="app.js?v=1.3"></script>
+  <script src="app.js?v=1.4"></script>
 
 </body>
 </html>

@@ -125,10 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.id === 'composition-modal') closeCompositionViewer();
   });
 
+  initSiteMockupGallery();
+
   document.addEventListener('keydown', e => { 
     if (e.key === 'Escape') {
       closeModal();
       closeCompositionViewer();
+      closeSiteMockupLightbox();
+    }
+
+    const siteLightbox = document.getElementById('site-mockup-lightbox');
+    if (siteLightbox && siteLightbox.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') showSiteMockup(siteMockupIndex - 1);
+      if (e.key === 'ArrowRight') showSiteMockup(siteMockupIndex + 1);
+      return;
     }
     
     // Handle next/prev symbol navigation with arrow keys when modal is open
@@ -281,6 +291,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+const siteMockups = [
+  { src: 'site_mockups/Assembly_01.png', caption: 'Assembly 01 · Complete site study', alt: 'Complete Identity Tapestry site assembly mockup' },
+  { src: 'site_mockups/429f5596-bfc8-4a4d-a76b-1422448ca47f.png', caption: 'Yellow wall study', alt: 'Student symbols applied across a yellow school wall' },
+  { src: 'site_mockups/73f40b30-8033-466e-81cb-c9eae3ff3bda.png', caption: 'Pink wall study', alt: 'Student symbols applied across a pink school wall' },
+  { src: 'site_mockups/82808cf6-4e61-4767-b853-b180760fea86.png', caption: 'Ochre wall study', alt: 'Student symbols applied across an ochre school wall' },
+  { src: 'site_mockups/92ddb08b-a0e9-4a54-8604-1aaa08439183.png', caption: 'Orange and turquoise wall study', alt: 'Turquoise student symbols applied across an orange school wall' },
+  { src: 'site_mockups/a5b16ced-5484-414a-869f-920b7b0a1d4d.png', caption: 'Red wall study', alt: 'Student symbols applied across a red school wall' },
+  { src: 'site_mockups/d5f0bac0-31ef-4dd3-ad2e-8c2d139c7ffd.png', caption: 'Blue wall study', alt: 'Student symbols applied vertically across a blue school wall' }
+];
+let siteMockupIndex = 0;
+
+function initSiteMockupGallery() {
+  const lightbox = document.getElementById('site-mockup-lightbox');
+  if (!lightbox) return;
+  document.querySelectorAll('[data-mockup-index]').forEach(button => {
+    button.addEventListener('click', () => openSiteMockupLightbox(Number(button.dataset.mockupIndex)));
+  });
+  document.getElementById('site-lightbox-close').addEventListener('click', closeSiteMockupLightbox);
+  document.getElementById('site-lightbox-prev').addEventListener('click', () => showSiteMockup(siteMockupIndex - 1));
+  document.getElementById('site-lightbox-next').addEventListener('click', () => showSiteMockup(siteMockupIndex + 1));
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) closeSiteMockupLightbox();
+  });
+}
+
+function openSiteMockupLightbox(index) {
+  showSiteMockup(index);
+  const lightbox = document.getElementById('site-mockup-lightbox');
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.getElementById('site-lightbox-close').focus();
+}
+
+function showSiteMockup(index) {
+  siteMockupIndex = (index + siteMockups.length) % siteMockups.length;
+  const mockup = siteMockups[siteMockupIndex];
+  const image = document.getElementById('site-lightbox-image');
+  image.src = mockup.src;
+  image.alt = mockup.alt;
+  document.getElementById('site-lightbox-caption').textContent = `${mockup.caption} · ${siteMockupIndex + 1} / ${siteMockups.length}`;
+}
+
+function closeSiteMockupLightbox() {
+  const lightbox = document.getElementById('site-mockup-lightbox');
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+}
 
 // ──────────────────────────────────────────────
 // MANIFESTO STATISTICS

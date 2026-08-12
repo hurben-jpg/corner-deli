@@ -1030,6 +1030,194 @@ body::after {
   z-index: 10;
 }
 
+/* Sightseeing: architectural mockups */
+.site-mockups-section {
+  padding-top: 44px;
+  border-top: 1px solid var(--border-light);
+}
+
+.site-mockups-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+
+.site-mockups-heading h3 {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.site-mockups-heading > p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.site-mockups-kicker {
+  color: #fbbf24;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.site-mockup-feature,
+.site-mockup-tile {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.site-mockup-feature {
+  position: relative;
+  border-radius: 16px;
+  aspect-ratio: 16 / 9;
+}
+
+.site-mockup-feature img,
+.site-mockup-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.site-mockup-feature:hover img,
+.site-mockup-tile:hover img {
+  transform: scale(1.015);
+}
+
+.site-mockup-feature:focus-visible,
+.site-mockup-tile:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.site-mockup-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  padding: 56px 24px 20px;
+  background: linear-gradient(transparent, rgba(7, 9, 19, 0.82));
+  text-align: left;
+}
+
+.site-mockup-caption strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.site-mockup-caption span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.75rem;
+}
+
+.site-mockup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.site-mockup-tile {
+  aspect-ratio: 1;
+  border-radius: 12px;
+}
+
+.site-mockup-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: none;
+  grid-template-columns: 72px minmax(0, 1fr) 72px;
+  align-items: center;
+  gap: 12px;
+  padding: 32px;
+  background: rgba(3, 4, 9, 0.96);
+  backdrop-filter: blur(14px);
+}
+
+.site-mockup-lightbox.active { display: grid; }
+
+.site-lightbox-figure {
+  display: flex;
+  min-width: 0;
+  height: calc(100vh - 64px);
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.site-lightbox-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 110px);
+  object-fit: contain;
+}
+
+.site-lightbox-figure figcaption {
+  min-height: 18px;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-lightbox-close,
+.site-lightbox-nav {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.site-lightbox-close:hover,
+.site-lightbox-nav:hover { color: #fff; }
+
+.site-lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 1;
+  font-size: 2.25rem;
+}
+
+.site-lightbox-nav {
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  font-size: 1.35rem;
+}
+
+@media (max-width: 768px) {
+  .site-mockups-heading { grid-template-columns: 1fr; gap: 14px; }
+  .site-mockup-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .site-mockup-caption span { display: none; }
+  .site-mockup-lightbox { grid-template-columns: 1fr 1fr; align-content: center; padding: 56px 16px 20px; }
+  .site-lightbox-figure { grid-column: 1 / -1; grid-row: 1; height: calc(100vh - 150px); }
+  .site-lightbox-nav { margin: 0 auto; }
+}
+
 /* Modal Overlay Styling */
 .modal-overlay {
   position: fixed;
